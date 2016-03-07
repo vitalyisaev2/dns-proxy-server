@@ -23,8 +23,14 @@ function proxy(question, response, cb) {
 		timeout: 1000
 	});
 
+
+	request.on('timeout', function () {
+		console.log('Timeout in making request no forwarding', question.name);
+	});
+
 	// when we get answers, append them to the response
 	request.on('message', (err, msg) => {
+		console.log('remote DNS response: ', err, msg)
 		msg.answer.forEach(a => response.answer.push(a));
 	});
 
@@ -34,7 +40,8 @@ function proxy(question, response, cb) {
 
 
 function handleRequest(request, response) {
-	console.log('request from', request.address.address, 'for', request.question[0].name);
+	var question = request.question[0];
+	console.log('request from', request.address.address, 'for', question.name);
 
 	let f = [];
 

@@ -29,5 +29,15 @@
       }
     ],
     "domain": "testing3.mageddo.com"
+  },
+  {
+    "records": [
+      {
+        "type": "A",
+        "address": "172.18.0.3",
+        "ttl": 300
+      }
+    ],
+    "domain": "bookmarks.uol.intranet"
   }
 ]
