@@ -3,7 +3,7 @@ defaultTasks 'build-dev'
 ext {
 	CONTAINER_NAME = "docker-dns-server"
 	TAG = getTheTag()
-	IMAGE_NAME = "${CONTAINER_NAME}:$PHP_TAG"
+	IMAGE_NAME = "${CONTAINER_NAME}:$TAG"
 	WORKDIR = "/opt/${CONTAINER_NAME}"
 }
 
