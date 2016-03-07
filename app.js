@@ -1,5 +1,6 @@
 'use strict';
 
+let ui = require('./ui/index.js')
 let dns = require('native-dns');
 let server = dns.createServer();
 let async = require('async');

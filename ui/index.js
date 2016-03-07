@@ -3,7 +3,7 @@ let express = require('express');
 let bodyParser = require('body-parser');
 
 let entries = require('./records.json');
-let password = 'ilovekittens';
+let password = 'cat';
 
 let app = express();
 
@@ -25,3 +25,4 @@ app.post('/save', (req, res) => {
 });
 
 app.listen(5380);
+module.exports = app
