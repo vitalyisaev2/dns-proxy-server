@@ -33,18 +33,13 @@ function proxy(question, response, cb) {
 }
 
 
-let entries = [
-	{ domain: "^hello.peteris.*", records: [ { type: "A", address: "127.0.0.99", ttl: 1800 } ] },
-	{ domain: "^cname.peteris.*", records: [ { type: "CNAME", address: "hello.peteris.rocks", ttl: 1800 } ] }
-];
-
 function handleRequest(request, response) {
 	console.log('request from', request.address.address, 'for', request.question[0].name);
 
 	let f = [];
 
 	request.question.forEach(question => {
-		let entry = entries.filter(r => new RegExp(r.domain, 'i').exec(question.name));
+		let entry = ui.entries.filter(r => new RegExp(r.domain, 'i').exec(question.name));
 
 		// a local resolved host
 		if (entry.length) {

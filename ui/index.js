@@ -4,10 +4,10 @@ let fs = require('fs');
 let express = require('express');
 let bodyParser = require('body-parser');
 
-let entries = require('./records.json');
-let password = 'cat';
-
 let app = express();
+
+let entries = app.entries = require(process.cwd() + '/records.json');
+let password = 'cat';
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
@@ -18,8 +18,8 @@ app.get('/load', (req, res) => {
 
 app.post('/save', (req, res) => {
 	if (req.query.password == password) {
-		entries = req.body;
-		fs.writeFileSync('records.json', JSON.stringify(entries));
+		entries = app.entries = req.body;
+		fs.writeFileSync('records.json', JSON.stringify(entries, null, '  '));
 		res.send('ok');
 	} else {
 		res.status(401).send('wrong');
