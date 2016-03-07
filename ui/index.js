@@ -1,3 +1,5 @@
+'use strict';
+
 let fs = require('fs');
 let express = require('express');
 let bodyParser = require('body-parser');
