@@ -1,5 +1,5 @@
 {
-  "name": "dnsserver",
+  "name": "docker-dns-server",
   "version": "1.0.0",
   "description": "A node dns server to resolve docker and others hostnames",
   "main": "app.js",
