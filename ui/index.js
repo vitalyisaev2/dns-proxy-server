@@ -5,8 +5,8 @@ let express = require('express');
 let bodyParser = require('body-parser');
 
 let app = express();
-
-let entries = app.entries = require(process.cwd() + '/records.json');
+let theRecordFile = process.cwd() + '/records.json';
+let entries = app.entries = getTheJson(theRecordFile);
 let password = 'cat';
 
 app.use(bodyParser.json());
@@ -19,12 +19,24 @@ app.get('/load', (req, res) => {
 app.post('/save', (req, res) => {
 	if (req.query.password == password) {
 		entries = app.entries = req.body;
-		fs.writeFileSync('records.json', JSON.stringify(entries, null, '  '));
+		writeJson(entries);
 		res.send('ok');
 	} else {
 		res.status(401).send('wrong');
 	}
 });
+
+function writeJson(json){
+	fs.writeFileSync(theRecordFile, JSON.stringify(json, null, '  '));
+}
+function getTheJson(name){
+	try{
+		return require(theRecordFile);
+	}catch(e){
+		writeJson([]);
+		return getTheJson(name);
+	}
+}
 
 app.listen(5380);
 module.exports = app
