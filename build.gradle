@@ -44,6 +44,7 @@ task 'docker-server-dev-up' (type:Exec) {
 	removeContainer(CONTAINER_NAME)
 	commandLine = [
 		'docker', 'run', '-d', '--hostname', CONTAINER_NAME,
+		'--expose', "53",
 		'--workdir', "${WORKDIR}",
 		'--volume',
 			"${pwd}/:${WORKDIR}",
