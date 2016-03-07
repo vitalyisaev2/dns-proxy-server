@@ -32,20 +32,36 @@ function proxy(question, response, cb) {
 }
 
 
+let entries = [
+	{ domain: "^hello.peteris.*", records: [ { type: "A", address: "127.0.0.99", ttl: 1800 } ] },
+	{ domain: "^cname.peteris.*", records: [ { type: "CNAME", address: "hello.peteris.rocks", ttl: 1800 } ] }
+];
 
 function handleRequest(request, response) {
 	console.log('request from', request.address.address, 'for', request.question[0].name);
 
-	let f = []; // array of functions
+	let f = [];
 
-	// proxy all questions
-	// since proxying is asynchronous, store all callbacks
 	request.question.forEach(question => {
-		f.push(cb => proxy(question, response, cb));
+		let entry = entries.filter(r => new RegExp(r.domain, 'i').exec(question.name));
+
+		// a local resolved host
+		if (entry.length) {
+			entry[0].records.forEach(record => {
+				record.name = question.name;
+				record.ttl = record.ttl || 1800;
+				if (record.type == 'CNAME') {
+					record.data = record.address;
+					f.push(cb => proxy({ name: record.data, type: dns.consts.NAME_TO_QTYPE.A, class: 1 }, response, cb));
+				}
+				response.answer.push(dns[record.type](record));
+			});
+		} else {
+			// forwarding host
+			f.push(cb => proxy(question, response, cb));
+		}
 	});
 
-	// do the proxying in parallel
-	// when done, respond to the request by sending the response
 	async.parallel(f, function() { response.send(); });
 }
 
