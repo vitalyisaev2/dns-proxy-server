@@ -27,7 +27,9 @@ app.post('/save', (req, res) => {
 });
 
 function writeJson(json){
-	fs.writeFileSync(theRecordFile, JSON.stringify(json, null, '  '));
+	fs.writeFileSync(theRecordFile, JSON.stringify(json, null, '  '), {
+		flag: 'w'
+	});
 }
 function getTheJson(name){
 	try{
