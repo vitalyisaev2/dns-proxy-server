@@ -44,7 +44,7 @@ task 'docker-server-dev-up' (type:Exec) {
 	removeContainer(CONTAINER_NAME)
 	commandLine = [
 		'docker', 'run', '-d', '--hostname', CONTAINER_NAME,
-		'--workdir', "${WORKDIR}"
+		'--workdir', "${WORKDIR}",
 		'--volume',
 			"${pwd}/:${WORKDIR}",
 		'--name', CONTAINER_NAME, IMAGE_NAME,
@@ -64,7 +64,10 @@ def removeLast(String str) {
 	str.substring(0, str.length()-1);
 }
 def getTheTag(){
-	removeLast(['git', 'describe', '--abbrev=0', '--tags'].execute().text)
+	def tag = ['git', 'describe', '--abbrev=0', '--tags'].execute().text;
+	if(tag.length() == 1)
+		return removeLast(tag)
+	return '1.0.0'
 }
 def removeContainer(String image){
 	def buff = new StringBuffer();
