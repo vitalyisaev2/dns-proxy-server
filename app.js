@@ -15,8 +15,9 @@ server.serve(53);
 let authority = { address: '8.8.8.8', port: 53, type: 'udp' };
 
 function proxy(question, response, cb) {
-	console.log('proxying', question.name);
+	console.log('proxying', JSON.stringify(question));
 
+	question.type = 1;
 	var request = dns.Request({
 		question: question, // forwarding the question
 		server: authority,  // this is the DNS server we are asking
@@ -30,8 +31,10 @@ function proxy(question, response, cb) {
 
 	// when we get answers, append them to the response
 	request.on('message', (err, msg) => {
-		console.log('remote DNS response: ', err, msg)
-		msg.answer.forEach(a => response.answer.push(a));
+		msg.answer.forEach(a => {
+				response.answer.push(a);
+				console.log('remote DNS response: ', a)
+		});
 	});
 
 	request.on('end', cb);
@@ -42,6 +45,7 @@ function proxy(question, response, cb) {
 function handleRequest(request, response) {
 	var question = request.question[0];
 	console.log('request from', request.address.address, 'for', question.name);
+	console.log('questions', request.question);
 
 	let f = [];
 
