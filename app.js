@@ -62,6 +62,7 @@ server.on('request', function handleRequest(request, response) {
 	 * 
 	 */
 	var nQuestions = request.question.length;
+	console.log('request with ', nQuestions, ' questions');
 	request.question.forEach(question => {
 
 		console.log('request from:', request.address.address, ' for:', question.name, ' type:', qtypeToName(question.type));
