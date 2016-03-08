@@ -45,19 +45,26 @@ the password is `cat`
 
 records.json
 
-	[
-	  {
-	    "records": [
-	      {
-	        "type": "A",
-	        "address": "127.0.0.1",
-	        "ttl": 300,
-	        "name": "testing.mageddo.com"
-	      }
-	    ],
-	    "domain": "testing.mageddo.com"
-	  }
-	]
+```javascript
+{
+  "remoteDns": [
+    { "address": "8.8.8.8", "port": 53, "type": "udp" }
+  ],
+  "entries" : [
+    {
+      "records": [
+        {
+          "type": "A",
+          "address": "127.0.0.1",
+          "ttl": 300,
+          "name": "testing.mageddo.com"
+        }
+      ],
+      "domain": "testing.mageddo.com"
+    }
+  ]
+}
+```
 
 testing on terminal 
 
