@@ -1,6 +1,6 @@
 # Introduction
 
-A simple DNS Server proxy 
+A simple Node DNS Server proxy based on [Peteris Rocks tutorial](https://peteris.rocks/blog/dns-proxy-server-in-node-js-with-ui/)
 
 # Running
 
@@ -75,3 +75,6 @@ testing on terminal
 
 This project is released under version 2.0 of the [Apache License][].
 [Apache License]: http://www.apache.org/licenses/LICENSE-2.0
+
+# Credits
+* [Pēteris Ņikiforovs (project owner)](https://peteris.rocks/)
