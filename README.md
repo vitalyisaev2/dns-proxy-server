@@ -71,3 +71,7 @@ testing on terminal
 	testing3.mageddo.com has address 127.0.0.1
 	testing3.mageddo.com has address 127.0.0.1
 
+# License
+
+This project is released under version 2.0 of the [Apache License][].
+[Apache License]: http://www.apache.org/licenses/LICENSE-2.0
