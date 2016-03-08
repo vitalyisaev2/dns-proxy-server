@@ -6,7 +6,7 @@ let bodyParser = require('body-parser');
 
 let app = express();
 let theRecordFile = process.cwd() + '/records.json';
-let entries = app.entries = getTheJson(theRecordFile);
+let entries = app.data = getTheJson(theRecordFile);
 let password = 'cat';
 
 app.use(bodyParser.json());
@@ -18,8 +18,8 @@ app.get('/load', (req, res) => {
 
 app.post('/save', (req, res) => {
 	if (req.query.password == password) {
-		entries = app.entries = req.body;
-		writeJson(entries);
+		app.data.entries = req.body;
+		writeJson(app.data);
 		res.send('ok');
 	} else {
 		res.status(401).send('wrong');
