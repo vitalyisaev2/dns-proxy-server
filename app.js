@@ -17,7 +17,6 @@ let authority = { address: '8.8.8.8', port: 53, type: 'udp' };
 function proxy(question, response, cb) {
 	console.log('proxying', JSON.stringify(question));
 
-	question.type = 1;
 	var request = dns.Request({
 		question: question, // forwarding the question
 		server: authority,  // this is the DNS server we are asking
