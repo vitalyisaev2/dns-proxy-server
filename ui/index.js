@@ -33,7 +33,7 @@ function writeJson(json){
 }
 function getTheJson(name){
 	try{
-		return require(theRecordFile);
+		return JSON.parse(fs.readFileSync(name).toString());
 	}catch(e){
 		writeJson([]);
 		return getTheJson(name);
