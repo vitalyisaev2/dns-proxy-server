@@ -43,8 +43,10 @@ task 'docker-server-dev-up' (type:Exec) {
 	def pwd = new File(".").absolutePath
 	removeContainer(CONTAINER_NAME)
 	commandLine = [
-		'docker', 'run', '-d', '--hostname', CONTAINER_NAME,
+		'docker', 'run', '-d', '--hostname', "dns.mageddo",
 		'--expose', "53",
+		'--publish', "5380:80",
+		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
 		'--workdir', "${WORKDIR}",
 		'--volume',
 			"${pwd}/:${WORKDIR}",
