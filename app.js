@@ -13,6 +13,26 @@ server.on('socketError', (err, socket) => console.error(err));
 
 server.serve(53);
 
+///////
+
+// registra os containers do docker 
+var Docker = require('dockerode');
+var DockerEvents = require('docker-events');
+var docker = new Docker({socketPath: '/var/run/docker.sock'});
+var emitter = new DockerEvents({
+	docker: docker
+});
+emitter.start();
+emitter.on("start", function(message) {
+	console.log("container started: %j", message);
+});
+emitter.on("stop", function(message) {
+	console.log("container stopped: %j", message);
+});
+
+////
+
+
 function proxy(question, response, cb) {
 	console.log('proxying: ', question.name, ', type: ', question.type);
 
