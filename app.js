@@ -182,7 +182,11 @@ function addContainer(id){
 	});
 }
 function getHostname(data){
-	return data.Config.Hostname + '.' + data.Config.Domainname;
+	var buff = data.Config.Hostname;
+	if(data.Config.Domainname){
+		buff += '.' + data.Config.Domainname;
+	}
+	return buff;
 }
 function getHostAddress(data){
 	return data.NetworkSettings.Networks.bridge.IPAddress;
