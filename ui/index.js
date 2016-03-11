@@ -35,7 +35,12 @@ function getTheJson(name){
 	try{
 		return JSON.parse(fs.readFileSync(name).toString());
 	}catch(e){
-		writeJson([]);
+		writeJson({
+			"remoteDns": [
+				{ "address": "8.8.8.8", "port": 53, "type": "udp" }
+			],
+			"entries" : []
+		});
 		return getTheJson(name);
 	}
 }
