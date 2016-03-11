@@ -45,6 +45,7 @@ task 'docker-server-dev-up' (type:Exec) {
 	commandLine = [
 		'docker', 'run', '-d', '--hostname', CONTAINER_NAME,
 		'--expose', "53",
+		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
 		'--workdir', "${WORKDIR}",
 		'--volume',
 			"${pwd}/:${WORKDIR}",
