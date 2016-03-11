@@ -26,10 +26,11 @@ var emitter = new DockerEvents({
 emitter.start(function(){
 	console.log('adicionando containers ja em pe');
 	docker.listContainers({all: false}, function(err, containers) {
-	containers.forEach(containerInfo => {
-		addContainer(containerInfo.Id);
+		containers.forEach(containerInfo => {
+			addContainer(containerInfo.Id);
+		});
+		console.log('!ALL: ' + containers.length);
 	});
-	console.log('!ALL: ' + containers.length);
 });
 emitter.on("start", function(message) {
 	console.log("container started: %j", message);
