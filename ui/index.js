@@ -45,5 +45,5 @@ function getTheJson(name){
 	}
 }
 
-app.listen(5380);
+app.listen(80);
 module.exports = app

@@ -95,9 +95,10 @@ server.on('request', function handleRequest(request, response) {
 					}
 					response.answer.push(dns[record.type](record));
 				});
-			}
+			}else{
 				// se nenhum satisfazer vamos encaminhar pro remoto
 				questionsToProxy.push(cb => proxy(question, response, cb));
+			}
 		}
 	});
 	async.parallel(questionsToProxy, function() {
