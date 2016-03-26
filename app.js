@@ -178,8 +178,21 @@ function addContainer(id){
 			],
 			"domain": hostname
 		};
-		console.log('container adicionando:', host);
+		console.info('container adicionando:', host);
 		ui.data.containerEntries.push(host);
+	});
+}
+function getHostnames(container){
+	var hostnames = [getHostname(container)];
+	container.Config.Env.forEach(function(env){
+		var key = 'HOSTNAMES=';
+		if(env.startsWith(key)){
+			console.info('encontrada a env do hostname');
+			var strHosts = env.substring(key),
+					arrHosts = strHosts.split(',');
+			hostnames = hostnames.concat(arrHosts);
+			console.log('hosts para o container: ', name, hostnames);
+		}
 	});
 }
 function getHostname(data){
