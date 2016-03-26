@@ -165,21 +165,22 @@ function removeContainer(id){
 function addContainer(id){
 	var container = docker.getContainer(id);
 	container.inspect(function (err, data) {
-		var hostname = getHostname(data);
-		var host = {
-			"_id": id,
-			"records": [
-				{
-					"type": "A",
-					"address": getHostAddress(data),
-					"ttl": 300,
-					"name": hostname
-				}
-			],
-			"domain": hostname
-		};
-		console.info('container adicionando:', host);
-		ui.data.containerEntries.push(host);
+		console.info('processando hostnames para:', data.Name);
+		getHostnames(data).forEach(hostname => {
+			var host = {
+				"_id": id,
+				"records": [
+					{
+						"type": "A",
+						"address": getHostAddress(data),
+						"ttl": 300,
+						"name": hostname
+					}
+				],
+				"domain": hostname
+			};
+			ui.data.containerEntries.push(host);
+		});
 	});
 }
 function getHostnames(container){
@@ -188,12 +189,13 @@ function getHostnames(container){
 		var key = 'HOSTNAMES=';
 		if(env.startsWith(key)){
 			console.info('encontrada a env do hostname');
-			var strHosts = env.substring(key),
+			var strHosts = env.substring(key.length),
 					arrHosts = strHosts.split(',');
 			hostnames = hostnames.concat(arrHosts);
-			console.log('hosts para o container: ', name, hostnames);
+			console.log('hosts para o container: ', container.Name, hostnames);
 		}
 	});
+	return hostnames;
 }
 function getHostname(data){
 	var buff = data.Config.Hostname;
