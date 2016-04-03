@@ -185,16 +185,18 @@ function addContainer(id){
 }
 function getHostnames(container){
 	var hostnames = [getHostname(container)];
-	container.Config.Env.forEach(function(env){
-		var key = 'HOSTNAMES=';
-		if(env.startsWith(key)){
-			console.info('encontrada a env do hostname');
-			var strHosts = env.substring(key.length),
-					arrHosts = strHosts.split(',');
-			hostnames = hostnames.concat(arrHosts);
-			console.log('hosts para o container: ', container.Name, hostnames);
-		}
-	});
+	if(Array.isArray(container.Config.Env)){
+		container.Config.Env.forEach(function(env){
+			var key = 'HOSTNAMES=';
+			if(env.startsWith(key)){
+				console.info('encontrada a env do hostname');
+				var strHosts = env.substring(key.length),
+						arrHosts = strHosts.split(',');
+				hostnames = hostnames.concat(arrHosts);
+				console.log('hosts para o container: ', container.Name, hostnames);
+			}
+		});
+	}
 	return hostnames;
 }
 function getHostname(data){
