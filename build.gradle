@@ -17,6 +17,12 @@ task 'build-dev' (dependsOn: [
 
 }
 
+task 'build' (dependsOn: [
+	'docker-server-dev-build', 'docker-server-dev-up-prod'
+	]) << {
+
+}
+
 /**
  * roda o sistema em modo test (com a base de dados do src)
  * este método já chama o build e up necessário
@@ -50,6 +56,25 @@ task 'docker-server-dev-up' (type:Exec) {
 		'--workdir', "${WORKDIR}",
 		'--volume',
 			"${pwd}/:${WORKDIR}",
+		'--name', CONTAINER_NAME, IMAGE_NAME,
+		'node', 'app.js'
+	]
+}
+
+/**
+ * roda o sistema de mock
+ */
+task 'docker-server-dev-up-prod' (type:Exec) {
+	def pwd = new File(".").absolutePath
+	removeContainer(CONTAINER_NAME)
+	commandLine = [
+		'docker', 'run', '-d', '--hostname', "dns.mageddo",
+		'--expose', "53",
+		'--publish', "80",
+		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
+		'--workdir', "${WORKDIR}",
+		'--volume',
+			"/var/lib/mageddo/dns-proxy-server/records.json/:${WORKDIR}/records.json",
 		'--name', CONTAINER_NAME, IMAGE_NAME,
 		'node', 'app.js'
 	]
