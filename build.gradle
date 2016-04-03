@@ -70,7 +70,6 @@ task 'docker-server-dev-up-prod' (type:Exec) {
 	commandLine = [
 		'docker', 'run', '-d', '--hostname', "dns.mageddo",
 		'--expose', "53",
-		'--publish', "80",
 		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
 		'--workdir', "${WORKDIR}",
 		'--volume',
