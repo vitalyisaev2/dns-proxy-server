@@ -74,7 +74,7 @@ task 'docker-server-dev-up-prod' (type:Exec) {
 		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
 		'--workdir', "${WORKDIR}",
 		'--volume',
-			"/var/lib/mageddo/dns-proxy-server/records.json/:${WORKDIR}/records.json",
+			"/var/lib/mageddo/dns-proxy-server/records.json:${WORKDIR}/records.json",
 		'--name', CONTAINER_NAME, IMAGE_NAME,
 		'node', 'app.js'
 	]
