@@ -21,6 +21,8 @@ task 'build' (dependsOn: [
 	'docker-server-dev-build', 'docker-server-dev-up-prod'
 	]) << {
 
+	description = 'build image and up it'
+
 }
 
 /**
