@@ -52,14 +52,11 @@ task 'docker-server-dev-up' (type:Exec) {
 	removeContainer(CONTAINER_NAME)
 	commandLine = [
 		'docker', 'run', '-d', '--hostname', "dns.mageddo",
-		'--expose', "53",
 		'--publish', "5380:80",
 		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
-		'--workdir', "${WORKDIR}",
-		'--volume',
-			"${pwd}/:${WORKDIR}",
-		'--name', CONTAINER_NAME, IMAGE_NAME,
-		'node', 'app.js'
+                '--volume', "/etc/resolv.conf:/etc/resolv.conf",
+		'--volume', "${pwd}/:${WORKDIR}",
+		'--name', CONTAINER_NAME, IMAGE_NAME
 	]
 }
 
@@ -71,13 +68,10 @@ task 'docker-server-dev-up-prod' (type:Exec) {
 	removeContainer(CONTAINER_NAME)
 	commandLine = [
 		'docker', 'run', '-d', '--hostname', "dns.mageddo",
-		'--expose', "53",
 		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
-		'--workdir', "${WORKDIR}",
-		'--volume',
-			"/var/lib/mageddo/dns-proxy-server/records.json:${WORKDIR}/records.json",
-		'--name', CONTAINER_NAME, IMAGE_NAME,
-		'node', 'app.js'
+		'--volume', "/var/lib/mageddo/dns-proxy-server/records.json:${WORKDIR}/records.json",
+		'--volume', "/etc/resolv.conf:/etc/resolv.conf",
+		'--name', CONTAINER_NAME, IMAGE_NAME
 	]
 }
 
