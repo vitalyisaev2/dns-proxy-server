@@ -5,7 +5,7 @@ let express = require('express');
 let bodyParser = require('body-parser');
 
 let app = express();
-let theRecordFile = process.cwd() + '/records.json';
+let theRecordFile = process.cwd() + '/conf/records.json';
 app.data = getTheJson(theRecordFile);
 let password = 'cat';
 

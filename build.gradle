@@ -69,7 +69,7 @@ task 'docker-server-dev-up-prod' (type:Exec) {
 	commandLine = [
 		'docker', 'run', '-d', '--hostname', "dns.mageddo",
 		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
-		'--volume', "/var/lib/mageddo/dns-proxy-server/records.json:${WORKDIR}/records.json",
+		'--volume', "/var/lib/mageddo/dns-proxy-server/conf:${WORKDIR}/conf",
 		'--volume', "/etc/resolv.conf:/etc/resolv.conf",
 		'--name', CONTAINER_NAME, IMAGE_NAME
 	]
