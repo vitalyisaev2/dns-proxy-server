@@ -4,7 +4,9 @@ A simple Node DNS Server proxy based on [Peteris Rocks tutorial](https://peteris
 
 # Running
 
-## Running localy
+## Running without docker
+
+you **can not** have other dns running on 53 port in some tests I discover that the DNS not work as well on another port
 
 Build the project 
 
@@ -14,10 +16,22 @@ Starting the server
 
 	npm start
 
+setting this DNS as default DNS
+
+```bash
+	sudo echo 'nameserver 127.0.0.1' > /etc/resolv.conf
+```
+
 ## Running on docker
-	
-	npm install # install dependencies
-	gradle build-dev # build docker image and run the container starting the app
+
+setup resolv.conf **is not** needle, is automatically
+
+setup it
+
+```bash
+$ npm install # install dependencies
+$ gradle build-dev # build docker image and run the container starting the app
+```
 
 # Testing if DNS is working
 
@@ -26,6 +40,7 @@ Starting the server
 	Name: 127.0.0.1
 	Address: 127.0.0.1#53
 	Aliases:
+
 
 # Adding DNS entries
 
@@ -36,10 +51,6 @@ you can edit `records.json` manually or use the **Gui Editor**
 the password is `cat`
 
 	http://<localhost or docker container ip>:5380/
-
-# Setting this proxy as default proxy 
-
-	sudo echo 'nameserver <127.0.0.1 or docker container ip>' > /etc/resolv.conf
 
 # A entry example
 
