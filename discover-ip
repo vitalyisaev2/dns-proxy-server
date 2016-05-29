@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "setting dns server on host "
+MY_IP=`ip addr show eth0 | awk '/inet/{print substr($2,0,index($2, "/")); exit}'`
+echo "nameserver $MY_IP" > /etc/resolv.conf
+
+echo "setup done!"
+
