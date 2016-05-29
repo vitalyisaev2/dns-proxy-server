@@ -1,6 +1,11 @@
 # Introduction
 
-A simple Node DNS Server proxy based on [Peteris Rocks tutorial](https://peteris.rocks/blog/dns-proxy-server-in-node-js-with-ui/)
+A DNS Server that works as a simple DNS and:
+
+* [Resolves automatically Docker containers IPs to hostnames that you set](#f1)
+
+* [Have manually entries(config file or web gui editor) to you setup IPs for hostnames that you want ](#f2)
+
 
 # Running
 
@@ -42,17 +47,41 @@ $ gradle build-dev # build docker image and run the container starting the app
 	Aliases:
 
 
-# Adding DNS entries
+    
+# Features
+
+## <span id="f1">Resolves automatically [Docker](https://docker.com) containers IPs to hostnames that you set</span>
+
+**Example**, running a apache server on docker
+
+```bash
+$ docker run --rm --hostname my.google.com eboraas/apache
+```
+
+with this **DNS server** to access this container, you **have not** to know the docker container IP(that is dynamically and changes on every run), or publish the container port to host port. Simply open your browser and type http://my.google.com and have fun.
+
+**OBS:** `--hostname` is a docker native flag
+
+**Add more than one hostname to the same docker container**
+If you need more than one hostname resolving to the same docker container you can use as follows
+
+```bash
+$ docker run --rm --hostname my.google.com --env HOSTNAMES="my2.google.com,my3.google.com" eboraas/apache
+```
+
+
+# <span id="f2">Add manual DNS entries</span>
 
 you can edit `records.json` manually or use the **Gui Editor**
 
-# Gui editor
+### Gui editor
 
-the password is `cat`
+Access http://localhost/ or http://dns.mageddo/ (when running on docker)
 
-	http://<localhost or docker container ip>:5380/
+the **password** is `cat`
+![](http://i.imgur.com/Zf5nlla.jpg)
 
-# A entry example
+### A manual entry example
 
 records.json
 
@@ -89,10 +118,11 @@ testing on terminal
 	testing3.mageddo.com has address 127.0.0.1
 	testing3.mageddo.com has address 127.0.0.1
 
+
 # License
 
-This project is released under version 2.0 of the [Apache License][].
-[Apache License]: http://www.apache.org/licenses/LICENSE-2.0
+This project is released under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
 
 # Credits
-* [Pēteris Ņikiforovs (project owner)](https://peteris.rocks/)
+* Elvis de Freitas
+* [Pēteris Ņikiforovs (Project Owner)](https://peteris.rocks/)
