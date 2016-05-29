@@ -6,7 +6,7 @@ A simple Node DNS Server proxy based on [Peteris Rocks tutorial](https://peteris
 
 ## Running without docker
 
-you **can not** have other dns running on 53 port in some tests I discover that the DNS not work as well on another port
+you **can not** have other dns running on 53 port, in some tests I discover that the DNS not work as well on another port
 
 Build the project 
 
@@ -19,12 +19,12 @@ Starting the server
 setting this DNS as default DNS
 
 ```bash
-	sudo echo 'nameserver 127.0.0.1' > /etc/resolv.conf
+sudo echo 'nameserver <127.0.0.1 or docker container ip>' > /etc/resolv.conf
 ```
 
 ## Running on docker
 
-setup resolv.conf **is not** needle, is automatically
+on **1.4.0** setup resolv.conf **is not** needled, is automatically
 
 setup it
 
