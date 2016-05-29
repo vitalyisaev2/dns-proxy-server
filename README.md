@@ -2,9 +2,9 @@
 
 A DNS Server that works as a simple DNS and:
 
-* [Resolves automatically Docker containers IPs to hostnames that you set](#f1)
+* [Resolves automatically Docker containers IPs to hostnames that you set](#resolves-automatically-docker-containers-ips-to-hostnames-that-you-set)
 
-* [Have manually entries(config file or web gui editor) to you setup IPs for hostnames that you want ](#f2)
+* [Have manually entries(config file or web gui editor) to you setup IPs for hostnames that you want ](#add-manual-dns-entries)
 
 
 # Running
@@ -50,7 +50,7 @@ $ gradle build-dev # build docker image and run the container starting the app
     
 # Features
 
-## <span id="f1">Resolves automatically [Docker](https://docker.com) containers IPs to hostnames that you set</span>
+## Resolves automatically [Docker](https://docker.com) containers IPs to hostnames that you set
 
 **Example**, running a apache server on docker
 
@@ -70,18 +70,18 @@ $ docker run --rm --hostname my.google.com --env HOSTNAMES="my2.google.com,my3.g
 ```
 
 
-# <span id="f2">Add manual DNS entries</span>
+## Add manual DNS entries
 
 you can edit `records.json` manually or use the **Gui Editor**
 
-### Gui editor
+#### Gui editor
 
 Access http://localhost/ or http://dns.mageddo/ (when running on docker)
 
 the **password** is `cat`
 ![](http://i.imgur.com/Zf5nlla.jpg)
 
-### A manual entry example
+#### A manual entry example
 
 records.json
 
