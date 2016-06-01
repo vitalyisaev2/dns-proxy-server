@@ -21,16 +21,13 @@ Starting the server
 
 	npm start
 
-setting this DNS as default DNS
+setting this DNS as default DNS, (on **1.4.0** setup resolv.conf **is not** needled, is automatically)
 
 ```bash
 sudo echo 'nameserver <127.0.0.1 or docker container ip>' > /etc/resolv.conf
 ```
 
 ## Running on docker
-
-on **1.4.0** setup resolv.conf **is not** needled, is automatically
-
 setup it
 
 ```bash
