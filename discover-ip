@@ -1,13 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "setting dns server on host "
+#echo "setting dns server on host "
 MY_IP=`ip addr show eth0 | awk '/inet/{print substr($2,0,index($2, "/")); exit}'`
+#echo $MY_IP
 
+cp /etc/resolv.conf /tmp/tmp
+echo "removing old lines"
 LINE=`grep -n "# docker-dns-server" /etc/resolv.conf | awk -F  ":" '{print $1}'`
-for i in $(seq 1 $LINE); do
-	sed -i "${i}d" /etc/resolv.conf
-done
-echo "setup done!"
+echo "finded line $LINE"
+if [ $LINE != "" ]; then
+	for i in $(seq 1 $LINE); do
+		echo "removing line $i"
+		sed -i "${i}d" /tmp/tmp
+	done
+fi
 
+echo "adding new ip"
 CONTAINER_ADD="nameserver $MY_IP # docker-dns-server\n"
-sed -i "1s/^/$CONTAINER_ADD/" /etc/resolv.conf
+sed -i "1i$CONTAINER_ADD" /tmp/tmp
+
+echo "processing"
+cat /tmp/tmp > /etc/resolv.conf
+echo "setup done!"
