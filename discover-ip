@@ -2,7 +2,12 @@
 
 echo "setting dns server on host "
 MY_IP=`ip addr show eth0 | awk '/inet/{print substr($2,0,index($2, "/")); exit}'`
-echo "nameserver $MY_IP # docker-dns-server " > /etc/resolv.conf
 
+LINE=`grep -n "# docker-dns-server" /etc/resolv.conf | awk -F  ":" '{print $1}'`
+for i in $(seq 1 $LINE); do
+	sed -i "${i}d" /etc/resolv.conf
+done
 echo "setup done!"
 
+CONTAINER_ADD="nameserver $MY_IP # docker-dns-server\n"
+sed -i "1s/^/$CONTAINER_ADD/" /etc/resolv.conf
