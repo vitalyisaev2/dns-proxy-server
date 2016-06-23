@@ -130,11 +130,22 @@ function proxy(question, response, cb) {
 	// when we get answers, append them to the response
 	request.on('message', (err, msg) => {
 
+		console.log('message event: err=', err);
 		msg.answer.forEach(a => {
-			response.answer.push(a);
+			console.log('new answer: type: ', a.type, ', name: ', a.name, ', address: ', a.address);
+			if(a.address){
+				response.answer.push(a);
+			}else{
+				console.log('not inserted in answers, address null');
+			}
 		});
 		msg.authority.forEach(a => {
-			response.answer.push(a);
+			console.log('new authority: type: ', a.type, ', name: ', a.name, ', address: ', a.address);
+			if(a.address){
+				response.answer.push(a);
+			}else{
+				console.log('not inserted in answers from authority, address null');
+			}
 		});
 	});
 
