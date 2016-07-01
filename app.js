@@ -214,5 +214,5 @@ function getHostAddress(data){
 			network = n
 		}
 	});
-	return network.IPAddress;
+	return networks[network].IPAddress;
 }
