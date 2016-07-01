@@ -207,5 +207,12 @@ function getHostname(data){
 	return buff;
 }
 function getHostAddress(data){
-	return data.NetworkSettings.Networks.bridge.IPAddress;
+	var networks = data.NetworkSettings.Networks;
+	var network;
+	Object.keys(networks).forEach(n => {
+		if(!network){
+			network = n
+		}
+	});
+	return network.IPAddress;
 }
