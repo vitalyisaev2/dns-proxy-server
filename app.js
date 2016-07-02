@@ -179,6 +179,7 @@ function addContainer(id){
 				],
 				"domain": hostname
 			};
+			console.info('container=%s, hostname=%s', data.Name, hostname);
 			ui.data.containerEntries.push(host);
 		});
 	});
