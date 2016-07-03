@@ -42,6 +42,11 @@ $ gradle build-dev # build docker image and run the container starting the app
 	Aliases:
 
 
+# See binded hostnames with containers
+
+	$ curl -X GET dns.mageddo/containers
+	container=/docker-dns-server, domain=dns.mageddo
+
 # Adding DNS entries
 
 you can edit `records.json` manually or use the **Gui Editor**
