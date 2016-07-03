@@ -7,6 +7,7 @@ let async = require('async');
 let qtypeToName = require('native-dns-packet').consts.qtypeToName;
 
 ui.data.containerEntries = [];
+require('./hostnameController.js')(ui, ui.data.containerEntries);
 server.on('listening', () => console.log('server listening on', server.address()));
 server.on('close', () => console.log('server closed', server.address()));
 server.on('error', (err, buff, req, res) => console.error(err.stack));
@@ -169,6 +170,7 @@ function addContainer(id){
 		getHostnames(data).forEach(hostname => {
 			var host = {
 				"_id": id,
+				"container": data.Name,
 				"records": [
 					{
 						"type": "A",

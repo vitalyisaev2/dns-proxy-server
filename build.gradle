@@ -54,7 +54,7 @@ task 'docker-server-dev-up' (type:Exec) {
 		'docker', 'run', '-d', '--hostname', "dns.mageddo",
 		'--publish', "5380:80",
 		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
-                '--volume', "/etc/resolv.conf:/etc/resolv.conf",
+		'--volume', "/var/lib/mageddo/dns-proxy-server/conf:${WORKDIR}/conf",
 		'--volume', "${pwd}/:${WORKDIR}",
 		'--name', CONTAINER_NAME, IMAGE_NAME
 	]
