@@ -120,7 +120,7 @@ function proxy(question, response, cb) {
 	let request = dns.Request({
 		question: question, // forwarding the question
 		server: server,  // this is the DNS server we are asking
-		timeout: 5000
+		timeout: 2000
 	});
 
 	request.on('timeout', function () {
