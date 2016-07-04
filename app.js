@@ -7,7 +7,7 @@ let async = require('async');
 let qtypeToName = require('native-dns-packet').consts.qtypeToName;
 
 ui.data.containerEntries = [];
-require('./hostnameController.js')(ui, ui.data.containerEntries);
+require('./hostnameController.js')(ui);
 server.on('listening', () => console.log('server listening on', server.address()));
 server.on('close', () => console.log('server closed', server.address()));
 server.on('error', (err, buff, req, res) => console.error(err.stack));
@@ -150,31 +150,29 @@ function proxy(question, response, cb) {
 
 
 function removeContainer(id){
-	var index = false;
-	ui.data.containerEntries.every((entry, i) => {
+	ui.data.containerEntries = ui.data.containerEntries.filter((entry, i) => {
 		if(entry._id == id){
-			index = i;
-			return false;
+			console.log('M=removeContainer, container=%s, domain=%s', entry.container, entry.domain);
+			return false
 		}
 		return true;
 	});
-	if(index !== false){
-		console.log('removido: ', ui.data.containerEntries[index].domain);
-		delete ui.data.containerEntries[index];
-	}
 }
+
 function addContainer(id){
 	var container = docker.getContainer(id);
 	container.inspect(function (err, data) {
 		console.info('processando hostnames para:', data.Name);
 		getHostnames(data).forEach(hostname => {
+			var ip = getHostAddress(data);
 			var host = {
 				"_id": id,
 				"container": data.Name,
+				"ip": ip,
 				"records": [
 					{
 						"type": "A",
-						"address": getHostAddress(data),
+						"address": ip,
 						"ttl": 300,
 						"name": hostname
 					}

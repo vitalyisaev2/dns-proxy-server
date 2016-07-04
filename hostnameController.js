@@ -1,10 +1,10 @@
-module.exports = function(app, ce){
+module.exports = function(app){
 	var http = require('http'), util = require('util');
 
 	app.get('/containers', (req, res) => {
 
-		ce.forEach(c => {
-			res.write(util.format('container=%s, domain=%s', c.container, c.domain));
+		app.data.containerEntries.forEach(c => {
+			res.write(util.format('container=%s, ip=%s, domain=%s', c.container, c.ip, c.domain));
 			res.write('\n');
 		});
 		res.end();
