@@ -29,10 +29,15 @@ emitter.on("start", function(message) {
 	console.log("container started: %j", message);
 	addContainer(message.id);
 });
-emitter.on("stop", function(message) {
+
+emitter.on("stop", removeEvent);
+emitter.on("die", removeEvent);
+emitter.on("destroy", removeEvent);
+
+function removeEvent(message) {
 	console.log("container stopped: %j", message);
 	removeContainer(message.id);
-});
+};
 
 console.log('adicionando containers ja em pe');
 docker.listContainers({all: false}, function(err, containers) {
