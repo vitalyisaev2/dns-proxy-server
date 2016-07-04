@@ -79,11 +79,11 @@ server.on('request', function handleRequest(request, response) {
 			});
 		}else{
 			// procurando nos hostnames do container
-			let entry = ui.data.containerEntries.filter(r => new RegExp(r.domain, 'i').exec(question.name));
+			let entry = ui.data.containerEntries.filter(r => new RegExp('^' + r.domain + '$', 'i').test(question.name));
 			if (entry.length) {
 				// primeiro vemos se nao esta no nosso registro
 				entry[0].records.forEach(record => {
-					console.log('resolvendo pelo hostname');
+					console.log('solving internally');
 					record.name = question.name;
 					record.ttl = record.ttl || 1800;
 					if (record.type == 'CNAME') {
