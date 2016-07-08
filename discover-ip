@@ -16,9 +16,11 @@ if [ $LINE != "" ]; then
 fi
 
 echo "adding new ip"
-CONTAINER_ADD="nameserver $MY_IP # docker-dns-server\n"
+CONTAINER_ADD="nameserver $MY_IP # docker-dns-server"
 sed -i "1i$CONTAINER_ADD" /tmp/tmp
 
 echo "processing"
-cat /tmp/tmp > /etc/resolv.conf
+echo $CONTAINER_ADD > '/etc/resolvconf/resolv.conf.d/head'
+cat '/etc/resolvconf/resolv.conf.d/head' > /etc/resolv.conf
+cat '/etc/resolvconf/resolv.conf.d/base' >> /etc/resolv.conf
 echo "setup done!"

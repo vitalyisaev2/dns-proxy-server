@@ -71,6 +71,7 @@ task 'docker-server-dev-up-prod' (type:Exec) {
 		'--volume', "/var/run/docker.sock:/var/run/docker.sock",
 		'--volume', "/var/lib/mageddo/dns-proxy-server/conf:${WORKDIR}/conf",
 		'--volume', "/etc/resolv.conf:/etc/resolv.conf",
+		'--volume', "/etc/resolvconf/resolv.conf.d:/etc/resolvconf/resolv.conf.d",
 		'--name', CONTAINER_NAME, IMAGE_NAME
 	]
 }

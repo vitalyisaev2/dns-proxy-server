@@ -1,5 +1,4 @@
 FROM node:5.6-wheezy
-
 ENV WORKDIR=/opt/docker-dns-server
 COPY . $WORKDIR
 EXPOSE 53
