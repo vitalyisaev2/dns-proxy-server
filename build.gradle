@@ -3,7 +3,7 @@ defaultTasks 'build-dev'
 ext {
 	CONTAINER_NAME = "docker-dns-server"
 	TAG = getTheTag()
-	IMAGE_NAME = "${CONTAINER_NAME}:$TAG"
+	IMAGE_NAME = "reg.mageddo.com:5000/mageddo/${CONTAINER_NAME}:$TAG"
 	WORKDIR = "/opt/${CONTAINER_NAME}"
 }
 
