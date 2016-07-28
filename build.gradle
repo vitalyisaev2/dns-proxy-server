@@ -91,7 +91,7 @@ def getTheTag(){
 	def tag = ['git', 'describe', '--abbrev=0', '--tags'].execute().text;
 	if(tag.length() == 1)
 		return removeLast(tag)
-	return '1.0.0'
+	return '1.6.6'
 }
 def removeContainer(String image){
 	def buff = new StringBuffer();
