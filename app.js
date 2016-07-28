@@ -64,44 +64,13 @@ server.on('request', function handleRequest(request, response) {
 	request.question.forEach(question => {
 
 		console.log('request from:', request.address.address, ' for:', question.name, ' type:', qtypeToName(question.type));
-
-		// finding a entry on local base that matches with question
-		let entry = ui.data.entries.filter(r => new RegExp(r.domain, 'i').exec(question.name));
-		if (entry.length) {
-			// primeiro vemos se nao esta no nosso registro
-			entry[0].records.forEach(record => {
-				record.name = question.name;
-				record.ttl = record.ttl || 1800;
-				if (record.type == 'CNAME') {
-					record.data = record.address;
-					questionsToProxy.push(cb => { 
-						proxy({
-							name: record.data, type: dns.consts.NAME_TO_QTYPE.A, class: 1
-						}, response, cb);
-					});
-				}
-				response.answer.push(dns[record.type](record));
-			});
-		}else{
-			// procurando nos hostnames do container
-			let entry = ui.data.containerEntries.filter(r => new RegExp('^' + r.domain + '$', 'i').test(question.name));
-			if (entry.length) {
-				// primeiro vemos se nao esta no nosso registro
-				entry[0].records.forEach(record => {
-					console.log('solving internally');
-					record.name = question.name;
-					record.ttl = record.ttl || 1800;
-					if (record.type == 'CNAME') {
-						record.data = record.address;
-						questionsToProxy.push(cb => { 
-							proxy({
-								name: record.data, type: dns.consts.NAME_TO_QTYPE.A, class: 1
-							}, response, cb);
-						});
-					}
-					response.answer.push(dns[record.type](record));
-				});
-			}else{
+		console.log('try solve from containers')
+		// procurando nos hostnames do container
+		if(!resolveDnsLocally(ui.data.containerEntries, question, questionsToProxy, response)){
+			console.log('try solve from local json')
+			// finding a entry on local base that matches with question
+			if(!resolveDnsLocally(ui.data.entries, question, questionsToProxy, response)){
+				console.log('try solve from remote')
 				// se nenhum satisfazer vamos encaminhar pro remoto
 				questionsToProxy.push(cb => proxy(question, response, cb));
 			}
@@ -114,6 +83,28 @@ server.on('request', function handleRequest(request, response) {
 		response.send();
 	});
 });
+
+function resolveDnsLocally(entries, question, questionsToProxy, response){
+	let entry = entries.filter(r => new RegExp('^' + r.domain + '$', 'i').test(question.name));
+	if (entry.length) {
+		// primeiro vemos se nao esta no nosso registro
+		entry[0].records.forEach(record => {
+			record.name = question.name;
+			record.ttl = record.ttl || 1800;
+			if (record.type == 'CNAME') {
+				record.data = record.address;
+				questionsToProxy.push(cb => { 
+					proxy({
+						name: record.data, type: dns.consts.NAME_TO_QTYPE.A, class: 1
+					}, response, cb);
+				});
+			}
+			response.answer.push(dns[record.type](record));
+		});
+		return true;
+	}
+	return false;
+}
 
 
 function proxy(question, response, cb) {
