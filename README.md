@@ -14,7 +14,7 @@ Build the project
 
 Starting the server 
 
-	npm start
+	sudo npm start
 
 setting this DNS as default DNS
 
