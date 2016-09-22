@@ -47,9 +47,9 @@ $ gradle build-dev # build docker image and run the container starting the app
 	$ curl -X GET dns.mageddo/containers
 	container=/docker-dns-server, domain=dns.mageddo
 
-# Adding DNS entries
+# Adding manual DNS entries
 
-you can edit `records.json` manually or use the **Gui Editor**
+you can create/edit `conf/records.json` (based on `records.samples.json`) manually or use the **Gui Editor**
 
 # Gui editor
 
