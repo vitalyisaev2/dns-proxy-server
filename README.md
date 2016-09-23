@@ -56,6 +56,8 @@ you can create/edit `conf/records.json` (based on `records.samples.json`) manual
 the password is `cat`
 
 	http://<localhost or docker container ip>:5380/
+	
+![](https://peteris.rocks/blog/dns-proxy-server-in-node-js-with-ui/dns.png)
 
 # A entry example
 
