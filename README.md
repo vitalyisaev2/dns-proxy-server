@@ -1,6 +1,6 @@
 # Introduction
 
-A simple Node DNS Server proxy based on [Peteris Rocks tutorial](https://peteris.rocks/blog/dns-proxy-server-in-node-js-with-ui/)
+A simple Node DNS Server proxy based on [Pēteris Ņikiforovs tutorial](https://peteris.rocks/blog/dns-proxy-server-in-node-js-with-ui/)
 
 # Running
 
