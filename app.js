@@ -1,6 +1,6 @@
 'use strict';
 
-let ui = require('./ui/index.js')
+let ui = require('./ui/index.js');
 let dns = require('native-dns');
 let server = dns.createServer();
 let async = require('async');
@@ -17,7 +17,7 @@ server.serve(53);
 
 ///////
 
-// registra os containers do docker 
+// registra os containers do docker
 var Docker = require('dockerode');
 var DockerEvents = require('docker-events');
 var docker = new Docker({socketPath: '/var/run/docker.sock'});
@@ -37,7 +37,7 @@ emitter.on("destroy", removeEvent);
 function removeEvent(message) {
 	console.log("m=removeEvent, msg=%j", message);
 	removeContainer(message.id);
-};
+}
 
 console.log('adicionando containers ja em pe');
 docker.listContainers({all: false}, function(err, containers) {
@@ -73,15 +73,21 @@ server.on('request', function handleRequest(request, response) {
 			if(!resolveDnsLocally(ui.data.entries, question, questionsToProxy, response)){
 				console.log('m=solve, from=remote')
 				// if not found locally then will find on WEB DNS
+				// insert the proxy function at the array to be called by parallel
 				questionsToProxy.push(cb => proxy(question, response, cb));
 			}
 		}
 	});
-	async.parallel(questionsToProxy, function() {
+	async.parallel(questionsToProxy, function(msg) {
 		// when all questions be done (end event) we will close the connection 
 		// sending the response
-		console.log('m=parallel, status=questions done, aciton=seding answers');
-		response.send();
+		console.log('m=parallel, status=questions done, action=sending answers');
+		if(msg == 'success'){
+			console.log('m=parallel, msg=success');
+			response.send();
+		}else{
+			console.log('m=parallel, msg=not found');
+		}
 	});
 });
 
@@ -128,24 +134,32 @@ function proxy(question, response, cb) {
 			msg.authority.forEach(a => {
 				response.answer.push(a);
 			});
-		cb();
+		cb('success');
 		return ;
 	}
 
+	proxyToServer(question, response, cb, 0);
 
-	console.log('m=proxy, status=resolvingFromRemote');
-	let server = ui.data.remoteDns[0];
-	if(!server){
-		throw "You need at least one remote server";
+}
+
+function proxyToServer(question, response, cb, index){
+
+	if(index >= ui.data.remoteDns.length){
+		console.log('m=proxyToServer, status=noMoreServers');
+		cb('not-found')
+		return;
 	}
+	let server = ui.data.remoteDns[index];
+	console.log('m=proxyToServer, status=resolvingFromRemote, server=%s, index=%s', server.address, index);
 	let request = dns.Request({
 		question: question, // forwarding the question
 		server: server,  // this is the DNS server we are asking
-		timeout: 5000
+		timeout: 1500
 	});
 
 	request.on('timeout', function () {
-		console.log('m=timeout, question=%s', question.name);
+		console.log('m=timeout, question=%s, server=%s', question.name, server.address);
+		proxyToServer(question, response, cb, index+1)
 	});
 
 	// when we get answers, append them to the response
@@ -166,9 +180,10 @@ function proxy(question, response, cb) {
 		response.answer.forEach(msg => {
 			console.log('m=remote-end, type=%s, name=%s, address=%s', msg.type, msg.name, msg.address);
 		})
-		cb();
+		cb('success');
 	});
 	request.send();
+
 }
 
 
