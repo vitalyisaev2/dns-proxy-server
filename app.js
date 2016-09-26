@@ -123,19 +123,30 @@ function proxy(question, response, cb) {
 		console.log('m=proxy, status=resolvedFromCache, host=%s, cacheSize=%s, qtd=%s',
 			question.name, Object.keys(cache).length,
 				msg.answer.length);
-
-		msg.answer.forEach(a => {
-				response.answer.push(a);
-			});
-			msg.authority.forEach(a => {
-				response.answer.push(a);
-			});
+		doAnswer(response, msg);
 		cb('success');
 		return ;
 	}
 
 	proxyToServer(question, response, cb, 0);
 
+}
+
+function doAnswer(response, msg){
+	console.log("m=doAnswer, answer=%s, authority=%s, additional=%s", msg.answer.length,
+		msg.authority.length, msg.additional);
+		
+	msg.answer.forEach(a => {
+//		console.log('m=answerFound, type=%s, ttl=%s, ip=%s, server=%s', a.type, a.ttl,
+			 a.address, server.address);
+		response.answer.push(a);
+	});
+	msg.authority.forEach(a => {
+		response.authority.push(a);
+	});
+	msg.additional.forEach(a => {
+		response.additional.push(a);
+	});
 }
 
 function proxyToServer(question, response, cb, index){
@@ -163,14 +174,8 @@ function proxyToServer(question, response, cb, index){
 	request.on('message', (err, msg) => {
 
 		cache[question.name] = msg;
-		msg.answer.forEach(a => {
-			console.log('m=answerFound, type=%s, ttl=%s, ip=%s, server=%s', a.type, a.ttl,
-			 a.address, server.address);
-			response.answer.push(a);
-		});
-		msg.authority.forEach(a => {
-			response.answer.push(a);
-		});
+		console.log('m=answerFound, status=cached, msg=', msg);
+		doAnswer(response, msg);
 		cb('success');
 	});
 
