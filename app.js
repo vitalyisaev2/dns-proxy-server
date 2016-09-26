@@ -104,7 +104,7 @@ function resolveDnsLocally(entries, question, questionsToProxy, response){
 			}
 			var a = dns[record.type](record);
 			console.log("m=resolveDnsLocally, status=success, question=%s, answer=%s", question.name,
-			 	a.records[0]);
+			 	a.records ? a.records[0] : null);
 			response.answer.push(a);
 		});
 		return true;
