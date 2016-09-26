@@ -81,13 +81,13 @@ server.on('request', function handleRequest(request, response) {
 	async.parallel(questionsToProxy, function(msg) {
 		// when all questions be done (end event) we will close the connection 
 		// sending the response
-		console.log('m=parallel, status=questions done, action=sending answers');
-		if(msg == 'success'){
-			console.log('m=parallel, msg=success');
-			response.send();
-		}else{
-			console.log('m=parallel, msg=not found');
-		}
+		console.log('m=parallel, status=questions done, action=sending answers, msg=%s', msg);
+//		if(msg == 'success'){
+//			console.log('m=parallel, msg=success');
+//			response.send();
+//		}else{
+//			console.log('m=parallel, msg=not found');
+//		}
 	});
 });
 
@@ -150,7 +150,8 @@ function proxyToServer(question, response, cb, index){
 		return;
 	}
 	let server = ui.data.remoteDns[index];
-	console.log('m=proxyToServer, status=resolvingFromRemote, server=%s, index=%s', server.address, index);
+	console.log('m=proxyToServer, status=resolvingFromRemote, server=%s, index=%s, dns=%s',
+		server.address, index, ui.data.remoteDns.length);
 	let request = dns.Request({
 		question: question, // forwarding the question
 		server: server,  // this is the DNS server we are asking
@@ -174,13 +175,13 @@ function proxyToServer(question, response, cb, index){
 		msg.authority.forEach(a => {
 			response.answer.push(a);
 		});
+		cb('success');
 	});
 
 	request.on('end', function(){
 		response.answer.forEach(msg => {
 			console.log('m=remote-end, type=%s, name=%s, address=%s', msg.type, msg.name, msg.address);
 		})
-		cb('success');
 	});
 	request.send();
 
