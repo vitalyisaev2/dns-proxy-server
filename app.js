@@ -133,7 +133,7 @@ function proxy(question, response, cb) {
 	request.on('message', (err, msg) => {
 
 		msg.answer.forEach(a => {
-			console.log('m=answerFound, answer=', a)
+			console.log('m=answerFound, type=%s, ttl=%s, ip=%s', a.type, a.ttl, a.address)
 			response.answer.push(a);
 		});
 		msg.authority.forEach(a => {
@@ -143,7 +143,7 @@ function proxy(question, response, cb) {
 
 	request.on('end', function(){
 		response.answer.forEach(msg => {
-			console.log('m=remote-end, type=', msg.type, ', name=', msg.name, ', address=', msg.address);
+			console.log('m=remote-end, type=%s, name=%s, address=%s', msg.type, msg.name, msg.address);
 		})
 		cb();
 	});
