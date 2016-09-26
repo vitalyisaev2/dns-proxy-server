@@ -114,10 +114,14 @@ function resolveDnsLocally(entries, question, questionsToProxy, response){
 
 var cache = {};
 function proxy(question, response, cb) {
-	console.log('m=proxy, status=resolvingFromCache, questionName=', question.name, ', type=', question.type);
+	console.log('m=proxy, status=begin, questionName=', question.name, ', type=', question.type);
 
+	var msg;
 	if(msg = cache[question.name]){
-		console.log('m=proxy, status=resolvedFromCache, qtd=%s', msg.answer.length);
+
+		console.log('m=proxy, status=resolvedFromCache, cacheSize=%s, qtd=%s', Object.keys(cache).length,
+				msg.answer.length);
+
 		msg.answer.forEach(a => {
 				response.answer.push(a);
 			});
