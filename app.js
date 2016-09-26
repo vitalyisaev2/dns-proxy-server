@@ -82,12 +82,7 @@ server.on('request', function handleRequest(request, response) {
 		// when all questions be done (end event) we will close the connection 
 		// sending the response
 		console.log('m=parallel, status=questions done, action=sending answers, msg=%s', msg);
-//		if(msg == 'success'){
-//			console.log('m=parallel, msg=success');
-//			response.send();
-//		}else{
-//			console.log('m=parallel, msg=not found');
-//		}
+		response.send();
 	});
 });
 
@@ -155,7 +150,7 @@ function proxyToServer(question, response, cb, index){
 	let request = dns.Request({
 		question: question, // forwarding the question
 		server: server,  // this is the DNS server we are asking
-		timeout: 1500
+		timeout: 3000
 	});
 
 	request.on('timeout', function () {
