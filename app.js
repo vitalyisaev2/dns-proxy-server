@@ -117,8 +117,8 @@ var cache = {};
 function proxy(question, response, cb) {
 	console.log('m=proxy, status=begin, questionName=', question.name, ', type=', question.type);
 
-	var msg;
-	if(msg = cache[question.name] && msg.question.filter( q => q.type == question.type ).length > 0){
+	var msg = cache[question.name];
+	if(msg && msg.question.filter( q => q.type == question.type ).length > 0){
 
 		console.log('m=proxy, status=resolvedFromCache, host=%s, cacheSize=%s, qtd=%s',
 			question.name, Object.keys(cache).length,
