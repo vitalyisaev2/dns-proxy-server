@@ -35,7 +35,7 @@ emitter.on("die", removeEvent);
 emitter.on("destroy", removeEvent);
 
 function removeEvent(message) {
-	console.log("container stopped: %j", message);
+	console.log("m=removeEvent, msg=%j", message);
 	removeContainer(message.id);
 };
 
@@ -60,18 +60,19 @@ server.on('request', function handleRequest(request, response) {
 	 * 
 	 */
 	var nQuestions = request.question.length;
-	console.log('request with ', nQuestions, ' questions');
+	console.log('m=request, questions=', nQuestions);
 	request.question.forEach(question => {
 
-		console.log('request from:', request.address.address, ' for:', question.name, ' type:', qtypeToName(question.type));
-		console.log('try solve from containers')
-		// procurando nos hostnames do container
+		console.log('m=solve, requestFrom=', request.address.address, ', for=', question.name,
+			', type=', qtypeToName(question.type));
+		console.log('m=solve, from=containers')
+		// finding container that matches hostname
 		if(!resolveDnsLocally(ui.data.containerEntries, question, questionsToProxy, response)){
-			console.log('try solve from local json')
+			console.log('m=solve, from=json')
 			// finding a entry on local base that matches with question
 			if(!resolveDnsLocally(ui.data.entries, question, questionsToProxy, response)){
-				console.log('try solve from remote')
-				// se nenhum satisfazer vamos encaminhar pro remoto
+				console.log('m=solve, from=remote')
+				// if not found locally then will find on WEB DNS
 				questionsToProxy.push(cb => proxy(question, response, cb));
 			}
 		}
@@ -79,12 +80,13 @@ server.on('request', function handleRequest(request, response) {
 	async.parallel(questionsToProxy, function() {
 		// when all questions be done (end event) we will close the connection 
 		// sending the response
-		console.log('all questions be done, send client answers');
+		console.log('m=parallel, status=questions done, aciton=seding answers');
 		response.send();
 	});
 });
 
 function resolveDnsLocally(entries, question, questionsToProxy, response){
+	console.log("m=resolveDnsLocally, status=begin, question=%s", question.name);
 	let entry = entries.filter(r => new RegExp('^' + r.domain + '$', 'i').test(question.name));
 	if (entry.length) {
 		// primeiro vemos se nao esta no nosso registro
@@ -99,16 +101,19 @@ function resolveDnsLocally(entries, question, questionsToProxy, response){
 					}, response, cb);
 				});
 			}
-			response.answer.push(dns[record.type](record));
+			var a = dns[record.type](record);
+			console.log("m=resolveDnsLocally, status=success, question=%s, answer=%s", question.name,
+			 	a.records[0]);
+			response.answer.push(a);
 		});
 		return true;
 	}
+	console.log("m=resolveDnsLocally, status=notFound, question=%s", question.name);
 	return false;
 }
 
-
 function proxy(question, response, cb) {
-	console.log('proxying: ', question.name, ', type: ', question.type);
+	console.log('m=proxy, questionName=', question.name, ', type=', question.type);
 
 	let server = ui.data.remoteDns[0];
 	if(!server){
@@ -121,13 +126,14 @@ function proxy(question, response, cb) {
 	});
 
 	request.on('timeout', function () {
-		console.log('Timeout in making request no forwarding', question.name);
+		console.log('m=timeout, question=%s', question.name);
 	});
 
 	// when we get answers, append them to the response
 	request.on('message', (err, msg) => {
 
 		msg.answer.forEach(a => {
+			console.log('m=answerFound, answer=', a)
 			response.answer.push(a);
 		});
 		msg.authority.forEach(a => {
@@ -137,7 +143,7 @@ function proxy(question, response, cb) {
 
 	request.on('end', function(){
 		response.answer.forEach(msg => {
-			console.log('remote DNS answer: type: ', msg.type, ', name: ', msg.name, ', address: ', msg.address);
+			console.log('m=remote-end, type=', msg.type, ', name=', msg.name, ', address=', msg.address);
 		})
 		cb();
 	});
@@ -158,7 +164,7 @@ function removeContainer(id){
 function addContainer(id){
 	var container = docker.getContainer(id);
 	container.inspect(function (err, data) {
-		console.info('processando hostnames para:', data.Name);
+		console.info('m=addContainer, status=process-hostnames, container=', data.Name);
 		getHostnames(data).forEach(hostname => {
 			var ip = getHostAddress(data);
 			var host = {
@@ -175,7 +181,7 @@ function addContainer(id){
 				],
 				"domain": hostname
 			};
-			console.info('container=%s, hostname=%s', data.Name, hostname);
+			console.info('m=addContainer, container=%s, hostname=%s', data.Name, hostname);
 			ui.data.containerEntries.push(host);
 		});
 	});
@@ -186,11 +192,11 @@ function getHostnames(container){
 		container.Config.Env.forEach(function(env){
 			var key = 'HOSTNAMES=';
 			if(env.startsWith(key)){
-				console.info('encontrada a env do hostname');
+				console.info('m=getHostnames, status=env fold');
 				var strHosts = env.substring(key.length),
 						arrHosts = strHosts.split(',');
 				hostnames = hostnames.concat(arrHosts);
-				console.log('hosts para o container: ', container.Name, hostnames);
+				console.log('m=getHostnames, container=%s, hosts=%s: ', container.Name, hostnames);
 			}
 		});
 	}
