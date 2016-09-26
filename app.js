@@ -122,7 +122,7 @@ function proxy(question, response, cb) {
 	let request = dns.Request({
 		question: question, // forwarding the question
 		server: server,  // this is the DNS server we are asking
-		timeout: 2000
+		timeout: 5000
 	});
 
 	request.on('timeout', function () {
@@ -133,7 +133,8 @@ function proxy(question, response, cb) {
 	request.on('message', (err, msg) => {
 
 		msg.answer.forEach(a => {
-			console.log('m=answerFound, type=%s, ttl=%s, ip=%s', a.type, a.ttl, a.address)
+			console.log('m=answerFound, type=%s, ttl=%s, ip=%s, server=%s', a.type, a.ttl,
+			 a.address, server.address)
 			response.answer.push(a);
 		});
 		msg.authority.forEach(a => {
