@@ -175,7 +175,8 @@ function proxyToServer(question, response, cb, index){
 
 	request.on('end', function(){
 		response.answer.forEach(msg => {
-			console.log('m=remote-end, type=%s, name=%s, address=%s', msg.type, msg.name, msg.address);
+			console.log('m=remote-end, type=%s, name=%s, address=%s, server=%s', msg.type,
+				msg.name, msg.address, server.address);
 		})
 	});
 	request.send();
