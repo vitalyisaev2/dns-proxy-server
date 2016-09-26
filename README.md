@@ -5,7 +5,7 @@ A simple Node DNS Server proxy based on [Pēteris Ņikiforovs tutorial](https://
 # Features
 * Create a static file with static address for each hostname that you want
 * Create your docker containers with `HOSTNAMES` env, example: `HOSTNAMES=dev.mageddo.com, blog.mageddo.com` then access these hostnames in browser
-* All others hostnames that are not found in docker, then static file will be find at internet in configured DNS servers that you have setted
+* All others hostnames that are not found in docker, then static file will be find at internet in configured DNS servers that you have set
 * Cache for remote DNS increasing internet velocity
 
 
