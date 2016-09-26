@@ -118,7 +118,7 @@ function proxy(question, response, cb) {
 	console.log('m=proxy, status=begin, questionName=', question.name, ', type=', question.type);
 
 	var msg;
-	if(msg = cache[question.name]){
+	if(msg = cache[question.name] && msg.question.filter( q => q.type == question.type ).length > 0){
 
 		console.log('m=proxy, status=resolvedFromCache, host=%s, cacheSize=%s, qtd=%s',
 			question.name, Object.keys(cache).length,
@@ -157,8 +157,9 @@ function proxyToServer(question, response, cb, index){
 		return;
 	}
 	let server = ui.data.remoteDns[index];
-	console.log('m=proxyToServer, status=resolvingFromRemote, server=%s, index=%s, dns=%s',
+	console.log('m=proxyToServer, status=resolvingFromRemote, server=%s, index=%s, dnsQtd=%s',
 		server.address, index, ui.data.remoteDns.length);
+	console.log("m=proxyToServer, host=%s, question=", question.name, question);
 	let request = dns.Request({
 		question: question, // forwarding the question
 		server: server,  // this is the DNS server we are asking
@@ -173,7 +174,17 @@ function proxyToServer(question, response, cb, index){
 	// when we get answers, append them to the response
 	request.on('message', (err, msg) => {
 
-		cache[question.name] = msg;
+	 // mouting cache
+		var tmp = cache[question.name];
+		if(tmp == null){
+			cache[question.name] = msg;
+		}else{
+			tmp.additional = tmp.additional.concat(msg.additional);
+			tmp.answer= tmp.answer.concat(msg.answer);
+			tmp.authority= tmp.authority.concat(msg.authority);
+			tmp.question= tmp.question.concat(msg.question);
+		}
+
 		console.log('m=answerFound, status=cached, msg=', msg);
 		doAnswer(response, msg, question.name);
 		cb('success');
