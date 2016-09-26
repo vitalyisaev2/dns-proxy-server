@@ -112,9 +112,24 @@ function resolveDnsLocally(entries, question, questionsToProxy, response){
 	return false;
 }
 
+var cache = {};
 function proxy(question, response, cb) {
-	console.log('m=proxy, questionName=', question.name, ', type=', question.type);
+	console.log('m=proxy, status=resolvingFromCache, questionName=', question.name, ', type=', question.type);
 
+	if(msg = cache[question.name]){
+		console.log('m=proxy, status=resolvedFromCache, qtd=%s', msg.answer.length);
+		msg.answer.forEach(a => {
+				response.answer.push(a);
+			});
+			msg.authority.forEach(a => {
+				response.answer.push(a);
+			});
+		cb();
+		return ;
+	}
+
+
+	console.log('m=proxy, status=resolvingFromRemote');
 	let server = ui.data.remoteDns[0];
 	if(!server){
 		throw "You need at least one remote server";
@@ -132,9 +147,10 @@ function proxy(question, response, cb) {
 	// when we get answers, append them to the response
 	request.on('message', (err, msg) => {
 
+		cache[question.name] = msg;
 		msg.answer.forEach(a => {
 			console.log('m=answerFound, type=%s, ttl=%s, ip=%s, server=%s', a.type, a.ttl,
-			 a.address, server.address)
+			 a.address, server.address);
 			response.answer.push(a);
 		});
 		msg.authority.forEach(a => {
