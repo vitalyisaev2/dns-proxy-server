@@ -11,6 +11,7 @@ let password = 'cat';
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
+app.set('json spaces', 2);
 
 app.get('/load', (req, res) => {
 	res.send(app.data.entries);

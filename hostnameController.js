@@ -8,6 +8,9 @@ module.exports = function(app){
 			res.write('\n');
 		});
 		res.end();
+	});
 
-	})
+	app.get('/cache', (req, res) => {
+			res.send(app.data.cache);
+	});
 }
