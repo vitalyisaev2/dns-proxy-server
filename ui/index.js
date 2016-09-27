@@ -47,5 +47,5 @@ function getTheJson(name){
 	}
 }
 
-app.listen(app.data.uiPort || 80);
+app.listen(app.data.uiPort || 5380);
 module.exports = app

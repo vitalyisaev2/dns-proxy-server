@@ -1,5 +1,5 @@
 {
-  "uiPort": 80,
+  "uiPort": 5380,
   "dnsServerPort": 53,
   "remoteDns": [
     { "address": "8.8.8.8", "port": 53, "type": "udp" },
