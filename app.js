@@ -2,10 +2,12 @@
 
 let ui = require('./ui/index.js');
 let dns = require('native-dns');
+let Cache = require('./cache.js');
 let server = dns.createServer();
 let async = require('async');
 let qtypeToName = require('native-dns-packet').consts.qtypeToName;
 
+var cache = new Cache(ui.data.cache = {});
 ui.data.containerEntries = [];
 require('./hostnameController.js')(ui);
 server.on('listening', () => console.log('server listening on', server.address()));
@@ -113,13 +115,12 @@ function resolveDnsLocally(entries, question, questionsToProxy, response){
 	return false;
 }
 
-var cache = {};
+
 function proxy(question, response, cb) {
 	console.log('m=proxy, status=begin, questionName=', question.name, ', type=', question.type);
 
-	var msg = cache[question.name];
-	if(msg && msg.question.filter( q => q.type == question.type ).length > 0){
-
+	var msg = cache.get(question);
+	if(msg){
 		console.log('m=proxy, status=resolvedFromCache, host=%s, cacheSize=%s, qtd=%s',
 			question.name, Object.keys(cache).length,
 				msg.answer.length);
@@ -127,7 +128,6 @@ function proxy(question, response, cb) {
 		cb('success');
 		return ;
 	}
-
 	proxyToServer(question, response, cb, 0);
 
 }
@@ -174,16 +174,8 @@ function proxyToServer(question, response, cb, index){
 	// when we get answers, append them to the response
 	request.on('message', (err, msg) => {
 
-	 // mouting cache
-		var tmp = cache[question.name];
-		if(tmp == null){
-			cache[question.name] = msg;
-		}else{
-			tmp.additional = tmp.additional.concat(msg.additional);
-			tmp.answer= tmp.answer.concat(msg.answer);
-			tmp.authority= tmp.authority.concat(msg.authority);
-			tmp.question= tmp.question.concat(msg.question);
-		}
+		// mouting cache
+		cache.put(question.name, msg);
 
 		console.log('m=answerFound, status=cached, msg=', msg);
 		doAnswer(response, msg, question.name);
