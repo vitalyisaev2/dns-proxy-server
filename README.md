@@ -63,7 +63,7 @@ you can create/edit `conf/records.json` (based on `records.samples.json`) manual
 
 # Gui editor
 
-* To access from docker [http://dns.mageddo](http://dns.mageddo)
+* To access from docker [http://dns.mageddo:5380](http://dns.mageddo:5380)
 * To access without docker(running at npm) [http://127.0.0.1:5380](http://127.0.0.1:5380)
 
 
