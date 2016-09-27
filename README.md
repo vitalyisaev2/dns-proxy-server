@@ -7,8 +7,9 @@ A simple Node DNS Server proxy based on [Pēteris Ņikiforovs tutorial](https://
 * Create your docker containers with `HOSTNAMES` env, example: `HOSTNAMES=dev.mageddo.com, blog.mageddo.com` then access these hostnames in browser
 * All others hostnames that are not found in docker, then static file will be find at internet in configured DNS servers that you have set
 * Cache for remote DNS increasing internet velocity
-* List docker containers using `http://dns.mageddo/containers`
-* List cached hosts using `http://127.0.0.1/cache` or `http://dns.mageddo/cache`
+* List docker containers using [http://dns.mageddo:5380/containers](http://dns.mageddo:5380/containers)
+* List cached hosts using [http://127.0.0.1:5380/cache](http://127.0.0.1:5380/cache)(without docker) or [http://dns.mageddo:5380/cache](http://dns.mageddo:5380/cache) (with docker)
+* [Change DNS server ip](#changing-default-ports), or GUI editor IP
 
 
 # Running
@@ -53,7 +54,7 @@ $ ./gradlew build-dev # build docker image and run the container starting the ap
 
 # See binded hostnames with containers
 
-	$ curl -X GET dns.mageddo/containers
+	$ curl -X GET dns.mageddo:5380/containers
 	container=/docker-dns-server, domain=dns.mageddo
 
 # Adding manual DNS entries
@@ -62,10 +63,12 @@ you can create/edit `conf/records.json` (based on `records.samples.json`) manual
 
 # Gui editor
 
+* To access from docker [http://dns.mageddo](http://dns.mageddo)
+* To access without docker(running at npm) [http://127.0.0.1:5380](http://127.0.0.1:5380)
+
+
 the password is `cat`
 
-	http://<localhost or docker container ip>:5380/
-	
 ![](https://peteris.rocks/blog/dns-proxy-server-in-node-js-with-ui/dns.png)
 
 # A entry example
@@ -104,6 +107,10 @@ testing on terminal
 	testing3.mageddo.com has address 127.0.0.1
 	testing3.mageddo.com has address 127.0.0.1
 	testing3.mageddo.com has address 127.0.0.1
+	
+# Changing default ports
+
+After [create your](#adding-manual-dns-entries) `records.json` file edit the variables `uiPort` and `dnsServerPort` then restart the DNS server
 
 # License
 
