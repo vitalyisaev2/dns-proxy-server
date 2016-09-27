@@ -46,5 +46,13 @@ module.exports = function(cache){
 	this.getCache = function(){
 		return cache;
 	}
+
+	this.keyset = function(){
+		return Object.keys(cache);
+	}
+
+	this.size = function(){
+		return this.keyset().length;
+	}
 }
 

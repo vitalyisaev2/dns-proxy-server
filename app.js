@@ -122,7 +122,7 @@ function proxy(question, response, cb) {
 	var msg = cache.get(question);
 	if(msg){
 		console.log('m=proxy, status=resolvedFromCache, host=%s, cacheSize=%s, qtd=%s',
-			question.name, Object.keys(cache).length,
+			question.name, cache.size(),
 				msg.answer.length);
 		doAnswer(response, msg, question.name);
 		cb('success');
