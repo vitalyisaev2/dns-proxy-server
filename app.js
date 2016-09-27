@@ -15,7 +15,7 @@ server.on('close', () => console.log('server closed', server.address()));
 server.on('error', (err, buff, req, res) => console.error(err.stack));
 server.on('socketError', (err, socket) => console.error(err));
 
-server.serve(53);
+server.serve(ui.dnsServerPort || 53);
 
 ///////
 
