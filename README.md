@@ -34,13 +34,13 @@ sudo echo 'nameserver <127.0.0.1 or docker container ip>' > /etc/resolv.conf
 
 ## Running on docker
 
-on **1.4.0** setup resolv.conf **is not** needled, is automatically
+From **1.4.0** setup resolv.conf **is not** needled, is automatically
 
 setup it
 
 ```bash
 $ npm install # install dependencies
-$ ./gradlew build-dev # build docker image and run the container starting the app
+$ ./gradlew build # build docker image and run the container starting the app
 ```
 
 # Testing if DNS is working
