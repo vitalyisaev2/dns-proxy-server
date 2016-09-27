@@ -3,8 +3,8 @@ module.exports = function(cache){
 	cache = cache || {};
 
 	this.get = function(question){
-		var msg = cache[question.name];
-		if(msg && msg.question.filter( q => q.type == question.type ).length > 0){
+		var msg = cache[getKey(question)];
+		if(msg){
 			console.log("m=get, status=found, questionName=%s, questionType=%s",
 						question.name, question.type)
 			return msg;
@@ -18,12 +18,12 @@ module.exports = function(cache){
 	 * Value must be a question
 	 */
 	this.put = function(question, value){
-
-		var tmp = cache[question.name];
+		var key = getKey(question);
+		var tmp = cache[key];
 		if(tmp == null){
 			console.log("m=put, status=puttingNewQuestion, questionName=%s, questionType=%s",
 					question.name, question.type)
-			cache[question.name] = value;
+			cache[key] = value;
 		}else{
 			if(!this.get(question)){
 				console.log("m=put, status=puttingNewType, questionName=%s, questionType=%s",
@@ -37,6 +37,10 @@ module.exports = function(cache){
 				 question.name, question.type)
 			}
 		}
+	}
+
+	function getKey(question){
+		return question.name + '-' + question.type;
 	}
 
 	this.getCache = function(){
