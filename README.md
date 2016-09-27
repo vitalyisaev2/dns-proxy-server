@@ -37,7 +37,7 @@ setup it
 
 ```bash
 $ npm install # install dependencies
-$ gradle build-dev # build docker image and run the container starting the app
+$ ./gradlew build-dev # build docker image and run the container starting the app
 ```
 
 # Testing if DNS is working
