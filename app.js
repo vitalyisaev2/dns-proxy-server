@@ -51,7 +51,13 @@ docker.listContainers({all: false}, function(err, containers) {
 
 //////
 
-server.on('request', function handleRequest(request, response) {
+server.on('request',
+	(req, res) => {
+		process.nextTick(handleRequest.bind(null, req, res))
+	}
+);
+
+function handleRequest(request, response) {
 
 	let questionsToProxy = [];
 
@@ -86,7 +92,7 @@ server.on('request', function handleRequest(request, response) {
 		console.log('m=parallel, status=questions done, action=sending answers, msg=%s', msg);
 		response.send();
 	});
-});
+};
 
 function resolveDnsLocally(entries, question, questionsToProxy, response){
 	console.log("m=resolveDnsLocally, status=begin, question=%s", question.name);
