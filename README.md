@@ -119,13 +119,13 @@ After [create your](#adding-manual-dns-entries) `records.json` file edit the var
 
 ### Containers - Show mapped containers
 
-	$ curl -X GET http://dns.mageddo:8080/containers
+	$ curl -X GET http://dns.mageddo:5380/containers
 	container=/docker-dns-server, ip=172.17.0.2, domain=dns.mageddo
 	container=/mageddo-jenkins, ip=172.17.0.3, domain=jenkins.mageddo.dev
 
 
 ### Cache - List data
-	$ curl -X GET http://dns.mageddo:8080/v1/cache
+	$ curl -X GET http://dns.mageddo:5380/v1/cache
 	{
 	"www.google.com-1": {
 		"header": {
@@ -185,7 +185,7 @@ After [create your](#adding-manual-dns-entries) `records.json` file edit the var
 		"creationDate": "2016-10-01T16:27:41.734Z"
 	}
 
-	$ curl -X GET http://dns.mageddo:8080/v2/cache
+	$ curl -X GET http://dns.mageddo:5380/v2/cache
 	{
 		size: 10, // how many keys has been cached
 		keys: "keys": ["www.google.com-1"], // the key array
