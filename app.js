@@ -15,7 +15,7 @@ server.on('close', () => console.log('server closed', server.address()));
 server.on('error', (err, buff, req, res) => console.error(err.stack));
 server.on('socketError', (err, socket) => console.error(err));
 
-server.serve(ui.dnsServerPort || 53);
+server.serve(ui.data.dnsServerPort || 53);
 
 ///////
 
@@ -118,9 +118,9 @@ function resolveDnsLocally(entries, question, questionsToProxy, response){
 
 function proxy(question, response, cb) {
 	console.log('m=proxy, status=begin, questionName=', question.name, ', type=', question.type,
-		', cache=' + ui.cacheEnabled);
+		', cache=' + ui.data.cacheEnabled);
 	var msg;
-	if(ui.cacheEnabled && (msg = cache.get(question))){
+	if(ui.data.cacheEnabled && (msg = cache.get(question))){
 		console.log('m=proxy, status=resolvedFromCache, host=%s, cacheSize=%s, qtd=%s',
 			question.name, cache.size(),
 				msg.answer.length);
@@ -175,7 +175,7 @@ function proxyToServer(question, response, cb, index){
 	request.on('message', (err, msg) => {
 
 		// mouting cache
-		if(ui.cacheEnabled){
+		if(ui.data.cacheEnabled){
 			cache.put(question, msg);
 		}
 
