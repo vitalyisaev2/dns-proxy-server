@@ -23,8 +23,8 @@ module.exports = function(app){
 	function v2CacheAPI(req, res){
 		var keys = Object.keys(app.data.cache);
 		res.send({
-			keys: keys,
 			size: keys.length,
+			keys: keys,
 			data: app.data.cache
 		});
 	}
