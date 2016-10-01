@@ -1,9 +1,9 @@
 
-module.exports = function(cache){
+module.exports = function(cache, cacheTimeout){
 
 	cache = cache || {};
 
-	this.get = function(question, cacheTimeout){
+	this.get = function(question){
 		var msg = cache[getKey(question)];
 		if(msg){
 			console.log("m=get, status=found, questionName=%s, questionType=%s, cacheTimeout=%s",
@@ -45,20 +45,20 @@ module.exports = function(cache){
 					question.name, question.type)
 			}
 
-		}
-
-		// Test global cache timeout
-			console.log("m=get, status=test-cache-from-global-cache, questionName=%s, questionType=%s, cacheTimeout=%s",
+			// Test global cache timeout
+				console.log("m=get, status=test-cache-from-global-cache, questionName=%s, questionType=%s, cacheTimeout=%s",
+						question.name, question.type, cacheTimeout)
+			if( cacheTimeout > 0 && isValidCache(msg.creationDate, cacheTimeout) ){
+				console.log("m=get, status=valid-from-global-timeout, questionName=%s, questionType=%s, cacheTimeout=%s",
 					question.name, question.type, cacheTimeout)
-		if( cacheTimeout > 0 && isValidCache(msg.creationDate, cacheTimeout) ){
-			console.log("m=get, status=valid-from-global-timeout, questionName=%s, questionType=%s, cacheTimeout=%s",
-				question.name, question.type, cacheTimeout)
-				return msg;
-		}else{
-			console.log("m=get, status=global-timeout-invalid, questionName=%s, questionType=%s, cacheTimeout=%s",
-				question.name, question.type, cacheTimeout)
+					return msg;
+			}else{
+				console.log("m=get, status=global-timeout-invalid, questionName=%s, questionType=%s, cacheTimeout=%s",
+					question.name, question.type, cacheTimeout)
+			}
+			this.remove(question);
+
 		}
-		this.remove(question);
 		return null;
 	}
 
