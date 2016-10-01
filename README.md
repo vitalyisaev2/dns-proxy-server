@@ -112,6 +112,86 @@ testing on terminal
 
 After [create your](#adding-manual-dns-entries) `records.json` file edit the variables `uiPort` and `dnsServerPort` then restart the DNS server
 
+
+# APIs
+
+### Containers - Show mapped containers
+
+	$ curl -X GET http://dns.mageddo:8080/containers
+	container=/docker-dns-server, ip=172.17.0.2, domain=dns.mageddo
+	container=/mageddo-jenkins, ip=172.17.0.3, domain=jenkins.mageddo.dev
+
+
+### Cache - List data
+	$ curl -X GET http://dns.mageddo:8080/v1/cache
+	{
+	"www.google.com-1": {
+		"header": {
+			"id": 12286,
+			"qr": 1,
+			"opcode": 0,
+			"aa": 0,
+			"tc": 0,
+			"rd": 1,
+			"ra": 1,
+			"res1": 0,
+			"res2": 0,
+			"res3": 0,
+			"rcode": 0
+		},
+		"question": [
+			{
+				"name": "www.google.com",
+				"type": 1,
+				"class": 1
+			}
+		],
+		"answer": [
+			{
+				"name": "www.google.com",
+				"type": 1,
+				"class": 1,
+				"ttl": 231,
+				"address": "216.58.222.100"
+			}
+		],
+		"authority": [
+			{
+				"name": "google.com",
+				"type": 2,
+				"class": 1,
+				"ttl": 101725,
+				"data": "ns2.google.com"
+			}
+		],
+		"additional": [
+			{
+				"name": "ns4.google.com",
+				"type": 1,
+				"class": 1,
+				"ttl": 101725,
+				"address": "216.239.38.10"
+			}
+		],
+		"edns_options": [],
+		"_socket": {
+			"address": "201.6.2.124",
+			"family": "IPv4",
+			"port": 53,
+			"size": 184
+		},
+		"creationDate": "2016-10-01T16:27:41.734Z"
+	}
+
+	$ curl -X GET http://dns.mageddo:8080/v2/cache
+	{
+		size: 10, // how many keys has been cached
+		keys: "keys": ["www.google.com-1"], // the key array
+		data: {} // the data of version 1
+	}
+
+
+
 # License
 
 This project is released under version 2.0 of the [Apache License][].
