@@ -13,7 +13,7 @@ module.exports = function(cache){
 				this.remove(question);
 				return null;
 			}
-			if(new Date().getTime() - msg.creationDate.getTime() > aRecords[0].ttl){
+			if(getAsSeconds(new Date()) - getAsSeconds(msg.creationDate) > aRecords[0].ttl){
 				console.log("m=get, status=expired, questionName=%s, questionType=%s, ttl=%s",
 									question.name, question.type, aRecords[0].ttl)
 				this.remove(question);
@@ -62,10 +62,6 @@ module.exports = function(cache){
 		return false;
 	}
 
-	function getKey(question){
-		return question.name + '-' + question.type;
-	}
-
 	this.getCache = function(){
 		return cache;
 	}
@@ -76,6 +72,14 @@ module.exports = function(cache){
 
 	this.size = function(){
 		return this.keyset().length;
+	}
+
+	function getKey(question){
+		return question.name + '-' + question.type;
+	}
+
+	function getAsSeconds(date){
+		return date.getTime() / 1000.0;
 	}
 }
 
