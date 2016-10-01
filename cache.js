@@ -3,28 +3,60 @@ module.exports = function(cache){
 
 	cache = cache || {};
 
-	this.get = function(question){
+	this.get = function(question, cacheTimeout){
 		var msg = cache[getKey(question)];
 		if(msg){
+			console.log("m=get, status=found, questionName=%s, questionType=%s",
+						question.name, question.type)
+
+			// test cache from DNS records
+			console.log("m=get, status=test-cache-from-dns, questionName=%s, questionType=%s, cacheTimeout=%s",
+					question.name, question.type, cacheTimeout)
+			var dnsRecords;
+			if( (dnsRecords = msg.authority.filter(v => v.type == 2)).length > 0 ){
+				if( isValidCache(msg.creationDate, dnsRecords[0].ttl) ){
+					console.log("m=get, status=valid-from-dns, questionName=%s, questionType=%s, ttl=%s",
+								question.name, question.type, aRecords[0].ttl)
+					return msg;
+				}else{
+					console.log("m=get, status=dns-expired, questionName=%s, questionType=%s, ttl=%s",
+							question.name, question.type, dnsRecords[0].ttl)
+				}
+			}else{
+				console.log("m=get, status=anwser-without-dns-record, questionName=%s, questionType=%s",
+						question.name, question.type)
+			}
+
+			// Test DNS cache from A records
+			console.log("m=get, status=test-cache-from-A, questionName=%s, questionType=%s, cacheTimeout=%s",
+					question.name, question.type, cacheTimeout)
 			var aRecords = msg.answer.filter(v => v.type == 1);
 			if(!aRecords.length){
 				console.log("m=get, status=anwser-without-a-record, questionName=%s, questionType=%s",
 											question.name, question.type)
-				this.remove(question);
-				return null;
 			}
-			if(getAsSeconds(new Date()) - getAsSeconds(msg.creationDate) > aRecords[0].ttl){
-				console.log("m=get, status=expired, questionName=%s, questionType=%s, ttl=%s",
-									question.name, question.type, aRecords[0].ttl)
-				this.remove(question);
-				return null;
+			if( isValidCache(msg.creationDate, aRecords[0]) ){
+				console.log("m=get, status=valid-from-a, questionName=%s, questionType=%s, ttl=%s",
+							question.name, question.type, aRecords[0].ttl)
+				return msg;
+			}else {
+				console.log("m=get, status=a-expired, questionName=%s, questionType=%s, ttl=%s",
+						question.name, question.type, aRecords[0].ttl)
 			}
-			console.log("m=get, status=expired, questionName=%s, questionType=%s, ttl=%s",
-									question.name, question.type, aRecords[0].ttl)
-			return msg;
 		}
-		console.log("m=get, status=found, questionName=%s, questionType=%s",
-						question.name, question.type)
+
+		// Test global cache timeout
+			console.log("m=get, status=test-cache-from-global-cache, questionName=%s, questionType=%s, cacheTimeout=%s",
+					question.name, question.type, cacheTimeout)
+		if( cacheTimeout > 0 && isValidCache(msg.creationDate, cacheTimeout) ){
+			console.log("m=get, status=valid-from-global-timeout, questionName=%s, questionType=%s, cacheTimeout=%s",
+				question.name, question.type, cacheTimeout)
+				return msg;
+		}else{
+			console.log("m=get, status=global-timeout-invalid, questionName=%s, questionType=%s, cacheTimeout=%s",
+				question.name, question.type, cacheTimeout)
+		}
+		this.remove(question);
 		return null;
 	}
 
@@ -80,6 +112,10 @@ module.exports = function(cache){
 
 	function getAsSeconds(date){
 		return date.getTime() / 1000.0;
+	}
+
+	function isValidCache(creationDate, record){
+		return getAsSeconds(new Date()) - getAsSeconds(creationDate) <= record.ttl;
 	}
 }
 

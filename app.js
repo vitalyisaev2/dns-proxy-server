@@ -7,7 +7,7 @@ let server = dns.createServer();
 let async = require('async');
 let qtypeToName = require('native-dns-packet').consts.qtypeToName;
 
-var cache = new Cache(ui.data.cache = {});
+var cache = new Cache(ui.data.cache = {}, ui.data.dnsCacheTTL);
 ui.data.containerEntries = [];
 require('./hostnameController.js')(ui);
 server.on('listening', () => console.log('server listening on', server.address()));
