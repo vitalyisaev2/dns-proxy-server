@@ -6,10 +6,10 @@ module.exports = function(cache){
 	this.get = function(question){
 		var msg = cache[getKey(question)];
 		if(msg){
-			var aRecords = msg.filter(v => v.type == 1);
+			var aRecords = msg.answer.filter(v => v.type == 1);
 			if(!aRecords.length){
 				console.log("m=get, status=anwser-without-a-record, questionName=%s, questionType=%s",
-											question.name, question.type, aRecords[0].ttl)
+											question.name, question.type)
 				this.remove(question);
 				return null;
 			}
@@ -37,6 +37,7 @@ module.exports = function(cache){
 		if(tmp == null){
 			console.log("m=put, status=puttingNewQuestion, questionName=%s, questionType=%s",
 					question.name, question.type)
+			value.creationDate = new Date();
 			cache[key] = value;
 		}else{
 			if(!this.get(question)){
