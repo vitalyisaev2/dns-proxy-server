@@ -1,3 +1,4 @@
+
 module.exports = function(cache){
 
 	cache = cache || {};
@@ -5,12 +6,25 @@ module.exports = function(cache){
 	this.get = function(question){
 		var msg = cache[getKey(question)];
 		if(msg){
-			console.log("m=get, status=found, questionName=%s, questionType=%s",
-						question.name, question.type)
+			var aRecords = msg.filter(v => v.type == 1);
+			if(!aRecords.length){
+				console.log("m=get, status=anwser-without-a-record, questionName=%s, questionType=%s",
+											question.name, question.type, aRecords[0].ttl)
+				this.remove(question);
+				return null;
+			}
+			if(new Date().getTime() - msg.creationDate.getTime() > aRecords[0].ttl){
+				console.log("m=get, status=expired, questionName=%s, questionType=%s, ttl=%s",
+									question.name, question.type, aRecords[0].ttl)
+				this.remove(question);
+				return null;
+			}
+			console.log("m=get, status=expired, questionName=%s, questionType=%s, ttl=%s",
+									question.name, question.type, aRecords[0].ttl)
 			return msg;
 		}
-		console.log("m=get, status=not-found, questionName=%s, questionType=%s",
-							question.name, question.type)
+		console.log("m=get, status=found, questionName=%s, questionType=%s",
+						question.name, question.type)
 		return null;
 	}
 
@@ -37,6 +51,14 @@ module.exports = function(cache){
 				 question.name, question.type)
 			}
 		}
+	}
+
+	this.remove = function(question){
+		var key = getKey(question);
+		if(cache.hasOwnProperty(key)){
+			delete cache[key];
+		}
+		return false;
 	}
 
 	function getKey(question){

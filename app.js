@@ -117,10 +117,10 @@ function resolveDnsLocally(entries, question, questionsToProxy, response){
 
 
 function proxy(question, response, cb) {
-	console.log('m=proxy, status=begin, questionName=', question.name, ', type=', question.type);
-
-	var msg = cache.get(question);
-	if(msg){
+	console.log('m=proxy, status=begin, questionName=', question.name, ', type=', question.type,
+		', cache=' + ui.cacheEnabled);
+	var msg;
+	if(ui.cacheEnabled && msg = cache.get(question)){
 		console.log('m=proxy, status=resolvedFromCache, host=%s, cacheSize=%s, qtd=%s',
 			question.name, cache.size(),
 				msg.answer.length);
