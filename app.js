@@ -175,7 +175,9 @@ function proxyToServer(question, response, cb, index){
 	request.on('message', (err, msg) => {
 
 		// mouting cache
-		cache.put(question, msg);
+		if(ui.cacheEnabled){
+			cache.put(question, msg);
+		}
 
 		console.log('m=answerFound, status=cached, msg=', msg);
 		doAnswer(response, msg, question.name);
