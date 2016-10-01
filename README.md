@@ -73,6 +73,8 @@ the password is `cat`
 
 # A entry example
 
+For more details see `conf/records.sample.json`
+
 records.json
 
 ```javascript
