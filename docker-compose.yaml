@@ -1,0 +1,15 @@
+version: '2'
+services:
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docker-dns-server
+    image: reg.mageddo.com:5000/mageddo/docker-dns-server:1.6.7
+    hostname: dns.mageddo
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/mageddo/dns-proxy-server/conf:/opt/docker-dns-server/conf
+      - /etc/resolv.conf:/etc/resolv.conf
+      - /etc/resolvconf/resolv.conf.d:/etc/resolvconf/resolv.conf.d
+    network_mode: bridge
