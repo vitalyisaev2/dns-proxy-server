@@ -16,10 +16,10 @@ Dns-proxy-server is a end user(developers, Server Administrators) DNS server too
 
 **For more details see** [Release Notes](RELEASE-NOTES.md)
 
-![](http://i.imgur.com/Bhe9P36.png)
+![](https://i.imgur.com/RsMJQR5.png)
 
 ### Requirements
-* Linux
+* Linux / Windows
 * Docker 1.9.x
 
 ### DNS resolution order
@@ -33,11 +33,13 @@ The Dns Proxy Server basically follow the bellow order to solve the names:
 
 ##### From docker
 
-	$ docker run --hostname dns.mageddo --name dns-proxy-server -p 5380:5380 \
-    -v /opt/dns-proxy-server/conf:/app/conf \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /etc/resolv.conf:/etc/resolv.conf \
-    defreitas/dns-proxy-server
+```
+$ docker run --hostname dns.mageddo --name dns-proxy-server -p 5380:5380 \
+	-v /opt/dns-proxy-server/conf:/app/conf \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v /etc/resolv.conf:/etc/resolv.conf \
+	defreitas/dns-proxy-server
+```
 
 ##### Standalone run
 
@@ -60,24 +62,28 @@ d96280ba54b44446f342ca78c0bc3b6b23efd78393d8e51e68757b5004314924
 
 Solving the docker container hostname from Dns Proxy Server
 
-	$ nslookup debian.dev.intranet
-	Server:		172.22.0.6
-	Address:	172.22.0.6#53
+```
+$ nslookup debian.dev.intranet
+Server:		172.22.0.6
+Address:	172.22.0.6#53
 
-	Non-authoritative answer:
-	Name:	debian.dev.intranet
-	Address: 172.22.0.7
+Non-authoritative answer:
+Name:	debian.dev.intranet
+Address: 172.22.0.7
+```
 
 Google keep working was well
 
-	$ nslookup google.com
-	Server:		172.22.0.6
-	Address:	172.22.0.6#53
+```
+$ nslookup google.com
+Server:		172.22.0.6
+Address:	172.22.0.6#53
 
-	Non-authoritative answer:
-	Name:	google.com
-	Address: 172.217.29.206
-	
+Non-authoritative answer:
+Name:	google.com
+Address: 172.217.29.206
+```
+
 Start the server at [custom port](#configure-your-dns) and solving from it
 
 	nslookup -port=8980 google.com 127.0.0.1
@@ -115,35 +121,35 @@ Start the server at [custom port](#configure-your-dns) and solving from it
 ### If you need terminal options 
 
 ```
-  -compress
-    	compress replies
-  -conf-path string
-    	The config file path  (default "conf/config.json")
-  -cpuprofile string
-    	write cpu profile to file
-  -default-dns
-    	This DNS server will be the default server for this machine (default true)
-  -help
-    	This message
-  -log-file string
-    	Log to file instead of console, (true=log to default log file, /tmp/log.log=log to custom log location) (default "console")
-  -log-level string
-    	Log Level CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG (default "DEBUG")
-  -server-port int
-    	The DNS server to start into (default 53)
-  -service string
-    	Setup as service, starting with machine at boot
-		docker = start as docker service,
-		normal = start as normal service,
-		uninstall = uninstall the service from machine
-  -service-publish-web-port
-    	Publish web port when running as service in docker mode (default true)
-  -tsig string
-    	use MD5 hmac tsig: keyname:base64
-  -version
-    	Current version
-  -web-server-port int
-    	The web server port (default 5380)
+-compress
+		compress replies
+-conf-path string
+		The config file path  (default "conf/config.json")
+-cpuprofile string
+		write cpu profile to file
+-default-dns
+		This DNS server will be the default server for this machine (default true)
+-help
+		This message
+-log-file string
+		Log to file instead of console, (true=log to default log file, /tmp/log.log=log to custom log location) (default "console")
+-log-level string
+		Log Level CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG (default "DEBUG")
+-server-port int
+		The DNS server to start into (default 53)
+-service string
+		Setup as service, starting with machine at boot
+	docker = start as docker service,
+	normal = start as normal service,
+	uninstall = uninstall the service from machine
+-service-publish-web-port
+		Publish web port when running as service in docker mode (default true)
+-tsig string
+		use MD5 hmac tsig: keyname:base64
+-version
+		Current version
+-web-server-port int
+		The web server port (default 5380)
 ```
 
 ### Installing it as a service
