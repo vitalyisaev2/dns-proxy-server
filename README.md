@@ -122,34 +122,37 @@ Start the server at [custom port](#configure-your-dns) and solving from it
 
 ```
 -compress
-		compress replies
+  	compress replies
 -conf-path string
-		The config file path  (default "conf/config.json")
+  	The config file path  (default "conf/config.json")
 -cpuprofile string
-		write cpu profile to file
+  	write cpu profile to file
 -default-dns
-		This DNS server will be the default server for this machine (default true)
+  	This DNS server will be the default server for this machine (default true)
+-docker-host string
+  	Docker daemon address (default "unix:///var/run/docker.sock")
 -help
-		This message
+  	This message
 -log-file string
-		Log to file instead of console, (true=log to default log file, /tmp/log.log=log to custom log location) (default "console")
+  	Log to file instead of console, (true=log to default log file, /tmp/log.log=log to custom log location) (default "console")
 -log-level string
-		Log Level CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG (default "DEBUG")
+  	Log Level CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG (default "DEBUG")
 -server-port int
-		The DNS server to start into (default 53)
+  	The DNS server to start into (default 53)
 -service string
-		Setup as service, starting with machine at boot
+  	Setup as service, starting with machine at boot
 	docker = start as docker service,
 	normal = start as normal service,
-	uninstall = uninstall the service from machine
+	uninstall = uninstall the service from machine 
 -service-publish-web-port
-		Publish web port when running as service in docker mode (default true)
+  	Publish web port when running as service in docker mode (default true)
 -tsig string
-		use MD5 hmac tsig: keyname:base64
+  	use MD5 hmac tsig: keyname:base64
 -version
-		Current version
+  	Current version
 -web-server-port int
-		The web server port (default 5380)
+  	The web server port (default 5380)
+
 ```
 
 ### Installing it as a service
