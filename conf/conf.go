@@ -7,6 +7,7 @@ import (
 	"github.com/mageddo/dns-proxy-server/utils/env"
 	"github.com/mageddo/go-logging"
 	"strings"
+	. "github.com/mageddo/dns-proxy-server/log"
 )
 
 func CpuProfile() string {
@@ -37,13 +38,15 @@ func DnsServerPort() int {
 
 func SetupResolvConf() bool {
 	if conf, _ := getConf(); conf != nil && conf.DefaultDns != nil {
+		LOGGER.Debugf("status=from-conf")
 		return *conf.DefaultDns
 	}
+	LOGGER.Debugf("status=from-flag, value=%t", *flags.SetupResolvconf)
 	return *flags.SetupResolvconf
 }
 
 func GetResolvConf() string {
-	return GetString(os.Getenv(env.MG_RESOLVCONF), "/etc/resolv.conf")
+	return GetString(os.Getenv(env.RESOLVCONF), "/etc/resolv.conf")
 }
 
 func getConf() (*local.LocalConfiguration, error) {
@@ -51,7 +54,7 @@ func getConf() (*local.LocalConfiguration, error) {
 }
 
 func LogLevel() string {
-	if lvl := os.Getenv(env.MG_LOG_LEVEL); lvl != "" {
+	if lvl := os.Getenv(env.LOG_LEVEL); lvl != "" {
 		return lvl
 	}
 
@@ -62,7 +65,7 @@ func LogLevel() string {
 }
 
 func LogFile() string {
-	f := os.Getenv(env.MG_LOG_FILE)
+	f := os.Getenv(env.LOG_FILE)
 	if conf, _ := getConf(); f == "" &&  conf != nil && conf.LogFile != "" {
 		f = conf.LogFile
 	}
@@ -75,6 +78,11 @@ func LogFile() string {
 		return ""
 	}
 	return f
+}
+
+func DockerHost() string {
+	GetString(os.Getenv(env.DOCKER_HOST), *flags.DockerHost)
+	return
 }
 
 func GetString(value, defaultValue string) string {

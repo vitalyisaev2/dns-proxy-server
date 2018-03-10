@@ -24,7 +24,7 @@ func TestSetMachineDNSServer_EmptyFileSuccess(t *testing.T) {
 	const TMP_RESOLV_FILE = "/tmp/test-resolv.conf"
 
 	os.OpenFile(TMP_RESOLV_FILE, os.O_TRUNC | os.O_CREATE, 0666)
-	os.Setenv(env.MG_RESOLVCONF, TMP_RESOLV_FILE)
+	os.Setenv(env.RESOLVCONF, TMP_RESOLV_FILE)
 	err := SetMachineDNSServer("9.9.9.9")
 	if err != nil {
 		t.Error(err)
@@ -40,7 +40,7 @@ func TestSetMachineDNSServer_EmptyFileSuccess(t *testing.T) {
 func TestSetMachineDNSServer_WithPreviousDnsServerAndCommentSuccess(t *testing.T) {
 
 	const TMP_RESOLV_FILE = "/tmp/test-resolv.conf"
-	os.Setenv(env.MG_RESOLVCONF, TMP_RESOLV_FILE)
+	os.Setenv(env.RESOLVCONF, TMP_RESOLV_FILE)
 
 	err := ioutil.WriteFile(TMP_RESOLV_FILE, []byte("# Provided by test\nnameserver 8.8.8.8"), 0666)
 	if err != nil {
@@ -66,7 +66,7 @@ nameserver 9.9.9.9 # dps-entry
 func TestSetMachineDNSServer_WithPreviousDnsProxyServerAndCommentSuccess(t *testing.T) {
 
 	const TMP_RESOLV_FILE = "/tmp/test-resolv.conf"
-	os.Setenv(env.MG_RESOLVCONF, TMP_RESOLV_FILE)
+	os.Setenv(env.RESOLVCONF, TMP_RESOLV_FILE)
 
 	err := ioutil.WriteFile(TMP_RESOLV_FILE, []byte("# Provided by test\n# nameserver 7.7.7.7\nnameserver 8.8.8.8\n# nameserver 10.10.10 # dps-entry"), 0666)
 	if err != nil {
@@ -94,7 +94,7 @@ nameserver 9.9.9.9 # dps-entry
 
 func TestRestoreResolvconfToDefault_Success(t *testing.T) {
 	const TMP_RESOLV_FILE = "/tmp/test-resolv.conf"
-	os.Setenv(env.MG_RESOLVCONF, TMP_RESOLV_FILE)
+	os.Setenv(env.RESOLVCONF, TMP_RESOLV_FILE)
 
 	err := ioutil.WriteFile(TMP_RESOLV_FILE, []byte("# Provided by test\n# nameserver 7.7.7.7\n# nameserver 8.8.8.8 # dps-comment\nnameserver 9.9.9.9 # dps-entry"), 0666)
 	if err != nil {
@@ -119,7 +119,7 @@ nameserver 8.8.8.8
 
 func TestRestoreResolvconfToDefault_ConfFileAlreadyOk(t *testing.T) {
 	const TMP_RESOLV_FILE = "/tmp/test-resolv.conf"
-	os.Setenv(env.MG_RESOLVCONF, TMP_RESOLV_FILE)
+	os.Setenv(env.RESOLVCONF, TMP_RESOLV_FILE)
 
 	originalFileContent := "# Provided by test\n# nameserver 8.8.8.8\nnameserver 9.9.9.9\n"
 	err := ioutil.WriteFile(TMP_RESOLV_FILE, []byte(originalFileContent), 0666)

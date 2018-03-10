@@ -14,16 +14,17 @@ import (
 	"github.com/mageddo/dns-proxy-server/cache"
 	"strings"
 	"errors"
+	"github.com/mageddo/dns-proxy-server/conf"
 )
 
-var c = lru.New(43690);
+var c = lru.New(43690)
 
 func HandleDockerEvents(){
 	defaultLogger := log.NewContext()
 	logger := log.NewLog(defaultLogger)
 
 	// connecting to docker api
-	cli, err := client.NewClient("unix:///var/run/docker.sock", "v1.21", nil, nil)
+	cli, err := client.NewClient(conf.DockerHost(), "v1.21", nil, nil)
 	if err != nil {
 		logger.Errorf("status=error-to-connect-at-host, solver=docker, err=%v", err)
 		return

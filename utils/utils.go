@@ -156,7 +156,7 @@ func DnsQTypeCodeToName(code uint16) string {
 
 func GetCurrentPath() string {
 
-	currDIr := os.Getenv(env.MG_WORK_DIR)
+	currDIr := os.Getenv(env.WORK_DIR)
 	if len(currDIr) != 0 {
 		return currDIr
 	}

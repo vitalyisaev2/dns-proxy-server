@@ -160,6 +160,8 @@ func main() {
 	fmt.Printf("server started\n")
 	s := <- utils.Sig
 	logger.Infof("status=exiting..., s=%s", s)
-	resolvconf.RestoreResolvconfToDefault()
+	if conf.SetupResolvConf() {
+		resolvconf.RestoreResolvconfToDefault()
+	}
 	logger.Warningf("status=exiting, signal=%v", s)
 }

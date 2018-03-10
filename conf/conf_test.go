@@ -66,7 +66,7 @@ func TestLogLevel_ReadFromConfig(t *testing.T) {
 func TestLogLevel_ReadFromEnv(t *testing.T) {
 
 	// arrange
-	os.Setenv(env.MG_LOG_LEVEL, "WARNING")
+	os.Setenv(env.LOG_LEVEL, "WARNING")
 
 	// act
 	level := LogLevel()
@@ -108,7 +108,7 @@ func TestLogFile_ReadFromConfig(t *testing.T) {
 func TestLogFile_ReadFromEnv(t *testing.T) {
 
 	// arrange
-	os.Setenv(env.MG_LOG_FILE, "true")
+	os.Setenv(env.LOG_FILE, "true")
 
 	// act
 	level := LogFile()
@@ -122,7 +122,7 @@ func TestLogFile_ReadFromEnv(t *testing.T) {
 func TestLogFile_CustomPath(t *testing.T) {
 
 	// arrange
-	os.Setenv(env.MG_LOG_FILE, "custom-file.log")
+	os.Setenv(env.LOG_FILE, "custom-file.log")
 
 	// act
 	level := LogFile()
