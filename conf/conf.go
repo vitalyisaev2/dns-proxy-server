@@ -81,8 +81,7 @@ func LogFile() string {
 }
 
 func DockerHost() string {
-	GetString(os.Getenv(env.DOCKER_HOST), *flags.DockerHost)
-	return
+	return GetString(os.Getenv(env.DOCKER_HOST), *flags.DockerHost)
 }
 
 func GetString(value, defaultValue string) string {
