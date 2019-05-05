@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Getting Started on DNS Proxy Server</title>
-    <link>http://mageddo.github.io/dns-proxy-server/la2.14/en/1-getting-started/</link>
+    <link>http://mageddo.github.io/dns-proxy-server/2.14/en/1-getting-started/</link>
     <description>Recent content in Getting Started on DNS Proxy Server</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     
-	<atom:link href="http://mageddo.github.io/dns-proxy-server/la2.14/en/1-getting-started/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://mageddo.github.io/dns-proxy-server/2.14/en/1-getting-started/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

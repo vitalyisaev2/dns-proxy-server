@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Getting Started on DNS Proxy Server</title>
-    <link>http://mageddo.github.io/dns-proxy-server/la2.14/en/</link>
+    <link>http://mageddo.github.io/dns-proxy-server/2.14/en/</link>
     <description>Recent content in Getting Started on DNS Proxy Server</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     
-	<atom:link href="http://mageddo.github.io/dns-proxy-server/la2.14/en/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://mageddo.github.io/dns-proxy-server/2.14/en/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Credits</title>
-      <link>http://mageddo.github.io/dns-proxy-server/la2.14/en/credits/</link>
+      <link>http://mageddo.github.io/dns-proxy-server/2.14/en/credits/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mageddo.github.io/dns-proxy-server/la2.14/en/credits/</guid>
+      <guid>http://mageddo.github.io/dns-proxy-server/2.14/en/credits/</guid>
       <description>Contributors Thanks to them  for making Open Source Software a better place !
 .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start }
 .ghContributors &amp;gt; div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors &amp;gt; div label{ padding-left: 4px ; } .ghContributors &amp;gt; div span{ font-size: x-small; padding-left: 4px ; }
@@ -25,10 +25,10 @@
     
     <item>
       <title>Showcase</title>
-      <link>http://mageddo.github.io/dns-proxy-server/la2.14/en/showcase/</link>
+      <link>http://mageddo.github.io/dns-proxy-server/2.14/en/showcase/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mageddo.github.io/dns-proxy-server/la2.14/en/showcase/</guid>
+      <guid>http://mageddo.github.io/dns-proxy-server/2.14/en/showcase/</guid>
       <description></description>
     </item>
     
