@@ -77,6 +77,13 @@
 	"content": " Developing with docker $ docker-compose rm -f \u0026amp;\u0026amp; docker-compose up --build app-dps compiler-dps  Running the application\n$ docker-compose exec compiler-dps bash $ go run dns.go  Running the GUI\n$ docker-compose exec app-dps bash $ npm start  Running unit tests\n$ go test -cover=false ./.../  Developing at Intellij  Install Golang plugin Import the project at File -\u0026gt; New -\u0026gt; Project from existing sources Make solve dependencies\n File -\u0026gt; Settings -\u0026gt; Languages \u0026amp; Frameworks -\u0026gt; Go -\u0026gt; Go Libraries At Project Libraries section add the project folder   Running: At Intellij you will want to make some customizes like these:\n Custom port to evict conflicts and don\u0026rsquo;t need root privleges Custom config path Don\u0026rsquo;t set it up at the default DNS    "
 },
 {
+	"uri": "http://mageddo.github.io/dns-proxy-server/2.14/en/6-generating-docs/",
+	"title": "Generating the docs",
+	"tags": [],
+	"description": "",
+	"content": "DPS uses Hugo to generate static docs. To generate the HTML use the following\n$ VERSION=cat VERSION | awk -F '.' '{ print $1\u0026quot;.\u0026quot;$2}' \u0026amp;\u0026amp;\\ hugo server --appendPort=false --renderToDisk \\ --source docs/ --destination $PWD/../dns-proxy-server-docs/${VERSION}/ \\ --baseURL=http://mageddo.github.io/dns-proxy-server/${VERSION}  "
+},
+{
 	"uri": "http://mageddo.github.io/dns-proxy-server/2.14/en/2-features/solving-host-machine-ip/",
 	"title": "Solve host machine IP from anywhere",
 	"tags": [],

@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/dns-proxy-server/latest/images/favicon.png" type="image/png">
 
-    <title>Getting Started :: DNS Proxy Server</title>
+    <title>Generating the docs :: DNS Proxy Server</title>
 
     
     <link href="/dns-proxy-server/latest/css/nucleus.css?1557073178" rel="stylesheet">
@@ -36,7 +36,7 @@
     <link href="/dns-proxy-server/latest/css/style.css" rel="stylesheet" type="text/css" />
 
   </head>
-  <body class="" data-url="/dns-proxy-server/latest/en/1-getting-started/">
+  <body class="" data-url="/dns-proxy-server/latest/en/6-generating-docs/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -77,8 +77,8 @@
   
     
     <li data-nav-id="/dns-proxy-server/latest/en/1-getting-started/" title="Getting Started" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="/dns-proxy-server/latest/en/1-getting-started/">
@@ -455,8 +455,8 @@
   
     
     <li data-nav-id="/dns-proxy-server/latest/en/6-generating-docs/" title="Generating the docs" class="dd-item 
-        
-        
+        parent
+        active
         
         ">
       <a href="/dns-proxy-server/latest/en/6-generating-docs/">
@@ -515,7 +515,7 @@
                   
                     
                     
-                      <option id="en" value="http://mageddo.github.io/dns-proxy-server/latest/en/1-getting-started/" selected>English</option>
+                      <option id="en" value="http://mageddo.github.io/dns-proxy-server/latest/en/6-generating-docs/" selected>English</option>
                     
                   
               
@@ -574,7 +574,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/1-getting-started/_index.en.md" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/6-generating-docs/_index.en.md" target="blank">
                       <i class="fas fa-code-branch"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -601,7 +601,7 @@
             
           
           
-            <a href='/dns-proxy-server/latest/en/'>Getting Started</a> > Getting Started
+            <a href='/dns-proxy-server/latest/en/'>Getting Started</a> > Generating the docs
           
          
           
@@ -628,7 +628,7 @@
           
             <h1>
               
-              Getting Started
+              Generating the docs
             </h1>
           
 
@@ -637,24 +637,14 @@
 
 
 
-	<p>Running it</p>
+	<p>DPS uses Hugo to generate static docs. To generate the HTML use the following</p>
 
-<pre><code class="language-bash">$ docker run --rm --hostname dns.mageddo \
--v /var/run/docker.sock:/var/run/docker.sock \
--v /etc/resolv.conf:/etc/resolv.conf \
-defreitas/dns-proxy-server
+<pre><code class="language-bash">$ 
+VERSION=cat VERSION | awk -F '.' '{ print $1&quot;.&quot;$2}' &amp;&amp;\
+hugo server --appendPort=false --renderToDisk \
+--source docs/ --destination $PWD/../dns-proxy-server-docs/${VERSION}/ \
+--baseURL=http://mageddo.github.io/dns-proxy-server/${VERSION}
 </code></pre>
-
-<p>Try it out</p>
-
-<pre><code class="language-bash">$ ping dns.mageddo
-PING dns.mageddo (172.17.0.4) 56(84) bytes of data.
-64 bytes from 172.17.0.4: icmp_seq=1 ttl=64 time=0.063 ms
-64 bytes from 172.17.0.4: icmp_seq=2 ttl=64 time=0.074 ms
-64 bytes from 172.17.0.4: icmp_seq=3 ttl=64 time=0.064 ms
-</code></pre>
-
-<p><a href="/dns-proxy-server/latest/en/1-getting-started/running-it/">Click here</a> to see more details about run DPS</p>
 
 
 
@@ -695,59 +685,8 @@ PING dns.mageddo (172.17.0.4) 56(84) bytes of data.
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -790,6 +729,24 @@ PING dns.mageddo (172.17.0.4) 56(84) bytes of data.
                     
             
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
                     
                         
             
@@ -871,6 +828,38 @@ PING dns.mageddo (172.17.0.4) 56(84) bytes of data.
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -926,6 +915,7 @@ PING dns.mageddo (172.17.0.4) 56(84) bytes of data.
             
             
                 
+                    
                     
                 
                 
@@ -947,10 +937,10 @@ PING dns.mageddo (172.17.0.4) 56(84) bytes of data.
 	 
 	 
 		
-			<a class="nav nav-prev" href="/dns-proxy-server/latest/en/" title="Getting Started"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/dns-proxy-server/latest/en/5-developing/" title="Developing at the project"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/dns-proxy-server/latest/en/1-getting-started/running-it/" title="Running it" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/dns-proxy-server/latest/en/1-getting-started/" title="Getting Started" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
