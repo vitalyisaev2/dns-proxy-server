@@ -3,47 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://mageddo.github.io:38111/dns-proxy-server/latest/fr/categories/</loc>
+    <loc>http://mageddo.github.io:45349/dns-proxy-server/latest/fr/categories/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://mageddo.github.io:38111/dns-proxy-server/latest/en/categories/"
+                href="http://mageddo.github.io:45349/dns-proxy-server/latest/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="http://mageddo.github.io:38111/dns-proxy-server/latest/fr/categories/"
+                href="http://mageddo.github.io:45349/dns-proxy-server/latest/fr/categories/"
                 />
   </url>
   
   <url>
-    <loc>http://mageddo.github.io:38111/dns-proxy-server/latest/fr/</loc>
+    <loc>http://mageddo.github.io:45349/dns-proxy-server/latest/fr/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://mageddo.github.io:38111/dns-proxy-server/latest/en/"
+                href="http://mageddo.github.io:45349/dns-proxy-server/latest/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="http://mageddo.github.io:38111/dns-proxy-server/latest/fr/"
+                href="http://mageddo.github.io:45349/dns-proxy-server/latest/fr/"
                 />
   </url>
   
   <url>
-    <loc>http://mageddo.github.io:38111/dns-proxy-server/latest/fr/tags/</loc>
+    <loc>http://mageddo.github.io:45349/dns-proxy-server/latest/fr/tags/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://mageddo.github.io:38111/dns-proxy-server/latest/en/tags/"
+                href="http://mageddo.github.io:45349/dns-proxy-server/latest/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="http://mageddo.github.io:38111/dns-proxy-server/latest/fr/tags/"
+                href="http://mageddo.github.io:45349/dns-proxy-server/latest/fr/tags/"
                 />
   </url>
   
