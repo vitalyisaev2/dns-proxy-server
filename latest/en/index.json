@@ -98,6 +98,13 @@
 	"content": "$ docker run -rm nginx --name my-nginx  $ nslookup my-nginx.docker Server:\t172.17.0.3 Address:\t172.17.0.3#53 Non-authoritative answer: Name:\tmy-nginx.docker Address: 10.0.2.3  You can enable this feature by\nActivating by command line\n./dns-proxy-server -register-container-names  Configuring at json config file\n... \u0026quot;registerContainerNames\u0026quot;: true ...  Using environment variable\nMG_REGISTER_CONTAINER_NAMES=1 ./dns-proxy-server  You can also customize the domain from docker to whatever you want by\nActivating by command line\n./dns-proxy-server --domain docker  Configuring at json config file\n... \u0026quot;domain\u0026quot;: \u0026quot;docker\u0026quot; ...  Using environment variable\nMG_DOMAIN=docker ./dns-proxy-server  "
 },
 {
+	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/7-versions/",
+	"title": "Versions",
+	"tags": [],
+	"description": "",
+	"content": " latest 2.14 2.13  "
+},
+{
 	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/specify-from-which-network-solve-container/",
 	"title": "Specify from which network solve container IP",
 	"tags": [],
