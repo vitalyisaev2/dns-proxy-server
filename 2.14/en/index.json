@@ -1,132 +1,132 @@
 [
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/1-getting-started/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/1-getting-started/",
 	"title": "Getting Started",
 	"tags": [],
 	"description": "",
 	"content": "Running it\n$ docker run --rm --hostname dns.mageddo \\ -v /var/run/docker.sock:/var/run/docker.sock \\ -v /etc/resolv.conf:/etc/resolv.conf \\ defreitas/dns-proxy-server  Try it out\n$ ping dns.mageddo PING dns.mageddo (172.17.0.4) 56(84) bytes of data. 64 bytes from 172.17.0.4: icmp_seq=1 ttl=64 time=0.063 ms 64 bytes from 172.17.0.4: icmp_seq=2 ttl=64 time=0.074 ms 64 bytes from 172.17.0.4: icmp_seq=3 ttl=64 time=0.064 ms  Click here to see more details about run DPS\n"
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/1-getting-started/running-it/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/1-getting-started/running-it/",
 	"title": "Running it",
 	"tags": [],
 	"description": "",
 	"content": " Running on Linux On docker $ docker run --rm --hostname dns.mageddo --name dns-proxy-server -p 5380:5380 \\ -v /opt/dns-proxy-server/conf:/app/conf \\ -v /var/run/docker.sock:/var/run/docker.sock \\ -v /etc/resolv.conf:/etc/resolv.conf \\ defreitas/dns-proxy-server  Standalone run Download the latest version, extract and run\n$ sudo ./dns-proxy-server  Dns Proxy Server is now your current DNS server, to back everything to original state just press CTRL + C\nRunning on Windows  We have cases of people got DPS running on Windows, below the information we have of how to run DPS on these OS, if you confirm that or have some information that would be helpful to archieve this please contribute creating a pull request or issue documenting that\n  Start up DPS\ndocker run --name dns-proxy-server -p 5380:5380 -p 53:53/udp \\ -v /var/run/docker.sock:/var/run/docker.sock \\ defreitas/dns-proxy-server  Change your default internet adapter DNS to 127.0.0.1\n   Press Windows + R and type ncpa.cpl then press enter or go to your network interfaces Window Change your default internet adapterDNS to 127.0.0.1 by following the below pictures (sorry they are in portuguese)  Testing the DNS server Starting some docker container and keeping it alive for DNS queries\n$ docker run --rm --hostname nginx.dev.intranet \\ -e 'HOSTNAMES=nginx2.dev.intranet,nginx3.dev.intranet' nginx  Solving the docker container hostname from Dns Proxy Server\n$ nslookup nginx.dev.intranet Server:\t172.22.0.6 Address:\t172.22.0.6#53 Non-authoritative answer: Name:\tdebian.dev.intranet Address: 172.22.0.7  Google keep working was well\n$ nslookup google.com Server:\t172.22.0.6 Address:\t172.22.0.6#53 Non-authoritative answer: Name:\tgoogle.com Address: 172.217.29.206  Start the server at custom port and solving from it\nnslookup -port=8980 google.com 127.0.0.1  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/",
 	"title": "Features",
 	"tags": [],
 	"description": "",
 	"content": " Features  GUI Dashboard   Installing DPS as service   Solving hostnames using wildcards   Configuring logs   Solve host machine IP from anywhere   Access container by it\u0026#39;s container name / service name   Specify from which network solve container IP   DNS resolution order DPS follow the below order to solve hostnames\n Try to solve the hostname from docker containers Then from local database file Then from 3rd configured remote DNS servers  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/gui/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/gui/",
 	"title": "GUI Dashboard",
 	"tags": [],
 	"description": "",
 	"content": " Manage local DNS records Actually you can create/edit/delete A and CNAME entries using the GUI accessing http://localhost:5380 or http://dns.mageddo or by editing the config.json.\n"
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/installing-as-service/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/installing-as-service/",
 	"title": "Installing DPS as service",
 	"tags": [],
 	"description": "",
 	"content": " Installing as docker service docker run --hostname dns.mageddo --name dns-proxy-server -p 5380:5380 \\ --restart=unless-stopped -d \\ -v /opt/dns-proxy-server/conf:/app/conf \\ -v /var/run/docker.sock:/var/run/docker.sock \\ -v /etc/resolv.conf:/etc/resolv.conf \\ defreitas/dns-proxy-server  Installing as linux service  Download the latest release and extract it Run the service installer  $ sudo ./dns-proxy-server -service=docker   Then follow the progress at the log file  $ tail -f /var/log/dns-proxy-server.log   this way it will start with the OS\nif you want to stop\n$ sudo service dns-proxy-server stop Stopping service… Service stopped  if you don\u0026rsquo;t want this service anymore\n$ sudo service dns-proxy-server uninstall Are you really sure you want to uninstall this service? That cannot be undone. [yes|No] yes  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/1-getting-started/requirements/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/1-getting-started/requirements/",
 	"title": "Requirements",
 	"tags": [],
 	"description": "",
 	"content": " Requirements  Linux/Windows Docker 1.9.x (Only if you run DPS using docker or want to solve docker containers hostname using DPS)  MAC Support Based on users feedback, DPS don\u0026rsquo;t work on MAC, unfortunatly I don\u0026rsquo;t have a MAC computer to work on that, if you want to contribute please try to fix it then open a pull request, sorry for the inconvenience.\n"
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/3-configuration/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/3-configuration/",
 	"title": "Configuration",
 	"tags": [],
 	"description": "",
 	"content": " JSON configuration { \u0026quot;remoteDnsServers\u0026quot;: [ [8,8,8,8], [4,4,4,4] ], // Remote DNS servers to be asked when can not solve from docker or local storage // If no one server was specified then the 8.8.8.8 will be used \u0026quot;envs\u0026quot;: [ // all existent environments { \u0026quot;name\u0026quot;: \u0026quot;\u0026quot;, // empty string is the default \u0026quot;hostnames\u0026quot;: [ // all local hostnames entries { \u0026quot;id\u0026quot;: 1, \u0026quot;hostname\u0026quot;: \u0026quot;github.com\u0026quot;, \u0026quot;ip\u0026quot;: [192, 168, 0, 1], \u0026quot;ttl\u0026quot;: 255 } ] } ], \u0026quot;activeEnv\u0026quot;: \u0026quot;\u0026quot;, // the default env keyname \u0026quot;lastId\u0026quot;: 1, // hostnames sequence, don't touch here \u0026quot;webServerPort\u0026quot;: 0, // web admin port, when 0 the default value is used, see --help option \u0026quot;dnsServerPort\u0026quot;: 8980, // dns server port, when 0 the default value is used \u0026quot;logLevel\u0026quot;: \u0026quot;DEBUG\u0026quot;, \u0026quot;logFile\u0026quot;: \u0026quot;console\u0026quot; // where the log will be written, \u0026quot;registerContainerNames\u0026quot;: false // if should register container name / service name as a hostname }  Environment variable configuration Terminal configuration -compress compress replies -conf-path string The config file path (default \u0026quot;conf/config.json\u0026quot;) -cpuprofile string write cpu profile to file -default-dns This DNS server will be the default server for this machine (default true) -help This message -log-file string Log to file instead of console, (true=log to default log file, /tmp/log.log=log to custom log location) (default \u0026quot;console\u0026quot;) -log-level string Log Level ERROR, WARNING, INFO, DEBUG (default \u0026quot;DEBUG\u0026quot;) -server-port int The DNS server to start into (default 53) -service string Setup as service, starting with machine at boot docker = start as docker service, normal = start as normal service, uninstall = uninstall the service from machine -service-publish-web-port Publish web port when running as service in docker mode (default true) -tsig string use MD5 hmac tsig: keyname:base64 -version Current version -web-server-port int The web server port (default 5380)  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/solving-hostnames-wildcard/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/solving-hostnames-wildcard/",
 	"title": "Solving hostnames using wildcards",
 	"tags": [],
 	"description": "",
 	"content": "If you register a hostname with . at start, then all subdomains will solve to that container/local storage entry\nExample\ndocker run --rm --hostname .mageddo.com nginx:latest  Now all mageddo.com subdomains will solve to that nginx container\n$ nslookup site1.mageddo.com Server:\t172.17.0.4 Address:\t172.17.0.4#53 Non-authoritative answer: Name:\tsite1.mageddo.com Address: 172.17.0.5 $ nslookup mageddo.com Server:\t172.17.0.4 Address:\t172.17.0.4#53 Non-authoritative answer: Name:\tmageddo.com Address: 172.17.0.5  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/4-compiling/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/4-compiling/",
 	"title": "Compiling from source",
 	"tags": [],
 	"description": "",
 	"content": " Building from source with docker DPS uses docker to simplify the compile process\nGenerate the binaries\n$ docker-compose rm -f \u0026amp;\u0026amp; docker-compose up --build prod-build-binary-dps Starting docker-dns-server-compiler Attaching to docker-dns-server-compiler docker-dns-server-compiler | ok github.com/mageddo/dns-proxy-server/conf\t0.008s docker-dns-server-compiler | ? github.com/mageddo/dns-proxy-server/controller\t[no test files] ... docker-dns-server-compiler | github.com/mageddo/dns-proxy-server/flags ... docker-dns-server-compiler | _/app/src docker-dns-server-compiler exited with code 0  Then binaries mus be available at build folder\n$ ls build/ dns-proxy-server dns-proxy-server-2.5.1.tgz static  If you want you can build the docker image\n$ docker-compose build prod-build-image-dps \u0026amp;\u0026amp; docker-compose up prod-dps  Take a look at docker-compose.yml for prod-build-image-dps* to build other arch\nBuilding binary for specific ARCH You can generate DPS binaries for all archs that are supported by golang, DPS were designed to run on linux though.\n$ docker-compose run prod-build-binary-dps builder.bash build linux amd64 \u0026gt; Testing \u0026gt; Tests completed \u0026gt; Building... \u0026gt; Compiling os=linux, arch=amd64  Used technologies  Docker Docker Compose Golang  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/logs/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/logs/",
 	"title": "Configuring logs",
 	"tags": [],
 	"description": "",
 	"content": " Configuring log output You can disable, log to console, log to default log file path or specify a log path at config file, environment or command line argument. Available options:\n console (default) - log to console false - Logs are disabled true - stop log to console and log to /var/log/dns-proxy-server.log file  eg. /tmp/log.log - log to specified path  Config File\n{ ... \u0026quot;logFile\u0026quot;: \u0026quot;console\u0026quot; ... }  Environment\nexport MG_LOG_FILE=console  Command line argument\ngo run dns.go -log-file=console  Configuring log level You can change system log level using environment variable, config file, or command line argument, DPS will consider the parameters in that order, first is more important.\nAvailable levels:\n ERROR WARNING INFO DEBUG (Default)  Environment\nexport MG_LOG_LEVEL=DEBUG  Config file\n{ ... \u0026quot;logLevel\u0026quot;: \u0026quot;DEBUG\u0026quot; ... }  Command line argument\ngo run dns.go -log-level=DEBUG  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/5-developing/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/5-developing/",
 	"title": "Developing at the project",
 	"tags": [],
 	"description": "",
 	"content": " Developing with docker $ docker-compose rm -f \u0026amp;\u0026amp; docker-compose up --build app-dps compiler-dps  Running the application\n$ docker-compose exec compiler-dps bash $ go run dns.go  Running the GUI\n$ docker-compose exec app-dps bash $ npm start  Running unit tests\n$ go test -cover=false ./.../  Developing at Intellij  Install Golang plugin Import the project at File -\u0026gt; New -\u0026gt; Project from existing sources Make solve dependencies\n File -\u0026gt; Settings -\u0026gt; Languages \u0026amp; Frameworks -\u0026gt; Go -\u0026gt; Go Libraries At Project Libraries section add the project folder   Running: At Intellij you will want to make some customizes like these:\n Custom port to evict conflicts and don\u0026rsquo;t need root privleges Custom config path Don\u0026rsquo;t set it up at the default DNS    "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/solving-host-machine-ip/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/solving-host-machine-ip/",
 	"title": "Solve host machine IP from anywhere",
 	"tags": [],
 	"description": "",
 	"content": "Just use host.docker\n$ ping host.docker PING host.docker (172.21.0.1) 56(84) bytes of data. 64 bytes from 172.21.0.1 (172.21.0.1): icmp_seq=1 ttl=64 time=0.086 ms 64 bytes from 172.21.0.1 (172.21.0.1): icmp_seq=2 ttl=64 time=0.076 ms 64 bytes from 172.21.0.1 (172.21.0.1): icmp_seq=3 ttl=64 time=0.081 ms  You can customize this hostname by setting\nEnvironment variable\n$ docker run dns-proxy-server -e MG_HOST_MACHINE_HOSTNAME=$(cat /etc/hostname)  Command line option\n$ ./dns-proxy-server --host-machine-hostname $(cat /etc/hostname)  Json configuration\n{ \u0026quot;hostMachineHostname\u0026quot;: \u0026quot;host.docker\u0026quot; }  Notes:\nBe aware if you set the host machine hostname as the machine name then you will have to remove it\u0026rsquo;s name from /etc/hosts since OS try to resolve names from hosts file first then from DNS server\n"
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/accessing-container-by-name/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/accessing-container-by-name/",
 	"title": "Access container by it&#39;s container name / service name",
 	"tags": [],
 	"description": "",
 	"content": "$ docker run -rm nginx --name my-nginx  $ nslookup my-nginx.docker Server:\t172.17.0.3 Address:\t172.17.0.3#53 Non-authoritative answer: Name:\tmy-nginx.docker Address: 10.0.2.3  You can enable this feature by\nActivating by command line\n./dns-proxy-server -register-container-names  Configuring at json config file\n... \u0026quot;registerContainerNames\u0026quot;: true ...  Using environment variable\nMG_REGISTER_CONTAINER_NAMES=1 ./dns-proxy-server  You can also customize the domain from docker to whatever you want by\nActivating by command line\n./dns-proxy-server --domain docker  Configuring at json config file\n... \u0026quot;domain\u0026quot;: \u0026quot;docker\u0026quot; ...  Using environment variable\nMG_DOMAIN=docker ./dns-proxy-server  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/2-features/specify-from-which-network-solve-container/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/2-features/specify-from-which-network-solve-container/",
 	"title": "Specify from which network solve container IP",
 	"tags": [],
 	"description": "",
 	"content": "If your container have multiple networks then you can specify which network to use when solving IP by specifying dps.network label.\nCreating a container with two networks attached to\n$ docker network create --attachable network1 $ docker network create --attachable network2 $ docker run --name nginx1 --rm --label dps.network=network2 --hostname server1.acme.com --network network1 nginx $ docker network connect network2 nginx1  Getting networks masks\n$ docker network inspect -f \u0026quot;{{ .IPAM.Config }}\u0026quot; network1 [{172.31.0.0/16 172.31.0.1 map[]}] $ docker network inspect -f \u0026quot;{{ .IPAM.Config }}\u0026quot; network2 [{192.168.16.0/20 192.168.16.1 map[]}]  Solving container IP checking that solved IP will be the respective to configured dps.network label\n$ nslookup server1.acme.com Server:\t172.17.0.3 Address:\t172.17.0.3#53 Non-authoritative answer: Name:\tserver1.acme.com Address: 192.168.16.2  "
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/categories/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/categories/",
 	"title": "Categories",
 	"tags": [],
 	"description": "",
 	"content": ""
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/credits/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/credits/",
 	"title": "Credits",
 	"tags": [],
 	"description": "",
 	"content": " Contributors Thanks to them  for making Open Source Software a better place !\n.ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start }\n.ghContributors \u0026gt; div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors \u0026gt; div label{ padding-left: 4px ; } .ghContributors \u0026gt; div span{ font-size: x-small; padding-left: 4px ; }\n  @mageddo 560 commits \n @AJenbo 1 commits \n\n"
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/",
 	"title": "Getting Started",
 	"tags": [],
 	"description": "",
 	"content": " Main features DPS is a end user(developers, Server Administrators) DNS server tool to develop systems with docker solving docker containers hostnames:\n Solve hostnames from local configuration database Solve hostnames from docker containers using docker hostname option or HOSTNAMES env Solve hostnames from a list of configured DNS servers(as a proxy) if no answer of two above Solve hostnames using wildcards Graphic interface to Create/List/Update/Delete A/CNAME records Solve host machine IP using host.docker hostname Access container by it’s container name / service name Specify from which network solve container IP  checkout the full documentation\n"
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/showcase/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/showcase/",
 	"title": "Showcase",
 	"tags": [],
 	"description": "",
 	"content": ""
 },
 {
-	"uri": "http://mageddo.github.io/dns-proxy-server/latest/en/tags/",
+	"uri": "http://mageddo.github.io/dns-proxy-server/la2.14/en/tags/",
 	"title": "Tags",
 	"tags": [],
 	"description": "",
