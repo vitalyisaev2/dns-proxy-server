@@ -12,20 +12,20 @@
     <title>Configuration :: DNS Proxy Server</title>
 
     
-    <link href="/dns-proxy-server/2.14/css/nucleus.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/fontawesome-all.min.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/hybrid.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/featherlight.min.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/perfect-scrollbar.min.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/auto-complete.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/atom-one-dark-reasonable.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/theme.css?1557074970" rel="stylesheet">
-    <link href="/dns-proxy-server/2.14/css/hugo-theme.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/nucleus.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/fontawesome-all.min.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/hybrid.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/featherlight.min.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/perfect-scrollbar.min.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/auto-complete.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/atom-one-dark-reasonable.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/theme.css?1557076295" rel="stylesheet">
+    <link href="/dns-proxy-server/2.14/css/hugo-theme.css?1557076295" rel="stylesheet">
     
-      <link href="/dns-proxy-server/2.14/css/theme-mine.css?1557074970" rel="stylesheet">
+      <link href="/dns-proxy-server/2.14/css/theme-mine.css?1557076295" rel="stylesheet">
     
 
-    <script src="/dns-proxy-server/2.14/js/jquery-3.3.1.min.js?1557074970"></script>
+    <script src="/dns-proxy-server/2.14/js/jquery-3.3.1.min.js?1557076295"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/dns-proxy-server/2.14/js/lunr.min.js?1557074970"></script>
-<script type="text/javascript" src="/dns-proxy-server/2.14/js/auto-complete.js?1557074970"></script>
+<script type="text/javascript" src="/dns-proxy-server/2.14/js/lunr.min.js?1557076295"></script>
+<script type="text/javascript" src="/dns-proxy-server/2.14/js/auto-complete.js?1557076295"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/mageddo.github.io\/dns-proxy-server\/2.14\/en";
     
 </script>
-<script type="text/javascript" src="/dns-proxy-server/2.14/js/search.js?1557074970"></script>
+<script type="text/javascript" src="/dns-proxy-server/2.14/js/search.js?1557076295"></script>
 
     
   </div>
@@ -678,64 +678,122 @@
 <h3 id="json-configuration">JSON configuration</h3>
 
 <pre><code class="language-json">{
-  &quot;remoteDnsServers&quot;: [ [8,8,8,8], [4,4,4,4] ], // Remote DNS servers to be asked when can not solve from docker or local storage 
-                                                // If no one server was specified then the 8.8.8.8 will be used
-  &quot;envs&quot;: [ // all existent environments 
+  // Remote DNS servers to be asked when can not solve from docker or local storage
+  // If no one server was specified then the 8.8.8.8 will be used
+  &quot;remoteDnsServers&quot;: [ &quot;8.8.8.8&quot;, &quot;4.4.4.4:54&quot; ],
+  
+  // all existent environments  
+  &quot;envs&quot;: [  
     {
-      &quot;name&quot;: &quot;&quot;, // empty string is the default
+      &quot;name&quot;: &quot;&quot;, // empty string is the default enviroment
       &quot;hostnames&quot;: [ // all local hostnames entries
         {
-          &quot;id&quot;: 1,
+          // (optional) used to control it will be automatically generated if not passed
+          &quot;id&quot;: 1, 
           &quot;hostname&quot;: &quot;github.com&quot;,
-          &quot;ip&quot;: [192, 168, 0, 1],
-          &quot;ttl&quot;: 255
+          &quot;ip&quot;: &quot;192.168.0.1&quot;,
+          &quot;ttl&quot;: 255 // how many seconds cache this entry
         }
       ]
     }
   ],
-  &quot;activeEnv&quot;: &quot;&quot;, // the default env keyname 
-  &quot;lastId&quot;: 1, // hostnames sequence, don't touch here
+  &quot;activeEnv&quot;: &quot;&quot;, // the current environment keyname 
   &quot;webServerPort&quot;: 0, // web admin port, when 0 the default value is used, see --help option
   &quot;dnsServerPort&quot;: 8980, // dns server port, when 0 the default value is used
   &quot;logLevel&quot;: &quot;DEBUG&quot;,
   &quot;logFile&quot;: &quot;console&quot; // where the log will be written,
-  &quot;registerContainerNames&quot;: false // if should register container name / service name as a hostname
+  &quot;registerContainerNames&quot;: false, // if should register container name / service name as a hostname
+  &quot;domain&quot;: &quot;&quot; // The container names domain
 }
 </code></pre>
 
 <h3 id="environment-variable-configuration">Environment variable configuration</h3>
 
+<table>
+<thead>
+<tr>
+<th>VARIBLE</th>
+<th>DESCRIPTION</th>
+<th>DEFAULT VALUE</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>MG_RESOLVCONF</td>
+<td>Linux resolvconf path to set DPS as default DNS</td>
+<td>/etc/resolv.conf</td>
+</tr>
+
+<tr>
+<td>MG_LOG_LEVEL</td>
+<td></td>
+<td>INFO</td>
+</tr>
+
+<tr>
+<td>MG_LOG_FILE</td>
+<td>Path where to logs will be stored</td>
+<td>console</td>
+</tr>
+
+<tr>
+<td>MG_REGISTER_CONTAINER_NAMES</td>
+<td>if should register container name / service name as a hostname</td>
+<td>false</td>
+</tr>
+
+<tr>
+<td>MG_HOST_MACHINE_HOSTNAME</td>
+<td>hostname to solve host machine IP</td>
+<td>host.docker</td>
+</tr>
+
+<tr>
+<td>MG_DOMAIN</td>
+<td>The container names domain (requires MG_REGISTER_CONTINER_NAMES=TRUE)</td>
+<td>.docker</td>
+</tr>
+</tbody>
+</table>
+
 <h3 id="terminal-configuration">Terminal configuration</h3>
 
-<pre><code>-compress
-    compress replies
--conf-path string
-    The config file path  (default &quot;conf/config.json&quot;)
--cpuprofile string
-    write cpu profile to file
--default-dns
-    This DNS server will be the default server for this machine (default true)
--help
-    This message
--log-file string
-    Log to file instead of console, (true=log to default log file, /tmp/log.log=log to custom log location) (default &quot;console&quot;)
--log-level string
-    Log Level ERROR, WARNING, INFO, DEBUG (default &quot;DEBUG&quot;)
--server-port int
-    The DNS server to start into (default 53)
--service string
-    Setup as service, starting with machine at boot
-  docker = start as docker service,
-  normal = start as normal service,
-  uninstall = uninstall the service from machine 
--service-publish-web-port
-    Publish web port when running as service in docker mode (default true)
--tsig string
-    use MD5 hmac tsig: keyname:base64
--version
-    Current version
--web-server-port int
-    The web server port (default 5380)
+<pre><code>  -compress
+    	compress replies
+  -conf-path string
+    	The config file path  (default &quot;conf/config.json&quot;)
+  -cpuprofile string
+    	write cpu profile to file
+  -default-dns
+    	This DNS server will be the default server for this machine (default true)
+  -domain string
+    	Domain utilized to solver containers and services hostnames (default &quot;docker&quot;)
+  -help
+    	This message
+  -host-machine-hostname string
+    	The hostname to get host machine IP (default &quot;host.docker&quot;)
+  -log-file string
+    	Log to file instead of console, (true=log to default log file, /tmp/log.log=log to custom log location) (default &quot;console&quot;)
+  -log-level string
+    	Log Level ERROR, WARNING, INFO, DEBUG (default &quot;INFO&quot;)
+  -register-container-names
+    	If must register container name / service name as host in DNS server
+  -server-port int
+    	The DNS server to start into (default 53)
+  -service string
+    	Setup as service, starting with machine at boot
+    			docker = start as docker service,
+    			normal = start as normal service,
+    			uninstall = uninstall the service from machine 
+  -service-publish-web-port
+    	Publish web port when running as service in docker mode (default true)
+  -tsig string
+    	use MD5 hmac tsig: keyname:base64
+  -version
+    	Current version
+  -web-server-port int
+    	The web server port (default 5380)
 </code></pre>
 
 
@@ -1061,20 +1119,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/dns-proxy-server/2.14/js/clipboard.min.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/perfect-scrollbar.min.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/perfect-scrollbar.jquery.min.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/jquery.sticky.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/featherlight.min.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/html5shiv-printshiv.min.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/highlight.pack.js?1557074970"></script>
+    <script src="/dns-proxy-server/2.14/js/clipboard.min.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/perfect-scrollbar.min.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/perfect-scrollbar.jquery.min.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/jquery.sticky.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/featherlight.min.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/html5shiv-printshiv.min.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/highlight.pack.js?1557076295"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/dns-proxy-server/2.14/js/modernizr.custom-3.6.0.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/learn.js?1557074970"></script>
-    <script src="/dns-proxy-server/2.14/js/hugo-learn.js?1557074970"></script>
+    <script src="/dns-proxy-server/2.14/js/modernizr.custom-3.6.0.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/learn.js?1557076295"></script>
+    <script src="/dns-proxy-server/2.14/js/hugo-learn.js?1557076295"></script>
 
-    <link href="/dns-proxy-server/2.14/mermaid/mermaid.css?1557074970" type="text/css" rel="stylesheet" />
-    <script src="/dns-proxy-server/2.14/mermaid/mermaid.js?1557074970"></script>
+    <link href="/dns-proxy-server/2.14/mermaid/mermaid.css?1557076295" type="text/css" rel="stylesheet" />
+    <script src="/dns-proxy-server/2.14/mermaid/mermaid.js?1557076295"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
