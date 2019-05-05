@@ -12,20 +12,20 @@
     <title>Generating the docs :: DNS Proxy Server</title>
 
     
-    <link href="/dns-proxy-server/latest/css/nucleus.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/fontawesome-all.min.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/hybrid.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/featherlight.min.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/perfect-scrollbar.min.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/auto-complete.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/atom-one-dark-reasonable.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/theme.css?1557074595" rel="stylesheet">
-    <link href="/dns-proxy-server/latest/css/hugo-theme.css?1557074595" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/nucleus.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/fontawesome-all.min.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/hybrid.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/featherlight.min.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/perfect-scrollbar.min.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/auto-complete.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/atom-one-dark-reasonable.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/theme.css?1557074970" rel="stylesheet">
+    <link href="/dns-proxy-server/latest/css/hugo-theme.css?1557074970" rel="stylesheet">
     
-      <link href="/dns-proxy-server/latest/css/theme-mine.css?1557074595" rel="stylesheet">
+      <link href="/dns-proxy-server/latest/css/theme-mine.css?1557074970" rel="stylesheet">
     
 
-    <script src="/dns-proxy-server/latest/js/jquery-3.3.1.min.js?1557074595"></script>
+    <script src="/dns-proxy-server/latest/js/jquery-3.3.1.min.js?1557074970"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/dns-proxy-server/latest/js/lunr.min.js?1557074595"></script>
-<script type="text/javascript" src="/dns-proxy-server/latest/js/auto-complete.js?1557074595"></script>
+<script type="text/javascript" src="/dns-proxy-server/latest/js/lunr.min.js?1557074970"></script>
+<script type="text/javascript" src="/dns-proxy-server/latest/js/auto-complete.js?1557074970"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/mageddo.github.io\/dns-proxy-server\/latest\/en";
     
 </script>
-<script type="text/javascript" src="/dns-proxy-server/latest/js/search.js?1557074595"></script>
+<script type="text/javascript" src="/dns-proxy-server/latest/js/search.js?1557074970"></script>
 
     
   </div>
@@ -636,7 +636,18 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#live-docs-preview">Live docs preview</a></li>
+<li><a href="#generating-doc-statics">Generating doc statics</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -661,13 +672,20 @@
 
 
 
-	<p>DPS uses Hugo to generate static docs. To generate the HTML use the following</p>
+	
 
-<pre><code class="language-bash">$ 
-VERSION=cat VERSION | awk -F '.' '{ print $1&quot;.&quot;$2}' &amp;&amp;\
-hugo server --appendPort=false --renderToDisk \
---source docs/ --destination $PWD/../dns-proxy-server-docs/${VERSION}/ \
---baseURL=http://mageddo.github.io/dns-proxy-server/${VERSION}
+<h3 id="live-docs-preview">Live docs preview</h3>
+
+<p>To se the current docs just type</p>
+
+<pre><code>hugo server --source docs
+</code></pre>
+
+<h3 id="generating-doc-statics">Generating doc statics</h3>
+
+<p>DPS uses Hugo to generate static docs. To generate the HTML use the following</p>
+
+<pre><code class="language-bash">$ ./builder.bash docs
 </code></pre>
 
 
@@ -993,20 +1011,20 @@ hugo server --appendPort=false --renderToDisk \
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/dns-proxy-server/latest/js/clipboard.min.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/perfect-scrollbar.min.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/perfect-scrollbar.jquery.min.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/jquery.sticky.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/featherlight.min.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/html5shiv-printshiv.min.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/highlight.pack.js?1557074595"></script>
+    <script src="/dns-proxy-server/latest/js/clipboard.min.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/perfect-scrollbar.min.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/perfect-scrollbar.jquery.min.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/jquery.sticky.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/featherlight.min.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/html5shiv-printshiv.min.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/highlight.pack.js?1557074970"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/dns-proxy-server/latest/js/modernizr.custom-3.6.0.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/learn.js?1557074595"></script>
-    <script src="/dns-proxy-server/latest/js/hugo-learn.js?1557074595"></script>
+    <script src="/dns-proxy-server/latest/js/modernizr.custom-3.6.0.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/learn.js?1557074970"></script>
+    <script src="/dns-proxy-server/latest/js/hugo-learn.js?1557074970"></script>
 
-    <link href="/dns-proxy-server/latest/mermaid/mermaid.css?1557074595" type="text/css" rel="stylesheet" />
-    <script src="/dns-proxy-server/latest/mermaid/mermaid.js?1557074595"></script>
+    <link href="/dns-proxy-server/latest/mermaid/mermaid.css?1557074970" type="text/css" rel="stylesheet" />
+    <script src="/dns-proxy-server/latest/mermaid/mermaid.js?1557074970"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

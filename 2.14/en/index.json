@@ -81,7 +81,7 @@
 	"title": "Generating the docs",
 	"tags": [],
 	"description": "",
-	"content": "DPS uses Hugo to generate static docs. To generate the HTML use the following\n$ VERSION=cat VERSION | awk -F '.' '{ print $1\u0026quot;.\u0026quot;$2}' \u0026amp;\u0026amp;\\ hugo server --appendPort=false --renderToDisk \\ --source docs/ --destination $PWD/../dns-proxy-server-docs/${VERSION}/ \\ --baseURL=http://mageddo.github.io/dns-proxy-server/${VERSION}  "
+	"content": " Live docs preview To se the current docs just type\nhugo server --source docs  Generating doc statics DPS uses Hugo to generate static docs. To generate the HTML use the following\n$ ./builder.bash docs  "
 },
 {
 	"uri": "http://mageddo.github.io/dns-proxy-server/2.14/en/2-features/solving-host-machine-ip/",
