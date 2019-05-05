@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>//localhost:46689/en/1-getting-started/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/1-getting-started/running-it/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/gui/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/installing-as-service/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/1-getting-started/requirements/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/3-configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/solving-hostnames-wildcard/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/4-compiling/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/logs/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/5-developing/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/solving-host-machine-ip/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/accessing-container-by-name/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/2-features/specify-from-which-network-solve-container/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="//localhost:46689/fr/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:46689/en/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/credits/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="//localhost:46689/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:46689/en/"
+                />
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/showcase/</loc>
+  </url>
+  
+  <url>
+    <loc>//localhost:46689/en/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="//localhost:46689/fr/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:46689/en/tags/"
+                />
+  </url>
+  
+</urlset>
