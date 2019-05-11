@@ -123,14 +123,14 @@
 	"title": "Credits",
 	"tags": [],
 	"description": "",
-	"content": " Contributors Thanks to them  for making Open Source Software a better place !\n.ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start }\n.ghContributors \u0026gt; div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors \u0026gt; div label{ padding-left: 4px ; } .ghContributors \u0026gt; div span{ font-size: x-small; padding-left: 4px ; }\n  @mageddo 560 commits \n @AJenbo 1 commits \n\n"
+	"content": " Contributors Thanks to them  for making Open Source Software a better place !\n.ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start }\n.ghContributors \u0026gt; div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors \u0026gt; div label{ padding-left: 4px ; } .ghContributors \u0026gt; div span{ font-size: x-small; padding-left: 4px ; }\n  @mageddo 565 commits \n @AJenbo 1 commits \n\n"
 },
 {
 	"uri": "http://mageddo.github.io/dns-proxy-server/2.14/",
 	"title": "Getting Started",
 	"tags": [],
 	"description": "",
-	"content": " Main features DPS is a end user(developers, Server Administrators) DNS server tool to develop systems with docker solving docker containers hostnames:\n Solve hostnames from local configuration database Solve hostnames from docker containers using docker hostname option or HOSTNAMES env Solve hostnames from a list of configured DNS servers(as a proxy) if no answer of two above Solve hostnames using wildcards Graphic interface to Create/List/Update/Delete A/CNAME records Solve host machine IP using host.docker hostname Access container by it’s container name / service name Specify from which network solve container IP  checkout the full documentation\n"
+	"content": " Main features DPS is a end user(developers, Server Administrators) DNS server tool to develop systems with docker solving docker containers hostnames:\n Solve hostnames from local configuration database Solve hostnames from docker containers using docker hostname option or HOSTNAMES env Solve hostnames from a list of configured DNS servers(as a proxy) if no answer of two above Solve hostnames using wildcards Graphic interface to Create/List/Update/Delete A/CNAME records Solve host machine IP using host.docker hostname Access container by it’s container name / service name Specify from which network solve container IP  "
 },
 {
 	"uri": "http://mageddo.github.io/dns-proxy-server/2.14/showcase/",
