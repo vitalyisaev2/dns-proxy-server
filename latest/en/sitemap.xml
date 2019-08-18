@@ -63,7 +63,20 @@
   </url>
   
   <url>
+    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/8-api/</loc>
+  </url>
+  
+  <url>
     <loc>http://mageddo.github.io/dns-proxy-server/latest/en/2-features/specify-from-which-network-solve-container/</loc>
+  </url>
+  
+  <url>
+    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/2-features/dps-network-resolution/</loc>
+  </url>
+  
+  <url>
+    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/8-api/v1/networks/</loc>
+    <priority>0</priority>
   </url>
   
   <url>

@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="description" content="Documentation for DPS">
+<meta name="author" content="Elvis Souza">
+
+    <link rel="icon" href="/dns-proxy-server/2.15/images/favicon.png" type="image/png">
+
+    <title>Running it :: DNS Proxy Server</title>
+
+    
+    <link href="/dns-proxy-server/2.15/css/nucleus.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/fontawesome-all.min.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/hybrid.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/featherlight.min.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/perfect-scrollbar.min.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/auto-complete.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/atom-one-dark-reasonable.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/theme.css?1566155775" rel="stylesheet">
+    <link href="/dns-proxy-server/2.15/css/hugo-theme.css?1566155775" rel="stylesheet">
+    
+      <link href="/dns-proxy-server/2.15/css/theme-mine.css?1566155775" rel="stylesheet">
+    
+
+    <script src="/dns-proxy-server/2.15/js/jquery-3.3.1.min.js?1566155775"></script>
+
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link href="/dns-proxy-server/2.15/css/style.css" rel="stylesheet" type="text/css" />
+
+  </head>
+  <body class="" data-url="/dns-proxy-server/2.15/en/1-getting-started/running-it/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="http://mageddo.github.io/dns-proxy-server/2.15" style="font-size: 40pt;font-weight: 600;color: #E2E2EF;" >DPS</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/dns-proxy-server/2.15/js/lunr.min.js?1566155775"></script>
+<script type="text/javascript" src="/dns-proxy-server/2.15/js/auto-complete.js?1566155775"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/mageddo.github.io\/dns-proxy-server\/2.15\/en";
+    
+</script>
+<script type="text/javascript" src="/dns-proxy-server/2.15/js/search.js?1566155775"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/1-getting-started/" title="Getting Started" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/1-getting-started/">
+          <b>1. </b>Getting Started
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/1-getting-started/running-it/" title="Running it" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/1-getting-started/running-it/">
+          Running it
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/1-getting-started/requirements/" title="Requirements" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/1-getting-started/requirements/">
+          Requirements
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/" title="Features" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/">
+          <b>2. </b>Features
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/gui/" title="GUI Dashboard" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/gui/">
+          GUI Dashboard
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/installing-as-service/" title="Installing DPS as service" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/installing-as-service/">
+          Installing DPS as service
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/solving-hostnames-wildcard/" title="Solving hostnames using wildcards" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/solving-hostnames-wildcard/">
+          Solving hostnames using wildcards
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/logs/" title="Configuring logs" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/logs/">
+          Configuring logs
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/solving-host-machine-ip/" title="Solve host machine IP from anywhere" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/solving-host-machine-ip/">
+          Solve host machine IP from anywhere
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/accessing-container-by-name/" title="Access container by it&#39;s container name / service name" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/accessing-container-by-name/">
+          Access container by it&#39;s container name / service name
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/specify-from-which-network-solve-container/" title="Specify from which network solve container IP" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/specify-from-which-network-solve-container/">
+          Specify from which network solve container IP
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/2-features/dps-network-resolution/" title="DPS docker network" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/2-features/dps-network-resolution/">
+          DPS docker network
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/3-configuration/" title="Configuration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/3-configuration/">
+          <b>3. </b>Configuration
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/4-compiling/" title="Compiling from source" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/4-compiling/">
+          <b>4. </b>Compiling from source
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/5-developing/" title="Developing at the project" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/5-developing/">
+          <b>5. </b>Developing at the project
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/6-generating-docs/" title="Generating the docs" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/6-generating-docs/">
+          <b>6. </b>Generating the docs
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/7-versions/" title="Versions" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/7-versions/">
+          <b>8. </b>Versions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dns-proxy-server/2.15/en/8-api/" title="API" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/dns-proxy-server/2.15/en/8-api/">
+          <b>8. </b>API
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/dns-proxy-server/2.15/en/8-api/v1/networks/" title="" class="dd-item ">
+        <a href="/dns-proxy-server/2.15/en/8-api/v1/networks/">
+        
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/mageddo/dns-proxy-server"><i class='fab fa-fw fa-github'></i> Github repo</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="http://mageddo.github.io/dns-proxy-server/2.15/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="http://mageddo.github.io/dns-proxy-server/2.15/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="http://mageddo.github.io/dns-proxy-server/2.15/en/1-getting-started/running-it/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <a class="github-button" href="https://github.com/mageddo/dns-proxy-server/releases" data-icon="octicon-cloud-download" aria-label="Download DPS on GitHub">Download</a>
+
+
+<a class="github-button" href="https://github.com/mageddo/dns-proxy-server" data-icon="octicon-star" data-show-count="true" aria-label="Star DPS on GitHub">Star</a>
+
+
+<a class="github-button" href="https://github.com/mageddo/dns-proxy-server/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork DPS on GitHub">Fork</a>
+
+<p>Built with <a href="https://github.com/mageddo/dns-proxy-server/"><i class="fas fa-heart"></i></a></p>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/mageddo/dns-proxy-server/edit/master/docs/content/1-getting-started/running-it/_index.en.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/dns-proxy-server/2.15/en/'>Getting Started</a> > <a href='/dns-proxy-server/2.15/en/1-getting-started/'>Getting Started</a> > Running it
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#running-on-linux">Running on Linux</a>
+<ul>
+<li><a href="#on-docker">On docker</a></li>
+<li><a href="#standalone-run">Standalone run</a></li>
+</ul></li>
+<li><a href="#running-on-windows">Running on Windows</a></li>
+<li><a href="#testing-the-dns-server">Testing the DNS server</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Running it
+            </h1>
+          
+
+        
+
+
+
+
+	
+
+<h3 id="running-on-linux">Running on Linux</h3>
+
+<h4 id="on-docker">On docker</h4>
+
+<pre><code class="language-bash">$ docker run --rm --hostname dns.mageddo --name dns-proxy-server -p 5380:5380 \
+  -v /opt/dns-proxy-server/conf:/app/conf \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /etc/resolv.conf:/etc/resolv.conf \
+  defreitas/dns-proxy-server
+</code></pre>
+
+<h4 id="standalone-run">Standalone run</h4>
+
+<p>Download the <a href="https://github.com/mageddo/dns-proxy-server/releases">latest version</a>, extract and run</p>
+
+<pre><code>$ sudo ./dns-proxy-server
+</code></pre>
+
+<p>Dns Proxy Server is now your current DNS server, to back everything to original state just press <code>CTRL + C</code></p>
+
+<h3 id="running-on-windows">Running on Windows</h3>
+
+<blockquote>
+<p>We have <a href="https://github.com/mageddo/dns-proxy-server/issues/66">cases</a> of people got DPS running on Windows,
+below the information we have of how to run DPS on these OS, if you confirm that or have some information that
+would be helpful to archieve this please contribute creating a pull request or issue documenting that</p>
+</blockquote>
+
+<ol>
+<li><p>Start up DPS</p>
+
+<pre><code class="language-bash">docker run --name dns-proxy-server -p 5380:5380 -p 53:53/udp \
+-v /var/run/docker.sock:/var/run/docker.sock \ 
+defreitas/dns-proxy-server
+</code></pre></li>
+
+<li><p>Change your default internet adapter DNS to <code>127.0.0.1</code></p></li>
+</ol>
+
+<ul>
+<li>Press <code>Windows + R</code> and type <code>ncpa.cpl</code> then press <strong>enter</strong> or go to your network interfaces Window</li>
+<li>Change your default internet adapterDNS to <code>127.0.0.1</code> by following the below
+pictures (sorry they are in portuguese)</li>
+</ul>
+
+<p><img src="https://i.imgur.com/1goUHp0.png?width=10pc&amp;classes=shadow" alt="Screenshot" />
+<img src="https://i.imgur.com/XKM7JwN.png?width=10pc&amp;classes=shadow" alt="Screenshot" />
+<img src="https://i.imgur.com/EFno6F6.png?width=10pc&amp;classes=shadow" alt="Screenshot" /></p>
+
+<h3 id="testing-the-dns-server">Testing the DNS server</h3>
+
+<p>Starting some docker container and keeping it alive for DNS queries</p>
+
+<pre><code class="language-bash">$ docker run --rm --hostname nginx.dev.intranet \
+  -e 'HOSTNAMES=nginx2.dev.intranet,nginx3.dev.intranet' nginx
+</code></pre>
+
+<p>Solving the docker container hostname from Dns Proxy Server</p>
+
+<pre><code class="language-bash">$ nslookup nginx.dev.intranet
+Server:		172.22.0.6
+Address:	172.22.0.6#53
+
+Non-authoritative answer:
+Name:	debian.dev.intranet
+Address: 172.22.0.7
+</code></pre>
+
+<p>Google keep working was well</p>
+
+<pre><code class="language-bash">$ nslookup google.com
+Server:		172.22.0.6
+Address:	172.22.0.6#53
+
+Non-authoritative answer:
+Name:	google.com
+Address: 172.217.29.206
+</code></pre>
+
+<p>Start the server at <a href="#configure-your-dns">custom port</a> and solving from it</p>
+
+<pre><code>nslookup -port=8980 google.com 127.0.0.1
+</code></pre>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/dns-proxy-server/2.15/en/1-getting-started/" title="Getting Started"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/dns-proxy-server/2.15/en/1-getting-started/requirements/" title="Requirements" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/dns-proxy-server/2.15/js/clipboard.min.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/perfect-scrollbar.min.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/perfect-scrollbar.jquery.min.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/jquery.sticky.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/featherlight.min.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/html5shiv-printshiv.min.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/highlight.pack.js?1566155775"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/dns-proxy-server/2.15/js/modernizr.custom-3.6.0.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/learn.js?1566155775"></script>
+    <script src="/dns-proxy-server/2.15/js/hugo-learn.js?1566155775"></script>
+
+    <link href="/dns-proxy-server/2.15/mermaid/mermaid.css?1566155775" type="text/css" rel="stylesheet" />
+    <script src="/dns-proxy-server/2.15/mermaid/mermaid.js?1566155775"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
