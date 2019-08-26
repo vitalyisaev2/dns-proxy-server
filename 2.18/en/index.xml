@@ -31,7 +31,8 @@ $ curl -X DELETE dns.mageddo:5380/network/disconnect-containers/?networkId=85e75
       <description>Contributors Thanks to them  for making Open Source Software a better place !
 .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start }
 .ghContributors &amp;gt; div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors &amp;gt; div label{ padding-left: 4px ; } .ghContributors &amp;gt; div span{ font-size: x-small; padding-left: 4px ; }
-  @mageddo 578 commits 
+  @mageddo 589 commits 
+ @josielrocha 9 commits 
  @AJenbo 1 commits</description>
     </item>
     
