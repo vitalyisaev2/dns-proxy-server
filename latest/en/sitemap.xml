@@ -11,6 +11,10 @@
   </url>
   
   <url>
+    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/api/v1/networks/</loc>
+  </url>
+  
+  <url>
     <loc>http://mageddo.github.io/dns-proxy-server/latest/en/2-features/</loc>
   </url>
   
@@ -55,15 +59,11 @@
   </url>
   
   <url>
+    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/api/</loc>
+  </url>
+  
+  <url>
     <loc>http://mageddo.github.io/dns-proxy-server/latest/en/2-features/accessing-container-by-name/</loc>
-  </url>
-  
-  <url>
-    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/7-versions/</loc>
-  </url>
-  
-  <url>
-    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/8-api/</loc>
   </url>
   
   <url>
@@ -71,12 +71,15 @@
   </url>
   
   <url>
+    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/versions/</loc>
+  </url>
+  
+  <url>
     <loc>http://mageddo.github.io/dns-proxy-server/latest/en/2-features/dps-network-resolution/</loc>
   </url>
   
   <url>
-    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/8-api/v1/networks/</loc>
-    <priority>0</priority>
+    <loc>http://mageddo.github.io/dns-proxy-server/latest/en/2-features/multiple-environments/</loc>
   </url>
   
   <url>
