@@ -12,20 +12,20 @@
     <title>Running it :: DNS Proxy Server</title>
 
     
-    <link href="/dns-proxy-server/2.18/css/nucleus.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/fontawesome-all.min.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/hybrid.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/featherlight.min.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/perfect-scrollbar.min.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/auto-complete.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/atom-one-dark-reasonable.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/theme.css?1566793630" rel="stylesheet">
-    <link href="/dns-proxy-server/2.18/css/hugo-theme.css?1566793630" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/nucleus.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/fontawesome-all.min.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/hybrid.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/featherlight.min.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/perfect-scrollbar.min.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/auto-complete.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/atom-one-dark-reasonable.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/theme.css?1578485434" rel="stylesheet">
+    <link href="/dns-proxy-server/2.18/css/hugo-theme.css?1578485434" rel="stylesheet">
     
-      <link href="/dns-proxy-server/2.18/css/theme-mine.css?1566793630" rel="stylesheet">
+      <link href="/dns-proxy-server/2.18/css/theme-mine.css?1578485434" rel="stylesheet">
     
 
-    <script src="/dns-proxy-server/2.18/js/jquery-3.3.1.min.js?1566793630"></script>
+    <script src="/dns-proxy-server/2.18/js/jquery-3.3.1.min.js?1578485434"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/dns-proxy-server/2.18/js/lunr.min.js?1566793630"></script>
-<script type="text/javascript" src="/dns-proxy-server/2.18/js/auto-complete.js?1566793630"></script>
+<script type="text/javascript" src="/dns-proxy-server/2.18/js/lunr.min.js?1578485434"></script>
+<script type="text/javascript" src="/dns-proxy-server/2.18/js/auto-complete.js?1578485434"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/mageddo.github.io\/dns-proxy-server\/2.18\/en";
     
 </script>
-<script type="text/javascript" src="/dns-proxy-server/2.18/js/search.js?1566793630"></script>
+<script type="text/javascript" src="/dns-proxy-server/2.18/js/search.js?1578485434"></script>
 
     
   </div>
@@ -755,7 +755,7 @@
 <ul>
 <li><a href="#running-on-linux">Running on Linux</a>
 <ul>
-<li><a href="#on-docker">On docker</a></li>
+<li><a href="#on-docker">On Docker</a></li>
 <li><a href="#standalone-run">Standalone run</a></li>
 </ul></li>
 <li><a href="#running-on-windows">Running on Windows</a></li>
@@ -792,12 +792,24 @@
 
 <h3 id="running-on-linux">Running on Linux</h3>
 
-<h4 id="on-docker">On docker</h4>
+<h4 id="on-docker">On Docker</h4>
 
 <pre><code class="language-bash">$ docker run --rm --hostname dns.mageddo --name dns-proxy-server -p 5380:5380 \
   -v /opt/dns-proxy-server/conf:/app/conf \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /etc/resolv.conf:/etc/resolv.conf \
+  defreitas/dns-proxy-server
+</code></pre>
+
+<p>If your system is periodically recreating <code>/etc/resolv.conf</code> (like <code>dhclient</code> does) and DPS stops working
+after a while you may need to try the following variant instead (see
+<a href="https://github.com/mageddo/dns-proxy-server/issues/166">issue 166</a> for why this is):</p>
+
+<pre><code class="language-bash">$ docker run --rm --hostname dns.mageddo --name dns-proxy-server -p 5380:5380 \
+  -v /opt/dns-proxy-server/conf:/app/conf \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /etc:/host/etc \
+  -e MG_RESOLVCONF=/host/etc/resolv.conf \
   defreitas/dns-proxy-server
 </code></pre>
 
@@ -1259,20 +1271,20 @@ Address: 172.217.29.206
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/dns-proxy-server/2.18/js/clipboard.min.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/perfect-scrollbar.min.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/perfect-scrollbar.jquery.min.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/jquery.sticky.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/featherlight.min.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/html5shiv-printshiv.min.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/highlight.pack.js?1566793630"></script>
+    <script src="/dns-proxy-server/2.18/js/clipboard.min.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/perfect-scrollbar.min.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/perfect-scrollbar.jquery.min.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/jquery.sticky.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/featherlight.min.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/html5shiv-printshiv.min.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/highlight.pack.js?1578485434"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/dns-proxy-server/2.18/js/modernizr.custom-3.6.0.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/learn.js?1566793630"></script>
-    <script src="/dns-proxy-server/2.18/js/hugo-learn.js?1566793630"></script>
+    <script src="/dns-proxy-server/2.18/js/modernizr.custom-3.6.0.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/learn.js?1578485434"></script>
+    <script src="/dns-proxy-server/2.18/js/hugo-learn.js?1578485434"></script>
 
-    <link href="/dns-proxy-server/2.18/mermaid/mermaid.css?1566793630" type="text/css" rel="stylesheet" />
-    <script src="/dns-proxy-server/2.18/mermaid/mermaid.js?1566793630"></script>
+    <link href="/dns-proxy-server/2.18/mermaid/mermaid.css?1578485434" type="text/css" rel="stylesheet" />
+    <script src="/dns-proxy-server/2.18/mermaid/mermaid.js?1578485434"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
