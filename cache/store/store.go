@@ -7,7 +7,8 @@ import (
 
 var caches []cache.Cache
 var mainCache cache.Cache
-func init(){
+
+func init() {
 	mainCache = lru.New(43690) // about 1 MB considering HostnameVo struct
 }
 
@@ -23,7 +24,7 @@ func RegisterCache(c cache.Cache) cache.Cache {
 	return c
 }
 
-func ClearAllCaches(){
+func ClearAllCaches() {
 	mainCache.Clear()
 	for _, c := range caches {
 		c.Clear()

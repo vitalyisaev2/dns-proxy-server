@@ -5,7 +5,6 @@ import (
 )
 
 type TimedValue interface {
-
 	Creation() time.Time
 	Timeout() time.Duration
 	Value() interface{}
@@ -15,7 +14,6 @@ type TimedValue interface {
 	// now current time to be compared with the Creation()
 	//
 	IsValid(now time.Time) bool
-
 }
 
 type timedValueImpl struct {
@@ -24,22 +22,22 @@ type timedValueImpl struct {
 	Val             interface{}
 }
 
-func(t *timedValueImpl) Creation() time.Time {
+func (t *timedValueImpl) Creation() time.Time {
 	return t.CreationDate
 }
 
-func(t *timedValueImpl) Timeout() time.Duration {
+func (t *timedValueImpl) Timeout() time.Duration {
 	return t.TimeoutDuration
 }
 
-func(t *timedValueImpl) Value() interface{} {
+func (t *timedValueImpl) Value() interface{} {
 	return t.Val
 }
 
-func(t *timedValueImpl) IsValid(now time.Time) bool {
+func (t *timedValueImpl) IsValid(now time.Time) bool {
 	return t.Timeout() > now.Sub(t.Creation())
 }
 
 func NewTimedValue(value interface{}, creation time.Time, timeout time.Duration) TimedValue {
-	return &timedValueImpl{CreationDate:creation, Val:value, TimeoutDuration:timeout}
+	return &timedValueImpl{CreationDate: creation, Val: value, TimeoutDuration: timeout}
 }

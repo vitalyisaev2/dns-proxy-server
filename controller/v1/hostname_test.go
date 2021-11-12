@@ -1,14 +1,15 @@
 package v1
 
 import (
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
 	"github.com/go-resty/resty"
 	"github.com/mageddo/dns-proxy-server/events/local"
 	"github.com/mageddo/dns-proxy-server/flags"
 	"github.com/mageddo/dns-proxy-server/utils"
 	"github.com/stretchr/testify/assert"
-	"net/http"
-	"net/http/httptest"
-	"testing"
 )
 
 func TestGetHostnamesByEnv(t *testing.T) {
@@ -17,8 +18,8 @@ func TestGetHostnamesByEnv(t *testing.T) {
 	local.LoadConfiguration()
 
 	err := utils.WriteToFile(`{ "remoteDnsServers": [], "envs": [
-		{ "name": "MyEnv", "hostnames": [{"hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
-	]}`, utils.SolveRelativePath(*flags.ConfPath))
+        { "name": "MyEnv", "hostnames": [{"hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
+    ]}`, utils.SolveRelativePath(*flags.ConfPath))
 
 	s := httptest.NewServer(nil)
 	defer s.Close()
@@ -34,7 +35,8 @@ func TestGetHostnamesByEnv(t *testing.T) {
 		t,
 		utils.Replace(
 			`{"name":"MyEnv","hostnames":[{"id":"$1","hostname":"github.io","ip":[1,2,3,4],"target":"","ttl":55,"type":"","env":"MyEnv"}]}`,
-			r.String(), `id":"(\d+)"`,
+			r.String(),
+			`id":"(\d+)"`,
 		),
 		r.String(),
 	)
@@ -48,8 +50,8 @@ func TestGetHostnamesByEnvAndHostname(t *testing.T) {
 	local.ResetConf()
 
 	err := utils.WriteToFile(`{ "remoteDnsServers": [], "envs": [
-		{ "name": "MyEnv", "hostnames": [{"hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
-	]}`, utils.SolveRelativePath(*flags.ConfPath))
+        { "name": "MyEnv", "hostnames": [{"hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
+    ]}`, utils.SolveRelativePath(*flags.ConfPath))
 
 	s := httptest.NewServer(nil)
 	defer s.Close()
@@ -68,7 +70,8 @@ func TestGetHostnamesByEnvAndHostname(t *testing.T) {
 		t,
 		utils.Replace(
 			`[{"id":"$1","hostname":"github.io","ip":[1,2,3,4],"target":"","ttl":55,"type":"","env":"MyEnv"}]`,
-			r.String(), `"id":"(\d+)"`,
+			r.String(),
+			`"id":"(\d+)"`,
 		),
 		r.String(),
 	)
@@ -108,7 +111,8 @@ func TestPostHostname(t *testing.T) {
 		t,
 		utils.Replace(
 			`[{"id":"$1","hostname":"github.io","ip":[1,2,3,4],"target":"","ttl":55,"type":"A","env":"MyOtherEnv"}]`,
-			r.String(), `"id":"(\d+)"`,
+			r.String(),
+			`"id":"(\d+)"`,
 		),
 		r.String(),
 	)
@@ -136,8 +140,8 @@ func TestPutHostname(t *testing.T) {
 	local.ResetConf()
 
 	err := utils.WriteToFile(`{ "remoteDnsServers": [], "envs": [
-		{ "name": "MyEnv", "hostnames": [{"id": 999, "hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
-	]}`, utils.SolveRelativePath(*flags.ConfPath))
+        { "name": "MyEnv", "hostnames": [{"id": 999, "hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
+    ]}`, utils.SolveRelativePath(*flags.ConfPath))
 
 	s := httptest.NewServer(nil)
 	defer s.Close()
@@ -163,15 +167,14 @@ func TestPutHostname(t *testing.T) {
 
 }
 
-
 func TestDeleteHostname(t *testing.T) {
 
 	// arrange
 	local.ResetConf()
 
 	err := utils.WriteToFile(`{ "remoteDnsServers": [], "envs": [
-		{ "name": "MyEnv", "hostnames": [{"hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
-	]}`, utils.SolveRelativePath(*flags.ConfPath))
+        { "name": "MyEnv", "hostnames": [{"hostname": "github.io", "ip": [1,2,3,4], "ttl": 55}] }
+    ]}`, utils.SolveRelativePath(*flags.ConfPath))
 
 	s := httptest.NewServer(nil)
 	defer s.Close()

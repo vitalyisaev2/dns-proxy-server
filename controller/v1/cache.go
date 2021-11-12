@@ -3,15 +3,18 @@ package v1
 import (
 	"context"
 	"net/http"
-	"github.com/mageddo/dns-proxy-server/utils"
+
 	"github.com/mageddo/dns-proxy-server/cache/store"
-	"github.com/mageddo/go-logging"
+	"github.com/mageddo/dns-proxy-server/utils"
 	. "github.com/mageddo/go-httpmap"
+	"github.com/mageddo/go-logging"
 )
+
 const (
-	CACHE_V1 = "/v1/caches"
+	CACHE_V1      = "/v1/caches"
 	CACHE_SIZE_V1 = "/v1/caches/size"
 )
+
 func init() {
 
 	Get(CACHE_V1, func(ctx context.Context, res http.ResponseWriter, req *http.Request) {

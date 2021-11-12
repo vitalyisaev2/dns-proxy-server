@@ -1,12 +1,20 @@
 package main
 
 import (
-	_ "github.com/mageddo/dns-proxy-server/log"
-	_ "github.com/mageddo/dns-proxy-server/controller/v1"
 	"fmt"
+	"net/http"
+	"os"
+	"runtime/debug"
+	"runtime/pprof"
+	"strings"
+	"sync/atomic"
+	"time"
+
 	"github.com/mageddo/dns-proxy-server/conf"
+	_ "github.com/mageddo/dns-proxy-server/controller/v1"
 	"github.com/mageddo/dns-proxy-server/events/docker"
 	"github.com/mageddo/dns-proxy-server/events/local"
+	_ "github.com/mageddo/dns-proxy-server/log"
 	"github.com/mageddo/dns-proxy-server/proxy"
 	"github.com/mageddo/dns-proxy-server/reference"
 	"github.com/mageddo/dns-proxy-server/resolvconf"
@@ -15,13 +23,6 @@ import (
 	"github.com/mageddo/dns-proxy-server/utils/exitcodes"
 	"github.com/mageddo/go-logging"
 	"github.com/miekg/dns"
-	"net/http"
-	"os"
-	"runtime/debug"
-	"runtime/pprof"
-	"strings"
-	"sync/atomic"
-	"time"
 )
 
 func handleQuestion(respWriter dns.ResponseWriter, reqMsg *dns.Msg) {
@@ -43,8 +44,12 @@ func handleQuestion(respWriter dns.ResponseWriter, reqMsg *dns.Msg) {
 	}
 
 	logging.Debugf(
-		"status=begin, reqId=%d, questions=%d, question=%s, type=%s", ctx, reqMsg.Id,
-		questionsQtd, firstQuestion.Name, utils.DnsQTypeCodeToName(firstQuestion.Qtype),
+		"status=begin, reqId=%d, questions=%d, question=%s, type=%s",
+		ctx,
+		reqMsg.Id,
+		questionsQtd,
+		firstQuestion.Name,
+		utils.DnsQTypeCodeToName(firstQuestion.Qtype),
 	)
 
 	solverFactory := proxy.NewCnameDnsSolverFactory(&proxy.DefaultDnsSolverFactory{})
@@ -69,6 +74,7 @@ func getAnswer(msg *dns.Msg) []dns.RR {
 
 var solversCreated int32 = 0
 var solvers []proxy.DnsSolver = nil
+
 func getSolvers() []proxy.DnsSolver {
 	if atomic.CompareAndSwapInt32(&solversCreated, 0, 1) {
 		// loading the solvers and try to solve the hostname in that order
@@ -130,13 +136,13 @@ func main() {
 	go serve("udp", name, secret)
 
 	// start web server and Rest API
-	go func(){
+	go func() {
 		webPort := conf.WebServerPort()
 		logging.Infof("status=web-server-starting, port=%d", webPort)
 		if err := http.ListenAndServe(fmt.Sprintf(":%d", webPort), nil); err != nil {
 			logging.Errorf("status=web-server-start-failed, err=%v, port=%d", err, webPort)
 			exitcodes.Exit(exitcodes.FAIL_START_WEB_SERVER)
-		}else{
+		} else {
 			logging.Infof("status=web-server-started, port=%d", webPort)
 		}
 	}()
@@ -146,7 +152,7 @@ func main() {
 		ctx := reference.Context()
 		logging.Infof("status=setup-default-dns, setup-dns=%t", ctx, conf.SetupResolvConf())
 		if conf.SetupResolvConf() {
-			for ; ; {
+			for {
 				if err := resolvconf.SetCurrentDnsServerToMachine(ctx); err != nil {
 					logging.Error("status=cant-turn-default-dns", err)
 					exitcodes.Exit(exitcodes.FAIL_SET_DNS_AS_DEFAULT)
@@ -157,7 +163,7 @@ func main() {
 	}()
 
 	logging.Warningf("server started")
-	s := <- utils.Sig
+	s := <-utils.Sig
 	logging.Warningf("status=exiting ;) signal=%s", s)
 	resolvconf.RestoreResolvconfToDefault()
 }

@@ -1,17 +1,17 @@
 package utils
 
 import (
-	"bytes"
-	"encoding/json"
-	"github.com/mageddo/dns-proxy-server/flags"
-	"github.com/mageddo/dns-proxy-server/utils/env"
-	"io"
-	"os"
-	"os/signal"
-	"path/filepath"
-	"strings"
-	"syscall"
-	"time"
+    "bytes"
+    "encoding/json"
+    "github.com/mageddo/dns-proxy-server/flags"
+    "github.com/mageddo/dns-proxy-server/utils/env"
+    "io"
+    "os"
+    "os/signal"
+    "path/filepath"
+    "strings"
+    "syscall"
+    "time"
 )
 
 var QTypeCodes = map[uint16] string {
@@ -102,130 +102,130 @@ var QTypeCodes = map[uint16] string {
 
 var QClassCodes = map[uint16] string {
 
-	// valid Question.Qclass,
-	1 : "ClassINET",
-	2 : "ClassCSNET",
-	3 : "ClassCHAOS",
-	4 : "ClassHESIOD",
-	254 : "ClassNONE",
-	255 : "ClassANY",
+    // valid Question.Qclass,
+    1 : "ClassINET",
+    2 : "ClassCSNET",
+    3 : "ClassCHAOS",
+    4 : "ClassHESIOD",
+    254 : "ClassNONE",
+    255 : "ClassANY",
 }
 
 var RCodes  = map[uint16] string {
-	// Message Response Codes.,
-	0 : "RcodeSuccess",
-	1 : "RcodeFormatError",
-	2 : "RcodeServerFailure",
-	3 : "RcodeNameError",
-	4 : "RcodeNotImplemented",
-	5 : "RcodeRefused",
-	6 : "RcodeYXDomain",
-	7 : "RcodeYXRrset",
-	8 : "RcodeNXRrset",
-	9 : "RcodeNotAuth",
-	10 : "RcodeNotZone",
-	16 : "RcodeBadSig", // TSIG
-	//16 : "RcodeBadVers", // EDNS0
-	17 : "RcodeBadKey",
-	18 : "RcodeBadTime",
-	19 : "RcodeBadMode", // TKEY
-	20 : "RcodeBadName",
-	21 : "RcodeBadAlg",
-	22 : "RcodeBadTrunc", // TSIG
-	23 : "RcodeBadCookie", // DNS Cookies
+    // Message Response Codes.,
+    0 : "RcodeSuccess",
+    1 : "RcodeFormatError",
+    2 : "RcodeServerFailure",
+    3 : "RcodeNameError",
+    4 : "RcodeNotImplemented",
+    5 : "RcodeRefused",
+    6 : "RcodeYXDomain",
+    7 : "RcodeYXRrset",
+    8 : "RcodeNXRrset",
+    9 : "RcodeNotAuth",
+    10 : "RcodeNotZone",
+    16 : "RcodeBadSig", // TSIG
+    //16 : "RcodeBadVers", // EDNS0
+    17 : "RcodeBadKey",
+    18 : "RcodeBadTime",
+    19 : "RcodeBadMode", // TKEY
+    20 : "RcodeBadName",
+    21 : "RcodeBadAlg",
+    22 : "RcodeBadTrunc", // TSIG
+    23 : "RcodeBadCookie", // DNS Cookies
 }
 
 var opCodes  = map[uint16] string {
-	// Message Opcodes. There is no 3.,
-	0 : "OpcodeQuery",
-	1 : "OpcodeIQuery",
-	2 : "OpcodeStatus",
-	4 : "OpcodeNotify",
-	5 : "OpcodeUpdate",
+    // Message Opcodes. There is no 3.,
+    0 : "OpcodeQuery",
+    1 : "OpcodeIQuery",
+    2 : "OpcodeStatus",
+    4 : "OpcodeNotify",
+    5 : "OpcodeUpdate",
 }
 
 var Sig = make(chan os.Signal)
 
 func init(){
-	signal.Notify(Sig, syscall.SIGINT, syscall.SIGTERM)
+    signal.Notify(Sig, syscall.SIGINT, syscall.SIGTERM)
 }
 
 func DnsQTypeCodeToName(code uint16) string {
-	return QTypeCodes[code]
+    return QTypeCodes[code]
 }
 
 func GetCurrentPath() string {
 
-	currDIr := os.Getenv(env.MG_WORK_DIR)
-	if len(currDIr) != 0 {
-		return currDIr
-	}
-	currentPath, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-	return currentPath
+    currDIr := os.Getenv(env.MG_WORK_DIR)
+    if len(currDIr) != 0 {
+        return currDIr
+    }
+    currentPath, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+    return currentPath
 
 }
 
 func SolveRelativePath(path string) string {
-	if !strings.HasPrefix(path, "/") {
-		path = "/" + path
-	}
-	currentPath := GetCurrentPath()
-	if strings.HasSuffix(currentPath, "/") {
-		currentPath = currentPath[0:len(currentPath)-1]
-	}
-	return currentPath + path
+    if !strings.HasPrefix(path, "/") {
+        path = "/" + path
+    }
+    currentPath := GetCurrentPath()
+    if strings.HasSuffix(currentPath, "/") {
+        currentPath = currentPath[0:len(currentPath)-1]
+    }
+    return currentPath + path
 }
 
 func GetPath(path string) string {
-	if strings.HasPrefix(path, "/") {
-		return path
-	}
-	return SolveRelativePath(path)
+    if strings.HasPrefix(path, "/") {
+        return path
+    }
+    return SolveRelativePath(path)
 }
 
 func GetJsonEncoder(w io.Writer) *json.Encoder {
-	enconder := json.NewEncoder(w)
-	if !flags.IsTestVersion() {
-		enconder.SetIndent("", "\t")
-	}
-	return enconder
+    enconder := json.NewEncoder(w)
+    if !flags.IsTestVersion() {
+        enconder.SetIndent("", "\t")
+    }
+    return enconder
 }
 
 func GetUUID() int64 {
-	return time.Now().UnixNano()
+    return time.Now().UnixNano()
 }
 
 func Copy(src, dst string) error {
-	in, err := os.Open(src)
-	if err != nil { return err }
-	defer in.Close()
-	out, err := os.OpenFile(dst, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
-	if err != nil { return err }
-	defer out.Close()
-	_, err = io.Copy(out, in)
-	cerr := out.Close()
-	if err != nil { return err }
-	return cerr
+    in, err := os.Open(src)
+    if err != nil { return err }
+    defer in.Close()
+    out, err := os.OpenFile(dst, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+    if err != nil { return err }
+    defer out.Close()
+    _, err = io.Copy(out, in)
+    cerr := out.Close()
+    if err != nil { return err }
+    return cerr
 }
 
 func CreateExecutableFile(sourceData, dst string) error {
-	out, err := os.OpenFile(dst, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
-	if err != nil { return err }
-	defer out.Close()
-	_, err = io.Copy(out, bytes.NewReader([]byte(sourceData)))
-	cerr := out.Close()
-	if err != nil { return err }
-	return cerr
+    out, err := os.OpenFile(dst, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+    if err != nil { return err }
+    defer out.Close()
+    _, err = io.Copy(out, bytes.NewReader([]byte(sourceData)))
+    cerr := out.Close()
+    if err != nil { return err }
+    return cerr
 }
 
 func WriteToFile(sourceData, dst string) error {
-	out, err := os.OpenFile(dst, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0766)
-	if err != nil { return err }
-	defer out.Close()
-	_, err = io.Copy(out, bytes.NewReader([]byte(sourceData)))
-	cerr := out.Close()
-	if err != nil { return err }
-	return cerr
+    out, err := os.OpenFile(dst, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0766)
+    if err != nil { return err }
+    defer out.Close()
+    _, err = io.Copy(out, bytes.NewReader([]byte(sourceData)))
+    cerr := out.Close()
+    if err != nil { return err }
+    return cerr
 }
 
 
@@ -234,6 +234,6 @@ func WriteToFile(sourceData, dst string) error {
 // b must be greater than a
 //
 func DiffMillis(a, b time.Time) int64 {
-	na, nb := a.UnixNano(), b.UnixNano()
-	return (nb - na) / int64(time.Nanosecond * time.Millisecond)
+    na, nb := a.UnixNano(), b.UnixNano()
+    return (nb - na) / int64(time.Nanosecond * time.Millisecond)
 }

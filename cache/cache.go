@@ -1,7 +1,6 @@
 package cache
 
 type Cache interface {
-
 	Get(key interface{}) interface{}
 
 	// Deprecated: don't use that! It will lead to concurrency problems
@@ -14,5 +13,4 @@ type Cache interface {
 	Clear()
 	KeySet() []interface{}
 	Size() int
-
 }

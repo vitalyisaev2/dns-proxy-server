@@ -3,7 +3,7 @@ package vo
 import "github.com/mageddo/dns-proxy-server/events/local/localvo"
 
 type EnvV1 struct {
-	Name string `json:"name"`
+	Name      string       `json:"name"`
 	Hostnames []HostnameV1 `json:"hostnames,omitempty"`
 }
 

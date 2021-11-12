@@ -2,24 +2,25 @@ package lru
 
 import (
 	"testing"
+
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPutAndGetSuccess(t *testing.T){
+func TestPutAndGetSuccess(t *testing.T) {
 
-	cache := New(10);
-	cache.Put("key1", "value1");
+	cache := New(10)
+	cache.Put("key1", "value1")
 
 	assert.Equal(t, "value1", cache.Get("key1").(string))
 
 }
 
-func TestPutAndGetSuccessSizeLimited(t *testing.T){
+func TestPutAndGetSuccessSizeLimited(t *testing.T) {
 
-	cache := New(2);
-	cache.Put("key1", "value1");
-	cache.Put("key2", "value2");
-	cache.Put("key3", "value3");
+	cache := New(2)
+	cache.Put("key1", "value1")
+	cache.Put("key2", "value2")
+	cache.Put("key3", "value3")
 
 	assert.Nil(t, cache.Get("key1"))
 	assert.Equal(t, "value2", cache.Get("key2").(string))
@@ -27,20 +28,18 @@ func TestPutAndGetSuccessSizeLimited(t *testing.T){
 
 }
 
-func TestPutAndGeRemovingLeastUsed(t *testing.T){
+func TestPutAndGeRemovingLeastUsed(t *testing.T) {
 
-	cache := New(3);
+	cache := New(3)
 
-	cache.Put("key1", "value1");
-	cache.Put("key2", "value2");
-	cache.Put("key3", "value3");
-
+	cache.Put("key1", "value1")
+	cache.Put("key2", "value2")
+	cache.Put("key3", "value3")
 
 	cache.Get("key2")
 	cache.Get("key1")
 
-	cache.Put("key4", "value4");
-
+	cache.Put("key4", "value4")
 
 	assert.Equal(t, "value1", cache.Get("key1"))
 	assert.Equal(t, "value2", cache.Get("key2").(string))
@@ -49,13 +48,12 @@ func TestPutAndGeRemovingLeastUsed(t *testing.T){
 
 }
 
+func TestPurge(t *testing.T) {
 
-func TestPurge(t *testing.T){
+	cache := New(3)
 
-	cache := New(3);
-
-	cache.Put("key1", "value1");
-	cache.Put("key2", "value2");
+	cache.Put("key1", "value1")
+	cache.Put("key2", "value2")
 
 	assert.Equal(t, "value1", cache.Get("key1"))
 	assert.Equal(t, "value2", cache.Get("key2"))
@@ -67,12 +65,12 @@ func TestPurge(t *testing.T){
 
 }
 
-func TestRemove(t *testing.T){
+func TestRemove(t *testing.T) {
 
-	cache := New(3);
+	cache := New(3)
 
-	cache.Put("key1", "value1");
-	cache.Put("key2", "value2");
+	cache.Put("key1", "value1")
+	cache.Put("key2", "value2")
 
 	assert.Equal(t, "value1", cache.Get("key1"))
 	assert.Equal(t, "value2", cache.Get("key2"))
@@ -84,25 +82,24 @@ func TestRemove(t *testing.T){
 
 }
 
-func TestKeySet(t *testing.T){
+func TestKeySet(t *testing.T) {
 
-	cache := New(3);
+	cache := New(3)
 
-	cache.Put("key1", "value1");
-	cache.Put("key2", "value2");
+	cache.Put("key1", "value1")
+	cache.Put("key2", "value2")
 
 	assert.Equal(t, []interface{}{"key1", "key2"}, cache.KeySet())
 
 }
 
-func TestSize(t *testing.T){
+func TestSize(t *testing.T) {
 
-	cache := New(3);
+	cache := New(3)
 
-	cache.Put("key1", "value1");
-	cache.Put("key2", "value2");
+	cache.Put("key1", "value1")
+	cache.Put("key2", "value2")
 
 	assert.Equal(t, 2, cache.Size())
-
 
 }

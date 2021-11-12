@@ -1,13 +1,14 @@
 package v1
 
 import (
+	"net/http/httptest"
+	"testing"
+
 	"github.com/go-resty/resty"
 	"github.com/mageddo/dns-proxy-server/events/local"
 	"github.com/mageddo/dns-proxy-server/flags"
 	"github.com/mageddo/dns-proxy-server/utils"
 	"github.com/stretchr/testify/assert"
-	"net/http/httptest"
-	"testing"
 )
 
 func TestGetActiveEnvSuccess(t *testing.T) {
@@ -48,10 +49,9 @@ func TestPutChangeActiveEnvSuccess(t *testing.T) {
 	local.ResetConf()
 
 	err := utils.WriteToFile(`{
-		"remoteDnsServers": [], "envs": [{ "name": "testEnv" }]
-	}`, utils.SolveRelativePath(*flags.ConfPath))
+        "remoteDnsServers": [], "envs": [{ "name": "testEnv" }]
+    }`, utils.SolveRelativePath(*flags.ConfPath))
 	assert.Nil(t, err)
-
 
 	s := httptest.NewServer(nil)
 	defer s.Close()
@@ -87,7 +87,6 @@ func TestGetEnvsSuccess(t *testing.T) {
 	defer s.Close()
 	r, err := resty.R().Get(s.URL + ENV)
 
-
 	// assert
 	assert.Nil(t, err)
 	assert.Equal(t, 200, r.StatusCode())
@@ -104,9 +103,9 @@ func TestPostEnvSuccess(t *testing.T) {
 
 	r, err := resty.R().
 		SetBody(`{
-			"name": "ThirdEnv",
-			"hostnames": [{"hostname": "github.com", "ip": [1,2,3,4], "ttl":30,"type":"A"}]
-		}`).
+            "name": "ThirdEnv",
+            "hostnames": [{"hostname": "github.com", "ip": [1,2,3,4], "ttl":30,"type":"A"}]
+        }`).
 		Post(s.URL + ENV)
 	assert.Nil(t, err)
 	assert.Equal(t, 200, r.StatusCode())
@@ -125,7 +124,6 @@ func TestPostEnvSuccess(t *testing.T) {
 		r.String(),
 	)
 }
-
 
 func TestDeleteEnvSuccess(t *testing.T) {
 
@@ -146,7 +144,6 @@ func TestDeleteEnvSuccess(t *testing.T) {
 	r, err = resty.R().
 		SetBody(`{"name": "SecondEnv"}`).
 		Delete(s.URL + ENV)
-
 
 	// assert
 

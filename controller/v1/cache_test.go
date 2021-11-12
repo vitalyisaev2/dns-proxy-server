@@ -1,12 +1,13 @@
 package v1
 
 import (
-	"testing"
-	"net/http/httptest"
-	"github.com/go-resty/resty"
-	"github.com/stretchr/testify/assert"
-	"github.com/mageddo/dns-proxy-server/cache/store"
 	"net/http"
+	"net/http/httptest"
+	"testing"
+
+	"github.com/go-resty/resty"
+	"github.com/mageddo/dns-proxy-server/cache/store"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetCache(t *testing.T) {

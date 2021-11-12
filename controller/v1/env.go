@@ -3,6 +3,10 @@ package v1
 import (
 	"context"
 	"encoding/json"
+	"net/http"
+	"strconv"
+	"time"
+
 	"github.com/mageddo/dns-proxy-server/controller/v1/vo"
 	"github.com/mageddo/dns-proxy-server/events/local"
 	"github.com/mageddo/dns-proxy-server/pkg/mageddo/uuid"
@@ -10,9 +14,6 @@ import (
 	"github.com/mageddo/dns-proxy-server/utils"
 	. "github.com/mageddo/go-httpmap"
 	"github.com/mageddo/go-logging"
-	"net/http"
-	"strconv"
-	"time"
 )
 
 const (
@@ -21,9 +22,9 @@ const (
 	ENV_ACTIVE = "/env/active"
 )
 
-func init(){
+func init() {
 
-	Get(ENV_ACTIVE, func(ctx context.Context, res http.ResponseWriter, req *http.Request){
+	Get(ENV_ACTIVE, func(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 		res.Header().Add("Content-Type", "application/json")
 		if conf, err := local.LoadConfiguration(); conf != nil {
 			utils.GetJsonEncoder(res).Encode(vo.EnvV1{Name: conf.ActiveEnv})
@@ -32,7 +33,7 @@ func init(){
 		}
 	})
 
-	Put(ENV_ACTIVE, func(ctx context.Context, res http.ResponseWriter, req *http.Request){
+	Put(ENV_ACTIVE, func(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 
 		logging.Infof("m=/env/active/, status=begin")
 		res.Header().Add("Content-Type", "application/json")
@@ -48,7 +49,7 @@ func init(){
 		}
 	})
 
-	Get(ENV, func(ctx context.Context, res http.ResponseWriter, req *http.Request){
+	Get(ENV, func(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 		res.Header().Add("Content-Type", "application/json")
 		if conf, err := local.LoadConfiguration(); conf != nil {
 			utils.GetJsonEncoder(res).Encode(vo.FromEnvs(conf.Envs))
@@ -58,7 +59,7 @@ func init(){
 		}
 	})
 
-	Post(ENV, func(ctx context.Context, res http.ResponseWriter, req *http.Request){
+	Post(ENV, func(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 		res.Header().Add("Content-Type", "application/json")
 		logging.Infof("m=/env/, status=begin, action=create-env")
 		var envVo vo.EnvV1
@@ -76,22 +77,22 @@ func init(){
 		}
 	})
 
-	Delete(ENV, func(ctx context.Context, res http.ResponseWriter, req *http.Request){
+	Delete(ENV, func(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 		res.Header().Add("Content-Type", "application/json")
 		logging.Infof("m=/env/, status=begin, action=delete-env")
 		var env vo.EnvV1
 		json.NewDecoder(req.Body).Decode(&env)
 		logging.Infof("m=/env/, status=parsed-host, action=delete-env, env=%+v", env)
-		if err := local.RemoveEnvByName(context.WithValue(ctx, reference.UUID, uuid.UUID()), env.Name);  err != nil {
-				logging.Infof("m=/env/, status=error, action=delete-env, err=%+v", err)
-				BadRequest(res, err.Error())
+		if err := local.RemoveEnvByName(context.WithValue(ctx, reference.UUID, uuid.UUID()), env.Name); err != nil {
+			logging.Infof("m=/env/, status=error, action=delete-env, err=%+v", err)
+			BadRequest(res, err.Error())
 		} else {
 			logging.Infof("m=/env/, status=success, action=delete-env")
 		}
 	})
 }
 
-func confLoadError(res http.ResponseWriter, err error){
+func confLoadError(res http.ResponseWriter, err error) {
 	logging.Errorf("could-not-load-conf, err=%+v", err, err)
 	BadRequest(res, "Could not load conf")
 }

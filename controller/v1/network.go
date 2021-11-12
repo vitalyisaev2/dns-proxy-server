@@ -3,10 +3,11 @@ package v1
 import (
 	"context"
 	"encoding/json"
+	"net/http"
+
 	"github.com/mageddo/dns-proxy-server/controller/v1/vo"
 	"github.com/mageddo/dns-proxy-server/docker/dockernetwork"
 	. "github.com/mageddo/go-httpmap"
-	"net/http"
 )
 
 const (

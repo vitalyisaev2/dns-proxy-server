@@ -1,19 +1,20 @@
 package vo
 
 import (
+	"strconv"
+
 	"github.com/mageddo/dns-proxy-server/events/local/localvo"
 	"github.com/mageddo/dns-proxy-server/utils/iputils"
-	"strconv"
 )
 
 type HostnameV1 struct {
-	Id string `json:"id"`
-	Hostname string `json:"hostname"`
-	Ip [4]byte `json:"ip"`
-	Target string `json:"target"`
-	Ttl int `json:"ttl"`
-	Type localvo.EntryType `json:"type"`
-	Env string `json:"env,omitempty"`
+	Id       string            `json:"id"`
+	Hostname string            `json:"hostname"`
+	Ip       [4]byte           `json:"ip"`
+	Target   string            `json:"target"`
+	Ttl      int               `json:"ttl"`
+	Type     localvo.EntryType `json:"type"`
+	Env      string            `json:"env,omitempty"`
 }
 
 func (hostnameV1 HostnameV1) ToHostname() localvo.Hostname {
@@ -40,7 +41,6 @@ func fromV1Hostnames(v1Hostnames []HostnameV1) []localvo.Hostname {
 	return hostnames
 }
 
-
 func FromHostnames(env string, hostnames []localvo.Hostname) []HostnameV1 {
 	v1Hostnames := make([]HostnameV1, len(hostnames))
 	for i, hostname := range hostnames {
@@ -49,7 +49,7 @@ func FromHostnames(env string, hostnames []localvo.Hostname) []HostnameV1 {
 	return v1Hostnames
 }
 
-func fromHostname(env string,hostname localvo.Hostname) HostnameV1 {
+func fromHostname(env string, hostname localvo.Hostname) HostnameV1 {
 	return HostnameV1{
 		Id:       strconv.FormatInt(hostname.Id, 10),
 		Type:     hostname.Type,

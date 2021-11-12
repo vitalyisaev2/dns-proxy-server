@@ -1,8 +1,8 @@
 package lru
 
 import (
-	"github.com/mageddo/dns-proxy-server/cache"
 	"github.com/hashicorp/golang-lru"
+	"github.com/mageddo/dns-proxy-server/cache"
 )
 
 type LRUCache struct {
@@ -33,7 +33,7 @@ func (c *LRUCache) PutIfAbsent(key, value interface{}) interface{} {
 	if ok, _ := c.Cache.ContainsOrAdd(key, value); ok {
 		return c.Get(key)
 	}
-	return nil;
+	return nil
 }
 
 func (c *LRUCache) Clear() {
@@ -63,5 +63,3 @@ func New(size int) cache.Cache {
 	}
 	return &LRUCache{c}
 }
-
-

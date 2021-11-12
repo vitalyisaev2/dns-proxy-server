@@ -1,15 +1,16 @@
 package conf
 
 import (
-	"testing"
-	"os"
-	"github.com/stretchr/testify/assert"
-	"github.com/mageddo/dns-proxy-server/flags"
-	"github.com/mageddo/dns-proxy-server/events/local"
-	"github.com/mageddo/dns-proxy-server/utils"
 	"flag"
+	"os"
+	"testing"
+
+	"github.com/mageddo/dns-proxy-server/events/local"
+	"github.com/mageddo/dns-proxy-server/flags"
+	"github.com/mageddo/dns-proxy-server/utils"
 	"github.com/mageddo/dns-proxy-server/utils/env"
 	"github.com/mageddo/go-logging"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestDefaultFlagValues(t *testing.T) {
@@ -40,7 +41,6 @@ func TestFlagValuesFromConf(t *testing.T) {
 	assert.Equal(t, 62, DnsServerPort())
 	assert.Equal(t, false, SetupResolvConf())
 }
-
 
 func TestLogLevel_DefaultValue(t *testing.T) {
 	assert.Equal(t, logging.INFO, LogLevel())
@@ -85,7 +85,7 @@ func TestLogFile_DefaultValue(t *testing.T) {
 	level := LogFile()
 
 	// assert
-	assert.Equal(t,"console", level)
+	assert.Equal(t, "console", level)
 }
 
 func TestLogFile_ReadFromConfig(t *testing.T) {
@@ -100,7 +100,7 @@ func TestLogFile_ReadFromConfig(t *testing.T) {
 	level := LogFile()
 
 	// assert
-	assert.Equal(t,"", level)
+	assert.Equal(t, "", level)
 
 	os.Remove(local.GetConfPath())
 }
@@ -114,7 +114,7 @@ func TestLogFile_ReadFromEnv(t *testing.T) {
 	level := LogFile()
 
 	// assert
-	assert.Equal(t,"/var/log/dns-proxy-server.log", level)
+	assert.Equal(t, "/var/log/dns-proxy-server.log", level)
 
 	os.Remove(local.GetConfPath())
 }
@@ -128,7 +128,7 @@ func TestLogFile_CustomPath(t *testing.T) {
 	level := LogFile()
 
 	// assert
-	assert.Equal(t,"custom-file.log", level)
+	assert.Equal(t, "custom-file.log", level)
 
 	os.Remove(local.GetConfPath())
 }

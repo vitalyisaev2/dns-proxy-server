@@ -2,13 +2,14 @@ package conf
 
 import (
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/mageddo/dns-proxy-server/events/local"
 	"github.com/mageddo/dns-proxy-server/events/local/localvo"
 	"github.com/mageddo/dns-proxy-server/flags"
 	"github.com/mageddo/dns-proxy-server/utils/env"
 	"github.com/mageddo/go-logging"
-	"os"
-	"strings"
 )
 
 func CpuProfile() string {
@@ -76,10 +77,9 @@ func logKeyToSyslogCode(key string) int {
 	panic("Unknown log level: " + key)
 }
 
-
 func LogFile() string {
 	f := os.Getenv(env.MG_LOG_FILE)
-	if conf, _ := getConf(); f == "" &&  conf != nil && conf.LogFile != "" {
+	if conf, _ := getConf(); f == "" && conf != nil && conf.LogFile != "" {
 		f = conf.LogFile
 	}
 	f = GetString(f, flags.LogToFile())
@@ -114,7 +114,7 @@ func GetHostname() string {
 	if hostname := os.Getenv(env.MG_HOST_MACHINE_HOSTNAME); len(strings.TrimSpace(hostname)) != 0 {
 		return hostname
 	}
-	if conf, _ := getConf(); conf != nil &&  len(conf.HostMachineHostname) != 0 {
+	if conf, _ := getConf(); conf != nil && len(conf.HostMachineHostname) != 0 {
 		return conf.HostMachineHostname
 	}
 	return *flags.HostMachineHostname
@@ -128,7 +128,7 @@ func GetDpsDomain() string {
 	if domain := os.Getenv(env.MG_DOMAIN); len(strings.TrimSpace(domain)) != 0 {
 		return domain
 	}
-	if conf, _ := getConf(); conf != nil &&  len(conf.Domain) != 0 {
+	if conf, _ := getConf(); conf != nil && len(conf.Domain) != 0 {
 		return conf.Domain
 	}
 	return *flags.Domain

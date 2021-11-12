@@ -1,8 +1,9 @@
 package timed
 
 import (
-	"github.com/mageddo/dns-proxy-server/cache"
 	"time"
+
+	"github.com/mageddo/dns-proxy-server/cache"
 )
 
 type TimedCache struct {
@@ -45,7 +46,7 @@ func (c *TimedCache) Put(key, value interface{}) {
 }
 
 func (c *TimedCache) PutTTL(key, value interface{}, ttl int64) {
-	c.cache.Put(key, NewTimedValue(value, time.Now(), time.Duration(ttl) * time.Second))
+	c.cache.Put(key, NewTimedValue(value, time.Now(), time.Duration(ttl)*time.Second))
 }
 
 func (c *TimedCache) PutIfAbsent(key, value interface{}) interface{} {
